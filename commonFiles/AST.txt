@@ -1,0 +1,1 @@
+(; (if (&& (5 nil nil)(7 nil nil))(else (; (= (i nil nil)(45 nil nil))(; (= (h nil nil)(== (145 nil nil)(d nil nil)))nil))(; (if (== (a nil nil)(9 nil nil))(else (; (= (new nil nil)(17 nil nil))nil)nil))nil)))nil)
