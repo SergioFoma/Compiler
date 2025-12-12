@@ -66,8 +66,8 @@ void stackPrint( stack_t *stk ){
 void stackDestroy( stack_t *stk ){
     free( stk->data );
     stk->data = NULL;
-    stk->capacity = -1;
-    stk->size = -1;
+    stk->capacity = 0;
+    stk->size = 0;
     stk->error = CORRECT;
 
     return ;

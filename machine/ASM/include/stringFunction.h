@@ -103,5 +103,8 @@ void destroyStringInformation( strInformation *stringFromFile );
 bool splitToLines( bufferInformation* bufferFromFile, strInformation *stringFromFile, FILE* myFile );
 
 char* cleanLine( char* lineFromText );
+
+ssize_t getlineWrapper( char** line, size_t* n, FILE* stream );
+
 #endif
 

@@ -41,6 +41,8 @@ void softProcessor( const char* nameOfByteFile, Processor* SPU ){
     }
 
     getArrayWithCommand( bufferFromFile, SPU );
+
+    destroyBufferInformation( &bufferFromFile );
     fclose( byteFile );
 }
 
@@ -106,7 +108,6 @@ void ramPrint( Processor* SPU ){
         }
     }
     printf("\n");
-    sleep(0.9);
 }
 
 void doColor( Processor* SPU, size_t index ){

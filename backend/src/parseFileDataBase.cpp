@@ -12,6 +12,8 @@
 
 const size_t nilLen = strlen( "nil" );
 
+#define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
+
 errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile ){
     assert( bufferFromFile );
     assert( nameOfFile );
@@ -94,25 +96,14 @@ bufferInformation getBufferFromFile( FILE** fileWithBuffer ){
 expertSystemErrors createTreeFromFile( tree_t* tree ){
     assert( tree );
 
-    colorPrintf( NOMODE, YELLOW, "Enter the name of file, that will used for make tree: " );
-
-    char* nameOfFileForTree = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfFileForTree, &sizeOfAllocationMemory, stdin );
-
-    if( sizeOfLine == -1 ){
-        return ERROR_WITH_GETLINE;
-    }
-
-    FILE* fileForDataBase = fopen( nameOfFileForTree, "r" );
+    FILE* fileForDataBase = fopen( FILE_WITH_TREE, "r" );
     if( fileForDataBase == NULL ){
         colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
-        free( nameOfFileForTree );
         return ERROR_WITH_FILE;
     }
 
     bufferInformation dataBaseFromFile = {};
-    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, nameOfFileForTree );
+    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, FILE_WITH_TREE );
     if( statusOfReadFromFile != correct ){
         return ERROR_WITH_FILE;
     }
@@ -121,7 +112,6 @@ expertSystemErrors createTreeFromFile( tree_t* tree ){
     tree->rootTree = createNodeFromFile( &ptrOnBuffer );
 
     fclose( fileForDataBase );
-    free( nameOfFileForTree );
     destroyBufferInformation( &dataBaseFromFile );
 
     colorPrintf( NOMODE, GREEN, "Expert system successful get data from your file\n" );

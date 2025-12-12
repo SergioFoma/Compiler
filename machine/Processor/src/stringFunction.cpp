@@ -29,7 +29,7 @@ errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile
     if( bufferFromFile->bufferSize == 0 ){
         return fileOpenErr;
     }
-    
+
     (bufferFromFile->buffer)[ bufferFromFile->fileSize ]= '\0';
     (bufferFromFile->buffer)[ bufferFromFile->bufferSize ] = '\0';
 
@@ -116,15 +116,15 @@ void getOriginalText( bufferInformation *bufferFromFile ){
 void destroyBufferInformation( bufferInformation *bufferFromFile ){
     free( bufferFromFile->buffer );
     bufferFromFile->buffer = NULL;
-    bufferFromFile->bufferSize = -1;
-    bufferFromFile->fileSize = -1;
+    bufferFromFile->bufferSize = 0;
+    bufferFromFile->fileSize = 0;
     bufferFromFile = NULL;
 }
 
 void destroyStringInformation( strInformation *stringFromFile ){
     free( stringFromFile->arrayOfStr );
     stringFromFile->arrayOfStr = NULL;
-    stringFromFile->arraySize = -1;
+    stringFromFile->arraySize = 0;
     stringFromFile = NULL;
 }
 

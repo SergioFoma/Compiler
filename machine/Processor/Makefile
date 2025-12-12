@@ -13,24 +13,26 @@ FLAGS = -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop
 -fstrict-overflow -flto-odr-type-merging -fno-omit-frame-pointer -Wlarger-than=30000 -Wstack-usage=8192 -pie -fPIE -Werror=vla \
 -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr
 
-EXE_NAME = $(BUILD_DIR)/fronted.out
+SPU_OUT_NAME = $(BUILD_DIR)/SPU.out  # Build/SPU.out
 
-SOURCES = main.cpp tree.cpp treeDump.cpp myStringFunction.cpp paint.cpp parseFileDataBase.cpp mathematicalCalculator.cpp mathOperatorsInfo.cpp dataForBackend.cpp
-OBJECTS = $(SOURCES:.cpp=.obj)
+SPU_SOURCES = main.cpp stack.cpp spuCheckError.cpp stackCheckError.cpp paint.cpp spuLoop.cpp stringFunction.cpp softProcessor.cpp
+SPU_OBJECTS = $(SPU_SOURCES:.cpp=.obj)
 
-OBJECTS_IN_SOURCE = $(addprefix src/, $(OBJECTS))
+SPU_OBJECTS_IN_SOURCE = $(addprefix src/, $(SPU_OBJECTS))  # src/main.obj
 
 .PHONY: all clean
 
-all: $(EXE_NAME)
+all: $(SPU_OUT_NAME)
 
-$(EXE_NAME): makeBuild $(OBJECTS_IN_SOURCE)
-	$(CXX) $(FLAGS) $(addprefix ./$(BUILD_DIR)/, $(OBJECTS_IN_SOURCE)) -o $(EXE_NAME)
+$(SPU_OUT_NAME): SPU_makeBuild $(SPU_OBJECTS_IN_SOURCE)
+	$(CXX) $(FLAGS) $(addprefix $(BUILD_DIR)/, $(SPU_OBJECTS_IN_SOURCE)) -o $(SPU_OUT_NAME)
 
-$(OBJECTS_IN_SOURCE): %.obj: %.cpp
-	$(CXX) $(FLAGS) -I ./include -c ./$^ -o ./$(BUILD_DIR)/$@
+$(SPU_OBJECTS_IN_SOURCE) : %.obj: %.cpp
+	$(CXX) $(FLAGS) -I ./include -c ./$^ -o ./$(SPU_FOLDER_NAME)/$(BUILD_DIR)/$@
 
-makeBuild:
+SPU_makeBuild:
 	mkdir -p ./$(BUILD_DIR)/src
+
 clean:
 	rm -rf ./$(BUILD_DIR)
+	rm -rf *.txt

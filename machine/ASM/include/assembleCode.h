@@ -122,6 +122,8 @@ typeOfErr printInFile( FILE* byteFile, int* commandArray, size_t sizeOfIntComman
 
 void analysisOfAssembleError( typeOfErr assembleError );
 
+char* getNameOfFileForSPU();
+
 #define GO_NEXT_OR_NOT()            \
     if( flag == true ){             \
         continue;                   \

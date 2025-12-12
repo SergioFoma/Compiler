@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD_DIRS=( "backend" )
+BUILD_DIRS=( "backend" "machine/ASM" "machine/Processor" )
 
 OUT_PATTERN="*.out"
 
@@ -17,6 +17,7 @@ for dir in "${BUILD_DIRS[@]}"; do
         if [ $? -ne 0 ]; then
             echo "Errors of Makefile in $dir "
             BUILD_STATUS=false
+            break
         fi
     fi
 done
@@ -29,7 +30,9 @@ fi
 
 echo "_______________STARTS Of PROGRAM_____________________"
 
-for out in $(find . -name "$OUT_PATTERN" -type f ); do
-    "$out"
-done
+echo "___________BACKED STARTED________________"
+"backend/Build/backend.out"
+
+echo "_____________ASSEMBLER STARTED_____________"
+"machine/ASM/Build/ASM.out" "commonFiles/assemble.asm"
 

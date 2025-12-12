@@ -14,8 +14,10 @@ int main( int argc, char** argv){
     }
 
 
-    if( argc > 2 ){
-        codeWithError = assemble( argv[1], argv[2], labels );
+    char* fileForSPU = getNameOfFileForSPU();
+
+    if( argc > 1 ){
+        codeWithError = assemble( argv[1], fileForSPU, labels );
         analysisOfAssembleError( codeWithError );
     }
     else{
@@ -27,5 +29,6 @@ int main( int argc, char** argv){
         colorPrintf( NOMODE, RED, "\nError from assemble :%s %s %d\n", __FILE__, __func__, __LINE__ );
     }
 
+    free( fileForSPU );
     return 0;
 }

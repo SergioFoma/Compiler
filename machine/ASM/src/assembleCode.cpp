@@ -97,7 +97,7 @@ typeOfErr assemble( const char* fileForAsm, const char* fileForByteCode, int* la
         return NULL_PTR;
     }
 
-    FILE* byteFile = fopen( fileForByteCode, "a" );
+    FILE* byteFile = fopen( fileForByteCode, "w" );
     if( byteFile == NULL ){
         return BYTE_FILE_ERROR;
     }
@@ -123,6 +123,8 @@ typeOfErr assemble( const char* fileForAsm, const char* fileForByteCode, int* la
     fclose( byteFile );
     free( commandArray );
     destroyStringCommand( &stringCommand );
+    destroyBufferInformation( &bufferFromFile );
+    destroyStringInformation( &stringFromFile );
 
     return OK;
 }
@@ -430,4 +432,14 @@ void analysisOfAssembleError( typeOfErr assembleError ){
         default:
             break;
     }
+}
+
+char* getNameOfFileForSPU(){
+    colorPrintf( NOMODE, YELLOW, "Enter the name of file, where i will save command for SPU: " );
+
+    char* nameOfSPUfile = NULL;
+    size_t sizeOfAllocationMemory = 0;
+    ssize_t sizeOfLine = getlineWrapper( &nameOfSPUfile, &sizeOfAllocationMemory, stdin );
+
+    return nameOfSPUfile;
 }

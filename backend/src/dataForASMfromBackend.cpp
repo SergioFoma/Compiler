@@ -7,69 +7,64 @@
 #include "paint.h"
 #include "myStringFunction.h"
 
+#define FILE_NAME_FOR_ASM "commonFiles/assemble.asm"            // hardcoding, because the user should not know about the intermediate files.
+
 expertSystemErrors writeASMcommand( tree_t* tree ){
     assert( tree );
 
-    colorPrintf( NOMODE, YELLOW, "\nEnter the name of file were do you want save ASSEMBLE code: " );
-
-    char* fileNameForWrite = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &fileNameForWrite, &sizeOfAllocationMemory, stdin );
-    if( sizeOfLine == -1 ){
-        return ERROR_WITH_GETLINE;
-    }
-
-    FILE* fileForTree = fopen( fileNameForWrite, "w" );
-    if( fileForTree == NULL ){
+    FILE* fileForASM = fopen( FILE_NAME_FOR_ASM, "w" );
+    if( fileForASM == NULL ){
         colorPrintf( NOMODE, RED, "\nError with write data base in:%s %s %d\n", __FILE__, __func__, __LINE__ );
         return ERROR_WITH_FILE;
     }
 
-    writeASMcommandFromNode( tree->rootTree, fileForTree );
+    writeASMcommandFromNode( tree->rootTree, fileForASM );
 
-    free( fileNameForWrite );
-    fclose( fileForTree );
+    fprintf( fileForASM, "OUT\n" );
+    fprintf( fileForASM, "HLT\n" );
+
+    fclose( fileForASM );
     return CORRECT_WORK;
 }
 
-void writeASMcommandFromNode( node_t* node, FILE* fileForTree ){
+void writeASMcommandFromNode( node_t* node, FILE* fileForASM ){
     assert( node );
 
     if( node->left ){
-        writeASMcommandFromNode( node->left, fileForTree );
+        writeASMcommandFromNode( node->left, fileForASM );
     }
     if( node->right ){
-        writeASMcommandFromNode( node->right, fileForTree );
+        writeASMcommandFromNode( node->right, fileForASM );
     }
 
-    writeCommand( node, fileForTree );
+    writeCommand( node, fileForASM );
 }
 
-void writeCommand( node_t* node, FILE* fileForTree ){
+void writeCommand( node_t* node, FILE* fileForASM ){
     assert( node );
 
     switch( node->nodeValueType ){
         case NUMBER:
-            printNumberInASM( node, fileForTree );
+            printNumberInASM( node, fileForASM );
             break;
         case OPERATOR:
-            printMathInASM( node, fileForTree );
+            printMathInASM( node, fileForASM );
             break;
         default:
             break;
     }
 }
 
-void printNumberInASM( node_t* node, FILE* fileForTree ){
+void printNumberInASM( node_t* node, FILE* fileForASM ){
     assert( node );
 
-    fprintf( fileForTree, "PUSH %lg\n", node->data.number );
+    fprintf( fileForASM, "PUSH %lg\n", node->data.number );
 }
 
-void printMathInASM( node_t* node, FILE* fileForTree ){
+void printMathInASM( node_t* node, FILE* fileForASM ){
     assert( node );
 
-    fprintf( fileForTree, "%s\n", getStringOfMathOperator( node ) );
+    fprintf( fileForASM, "%s\n", getStringOfMathOperator( node ) );
 }
 
 const char* getStringOfMathOperator( const node_t* node ){

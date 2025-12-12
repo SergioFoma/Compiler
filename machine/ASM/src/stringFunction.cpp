@@ -120,15 +120,15 @@ void getOriginalText( bufferInformation *bufferFromFile ){
 void destroyBufferInformation( bufferInformation *bufferFromFile ){
     free( bufferFromFile->buffer );
     bufferFromFile->buffer = NULL;
-    bufferFromFile->bufferSize = -1;
-    bufferFromFile->fileSize = -1;
+    bufferFromFile->bufferSize = 0;
+    bufferFromFile->fileSize = 0;
     bufferFromFile = NULL;
 }
 
 void destroyStringInformation( strInformation *stringFromFile ){
     free( stringFromFile->arrayOfStr );
     stringFromFile->arrayOfStr = NULL;
-    stringFromFile->arraySize = -1;
+    stringFromFile->arraySize = 0;
     stringFromFile = NULL;
 }
 
@@ -140,4 +140,18 @@ char* cleanLine( char* lineFromText) {
         ++lineIndex;
     }
     return lineFromText + lineIndex;
+}
+
+ssize_t getlineWrapper( char** line, size_t* n, FILE* stream ) {
+
+    ssize_t sizeOfLine = getline( line, n, stream );
+    if( sizeOfLine == -1 ){
+        return -1;
+    }
+
+    if( (*line)[ sizeOfLine - 1 ] == '\n' ){
+        (*line)[ sizeOfLine - 1 ] = '\0';
+    }
+
+    return sizeOfLine;
 }

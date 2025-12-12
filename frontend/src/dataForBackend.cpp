@@ -7,27 +7,18 @@
 #include "paint.h"
 #include "dataForBackend.h"
 
+#define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
+
 expertSystemErrors writeAST( tree_t* tree ){
     assert( tree );
 
-    colorPrintf( NOMODE, YELLOW, "\nEnter the name of file were do you want save PUBG language: " );
-
-    char* fileNameForWrite = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &fileNameForWrite, &sizeOfAllocationMemory, stdin );
-    if( sizeOfLine == -1 ){
-        return ERROR_WITH_GETLINE;
-    }
-
-    FILE* fileForTree = fopen( fileNameForWrite, "w" );
+    FILE* fileForTree = fopen( FILE_WITH_TREE, "w" );
     if( fileForTree == NULL ){
         colorPrintf( NOMODE, RED, "\nError with write data base in file\n" );
         return ERROR_WITH_FILE;
     }
 
     dumpTreeInFile( tree, fileForTree );
-
-    free( fileNameForWrite );
 
     fclose( fileForTree );
     return CORRECT_WORK;
