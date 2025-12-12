@@ -129,97 +129,28 @@ void lexAnalysis( char** symbol, infoForCreateTree* infoForTree ){
             initializationNodeInArray( infoForTree, infoForTree->freeIndexNow + 1 );
         }
 
-        if( strncmp( *symbol, COMMENT_BEGIN, COMMENT_LEN ) == 0 ){
-            *symbol += COMMENT_LEN;
-            while( strncmp( *symbol, COMMENT_END, COMMENT_LEN ) != 0 ){
-                ++( *symbol );
-            }
-            *symbol += COMMENT_LEN;
+        checkingOnComment( symbol );
+
+        if( tryInitializationExpressionNode( symbol, infoForTree ) == true ){
             continue;
         }
 
-        bool isSearchExpression = false;
-        for( size_t expressionIndex = 0; expressionIndex < sizeOfExpressionArray; expressionIndex++ ){
-            const char* nameOfOperator = arrayWithExpressions[ expressionIndex ].viewOfExpressionOperatorInFile;
-            size_t lenOfOperator = strlen( arrayWithExpressions[ expressionIndex ].viewOfExpressionOperatorInFile );
-
-            if( strncmp( *symbol, nameOfOperator, lenOfOperator ) == 0 ){
-
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = EXPRESSION;
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.expressionOperator = arrayWithExpressions[ expressionIndex ].expressionOperator;
-                (*symbol) += lenOfOperator;
-                ++( infoForTree->freeIndexNow );
-                isSearchExpression = true;
-                break;
-            }
-        }
-        if( isSearchExpression ){
+        if( tryInitializationStatement( symbol, infoForTree ) == true ){
             continue;
         }
 
-        bool isSearchStatement = false;
-        for( size_t statementIndex = 0; statementIndex < sizeOfStatementArray; statementIndex++ ){
-            const char* nameOfStatement = arrayWithStatements[ statementIndex ].viewOfStatementInFile;
-            size_t lenOfStatement = strlen( arrayWithStatements[ statementIndex ].viewOfStatementInFile );
-
-            if( strncmp( *symbol, nameOfStatement, lenOfStatement ) == 0 ){
-
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = STATEMENT;
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.statement = arrayWithStatements[ statementIndex ].statement;
-                (*symbol) += lenOfStatement;
-                ++( infoForTree->freeIndexNow );
-                isSearchStatement = true;
-                break;
-            }
-        }
-        if( isSearchStatement ){
-            continue;
-        }
-
-        bool isSearchMath = false;
-        for( size_t mathIndex = 0; mathIndex < sizeOfStatementArray; mathIndex++ ){
-            const char* nameOfMath = arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile;
-            size_t lenOfMath = strlen( arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile );
-
-            if( strncmp( *symbol, nameOfMath, lenOfMath ) == 0 ){
-
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = OPERATOR;
-                (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.mathOperation = arrayWithMathInfo[ mathIndex ].mathOperation;
-                (*symbol) += lenOfMath;
-                ++( infoForTree->freeIndexNow );
-                isSearchMath = true;
-                break;
-            }
-        }
-        if( isSearchMath ){
+        if( tryInitializationMathOperator( symbol, infoForTree ) == true ){
             continue;
         }
 
 
-        if( '0' <= **symbol && **symbol <= '9' ){
-            double value = 0;
-            do{
-                value = value * 10 + ( **symbol - '0' );
-                ++(*symbol);
-            }while( '0' <= **symbol && **symbol <= '9' );
-
-            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = NUMBER;
-            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.number = value;
-            ++( infoForTree->freeIndexNow );
+        if( tryInitializationNumber( symbol, infoForTree ) == true ){
             continue;
         }
 
-
-        if( isalpha( **symbol ) || **symbol == '_' ){
-            char* lineWithVar = NULL;
-            size_t lineLen = readingVariable( &lineWithVar, symbol );
-            bool statusOfSearching = changTypeOfNodeOnVariableNode( infoForTree, symbol, lineWithVar, lineLen );
-            if( !statusOfSearching ){
-                free( ( infoForTree->tokens )[ infoForTree->freeIndexNow ] );
-                ( infoForTree->tokens )[ infoForTree->freeIndexNow ] = makeNodeWithNewVariable( lineWithVar, symbol, lineLen, infoForVarArray.freeIndexNow );
-            }
-            ++( infoForTree->freeIndexNow );
+        if( tryInitializationVariable( symbol, infoForTree ) == true ){
             continue;
+
         }
 
         if( isspace( **symbol ) ){
@@ -230,6 +161,131 @@ void lexAnalysis( char** symbol, infoForCreateTree* infoForTree ){
         colorPrintf( NOMODE, RED, "\n\nERROR OF LEX ANALYSIS\n\nNOT UNDEFINED SYMBOL  '%c' \n",**symbol );
         exit( 0 );
     }
+}
+
+void checkingOnComment( char** symbol ){
+    assert( symbol );
+    assert( *symbol );
+
+    if( strncmp( *symbol, COMMENT_BEGIN, COMMENT_LEN ) == 0 ){
+        *symbol += COMMENT_LEN;
+        while( strncmp( *symbol, COMMENT_END, COMMENT_LEN ) != 0 ){
+            ++( *symbol );
+        }
+        *symbol += COMMENT_LEN;
+    }
+}
+
+bool tryInitializationExpressionNode( char** symbol, infoForCreateTree* infoForTree ){
+    assert( symbol );
+    assert( *symbol );
+    assert( infoForTree );
+
+    for( size_t expressionIndex = 0; expressionIndex < sizeOfExpressionArray; expressionIndex++ ){
+        const char* nameOfOperator = arrayWithExpressions[ expressionIndex ].viewOfExpressionOperatorInFile;
+        size_t lenOfOperator = strlen( arrayWithExpressions[ expressionIndex ].viewOfExpressionOperatorInFile );
+
+        if( strncmp( *symbol, nameOfOperator, lenOfOperator ) == 0 ){
+
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = EXPRESSION;
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.expressionOperator = arrayWithExpressions[ expressionIndex ].expressionOperator;
+            (*symbol) += lenOfOperator;
+            ++( infoForTree->freeIndexNow );
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool tryInitializationStatement( char** symbol, infoForCreateTree* infoForTree ){
+    assert( symbol );
+    assert( *symbol );
+    assert( infoForTree );
+
+    for( size_t statementIndex = 0; statementIndex < sizeOfStatementArray; statementIndex++ ){
+        const char* nameOfStatement = arrayWithStatements[ statementIndex ].viewOfStatementInFile;
+        size_t lenOfStatement = strlen( arrayWithStatements[ statementIndex ].viewOfStatementInFile );
+
+        if( strncmp( *symbol, nameOfStatement, lenOfStatement ) == 0 ){
+
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = STATEMENT;
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.statement = arrayWithStatements[ statementIndex ].statement;
+            (*symbol) += lenOfStatement;
+            ++( infoForTree->freeIndexNow );
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool tryInitializationMathOperator( char** symbol, infoForCreateTree* infoForTree ){
+    assert( symbol );
+    assert( *symbol );
+    assert( infoForTree );
+
+    for( size_t mathIndex = 0; mathIndex < sizeOfStatementArray; mathIndex++ ){
+        const char* nameOfMath = arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile;
+        size_t lenOfMath = strlen( arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile );
+
+        if( strncmp( *symbol, nameOfMath, lenOfMath ) == 0 ){
+
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = OPERATOR;
+            (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.mathOperation = arrayWithMathInfo[ mathIndex ].mathOperation;
+            (*symbol) += lenOfMath;
+            ++( infoForTree->freeIndexNow );
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool tryInitializationNumber( char** symbol, infoForCreateTree* infoForTree ){
+    assert( symbol );
+    assert( *symbol );
+    assert( infoForTree );
+
+    if( '0' <= **symbol && **symbol <= '9' ){
+        double value = 0;
+        do{
+            value = value * 10 + ( **symbol - '0' );
+            ++(*symbol);
+        }while( '0' <= **symbol && **symbol <= '9' );
+
+        (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = NUMBER;
+        (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.number = value;
+        ++( infoForTree->freeIndexNow );
+
+        return true;
+    }
+
+    return false;
+}
+
+bool tryInitializationVariable( char** symbol, infoForCreateTree* infoForTree ){
+    assert( symbol );
+    assert( *symbol );
+    assert( infoForTree );
+
+    if( isalpha( **symbol ) || **symbol == '_' ){
+        char* lineWithVar = NULL;
+        size_t lineLen = readingVariable( &lineWithVar, symbol );
+        bool statusOfSearching = changTypeOfNodeOnVariableNode( infoForTree, symbol, lineWithVar, lineLen );
+        if( !statusOfSearching ){
+            free( ( infoForTree->tokens )[ infoForTree->freeIndexNow ] );
+            ( infoForTree->tokens )[ infoForTree->freeIndexNow ] = makeNodeWithNewVariable( lineWithVar, symbol, lineLen, infoForVarArray.freeIndexNow );
+        }
+        ++( infoForTree->freeIndexNow );
+
+        return true;
+    }
+
+    return false;
 }
 
 bool changTypeOfNodeOnVariableNode( infoForCreateTree* infoForTree, char** ptrOnSymbolInPosition, char* lineWithVar, size_t lineLen ){
@@ -294,6 +350,10 @@ node_t* makeTreeFromOperators( infoForCreateTree* infoForTree ){
 
     node_t* nodeOperator = getOperator( infoForTree );
     if( nodeOperator->right == NULL ){
+        nodeOperator->right = makeTreeFromOperators( infoForTree );
+    }
+    else{
+        nodeOperator = newStatementNode( STATEMENT, OPERATOR_END, nodeOperator, NULL );
         nodeOperator->right = makeTreeFromOperators( infoForTree );
     }
 

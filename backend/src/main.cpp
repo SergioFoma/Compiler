@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+#include "dataForASMfromBackend.h"
+#include "paint.h"
+#include "tree.h"
+#include "parseFileDataBase.h"
+
+int main(){
+
+    tree_t treeFromAST = {};
+
+    expertSystemErrors statusOfCreate = createTreeFromFile( &treeFromAST );
+
+    if( statusOfCreate != CORRECT_WORK ){
+        colorPrintf( NOMODE, RED, "Error of create tree for AST:%s %s %d\n", __FILE__, __func__, __LINE__ );
+    }
+
+    writeASMcommand( &treeFromAST );
+
+    destroyTree( &treeFromAST );
+}

@@ -47,12 +47,6 @@ void destroyBufferInformation( bufferInformation *bufferFromFile );
 
 bufferInformation getBufferFromFile( FILE** fileWithBuffer );
 
-expertSystemErrors createTreeFromFile( tree_t* tree );
-
-node_t* createNodeFromFile( char** ptrOnSymbolInPosition );
-
-char* readNodeNameFromFile( char** ptrOnSymbolInPosition );
-
 expertSystemErrors buildnewMathNode( node_t** node, char* nodeName );
 
 void initializationTokens( infoForCreateTree* infoForTree );
@@ -64,6 +58,18 @@ bool changTypeOfNodeOnVariableNode( infoForCreateTree* infoForTree, char** ptrOn
 expertSystemErrors createTreeByRecursiveDescent( tree_t* tree );
 
 void lexAnalysis( char** mathExpression, infoForCreateTree* infoForTree );
+
+void checkingOnComment( char** symbol );
+
+bool tryInitializationExpressionNode( char** symbol, infoForCreateTree* infoForTree );
+
+bool tryInitializationStatement( char** symbol, infoForCreateTree* infoForTree );
+
+bool tryInitializationMathOperator( char** symbol, infoForCreateTree* infoForTree );
+
+bool tryInitializationNumber( char** symbol, infoForCreateTree* infoForTree );
+
+bool tryInitializationVariable( char** symbol, infoForCreateTree* infoForTree );
 
 node_t* getGeneral( infoForCreateTree* infoForTree );
 

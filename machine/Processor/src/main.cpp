@@ -18,7 +18,7 @@ int main(int argc, char** argv){
     if( argc > 1 && strcmp( argv[1], "--softProcessor" ) == 0 ){
         typeOfErr = calculationFromProcessor( &SPU, argv[2] );
         if( typeOfErr != SUCCESSFUL ){
-            colorPrintf( NOMODE, RED, "\n\nMain got an error of type: %d\n\n", typeOfErr ); // TODO func for error printing
+            colorPrintf( NOMODE, RED, "\n\nMain got an error of type: %d\n\n", typeOfErr );
         }
     }
 

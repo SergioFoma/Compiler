@@ -1,8 +1,9 @@
-wool( 5 |BMP| 7  ){
-    i pabgo_govnito 45 gusi
-    h pabgo_govnito ( 145 == d ) gusi
-}
-dandruff wool( a == 9 ){
-    new pabgo_govnito 17 gusi
+wool( a == 10 ){
+    a pabgo_govnito 7 gusi
+    b pabgo_govnito 8 gusi
 }
 
+{
+    c pabgo_govnito 9 gusi
+    d pabgo_govnito 10 gusi
+}

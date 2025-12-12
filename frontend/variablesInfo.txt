@@ -1,14 +1,12 @@
-array with variables[ 5 ] = {
-	{ i  , 0  },
-	{ h  , 1  },
-	{ d  , 2  },
-	{ a  , 3  },
-	{ new  , 4  },
+array with variables[ 4 ] = {
+	{ a  , 0  },
+	{ b  , 1  },
+	{ c  , 2  },
+	{ d  , 3  },
 };
 capacity = 8
 
-var[0] = 45
-var[1] = 0.999991
-var[2] = -1.83255e-06
-var[3] = -1.83255e-06
-var[4] = 17
+var[0] = 7
+var[1] = 8
+var[2] = 9
+var[3] = 10

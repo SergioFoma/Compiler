@@ -23,7 +23,6 @@ struct informationWithMathOperators {
     typeOfMathOperation mathOperation;
     const char* nameOfMathOperation;
     const char* viewOfMathOperationInFile;
-    double(*doMathOperation)( double firstNumber, double doubleSecondNumber );
     functionClasses functionClass;
 };
 
