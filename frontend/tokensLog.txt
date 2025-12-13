@@ -1,25 +1,85 @@
-array with tokens[ 20 ] = {
+array with tokens[ 80 ] = {
 	[0] = { type = VARIABLE, val = 'a'}
 	[1] = { type = STATEMENT, val = 'ASSIGNMENT'}
-	[2] = { type = NUMBER, val = 5}
-	[3] = { type = OPERATOR, val = 'ADD'}
-	[4] = { type = NUMBER, val = 3}
-	[5] = { type = STATEMENT, val = 'OP_END'}
-	[6] = { type = STATEMENT, val = 'NO_TYPE'}
-	[7] = { type = STATEMENT, val = 'NO_TYPE'}
-	[8] = { type = STATEMENT, val = 'NO_TYPE'}
-	[9] = { type = STATEMENT, val = 'NO_TYPE'}
-	[10] = { type = STATEMENT, val = 'NO_TYPE'}
-	[11] = { type = STATEMENT, val = 'NO_TYPE'}
-	[12] = { type = STATEMENT, val = 'NO_TYPE'}
-	[13] = { type = STATEMENT, val = 'NO_TYPE'}
-	[14] = { type = STATEMENT, val = 'NO_TYPE'}
-	[15] = { type = STATEMENT, val = 'NO_TYPE'}
-	[16] = { type = STATEMENT, val = 'NO_TYPE'}
-	[17] = { type = STATEMENT, val = 'NO_TYPE'}
-	[18] = { type = STATEMENT, val = 'NO_TYPE'}
-	[19] = { type = STATEMENT, val = 'NO_TYPE'}
+	[2] = { type = NUMBER, val = 11}
+	[3] = { type = STATEMENT, val = 'OP_END'}
+	[4] = { type = STATEMENT, val = 'IF'}
+	[5] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[6] = { type = VARIABLE, val = 'a'}
+	[7] = { type = EXPRESSION, val = 'ABOVE'}
+	[8] = { type = NUMBER, val = 10}
+	[9] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[10] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[11] = { type = STATEMENT, val = 'WHILE'}
+	[12] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[13] = { type = VARIABLE, val = 'a'}
+	[14] = { type = EXPRESSION, val = 'ABOVE'}
+	[15] = { type = NUMBER, val = 0}
+	[16] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[17] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[18] = { type = VARIABLE, val = 'a'}
+	[19] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[20] = { type = VARIABLE, val = 'a'}
+	[21] = { type = OPERATOR, val = 'SUB'}
+	[22] = { type = NUMBER, val = 1}
+	[23] = { type = STATEMENT, val = 'OP_END'}
+	[24] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[25] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[26] = { type = STATEMENT, val = 'ELSE'}
+	[27] = { type = STATEMENT, val = 'IF'}
+	[28] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[29] = { type = VARIABLE, val = 'a'}
+	[30] = { type = EXPRESSION, val = 'EQUAL'}
+	[31] = { type = NUMBER, val = 10}
+	[32] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[33] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[34] = { type = VARIABLE, val = 'a'}
+	[35] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[36] = { type = VARIABLE, val = 'a'}
+	[37] = { type = OPERATOR, val = 'MUL'}
+	[38] = { type = NUMBER, val = 2}
+	[39] = { type = STATEMENT, val = 'OP_END'}
+	[40] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[41] = { type = STATEMENT, val = 'ELSE'}
+	[42] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[43] = { type = VARIABLE, val = 'new_var'}
+	[44] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[45] = { type = VARIABLE, val = 'a'}
+	[46] = { type = STATEMENT, val = 'OP_END'}
+	[47] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[48] = { type = STATEMENT, val = 'NO_TYPE'}
+	[49] = { type = STATEMENT, val = 'NO_TYPE'}
+	[50] = { type = STATEMENT, val = 'NO_TYPE'}
+	[51] = { type = STATEMENT, val = 'NO_TYPE'}
+	[52] = { type = STATEMENT, val = 'NO_TYPE'}
+	[53] = { type = STATEMENT, val = 'NO_TYPE'}
+	[54] = { type = STATEMENT, val = 'NO_TYPE'}
+	[55] = { type = STATEMENT, val = 'NO_TYPE'}
+	[56] = { type = STATEMENT, val = 'NO_TYPE'}
+	[57] = { type = STATEMENT, val = 'NO_TYPE'}
+	[58] = { type = STATEMENT, val = 'NO_TYPE'}
+	[59] = { type = STATEMENT, val = 'NO_TYPE'}
+	[60] = { type = STATEMENT, val = 'NO_TYPE'}
+	[61] = { type = STATEMENT, val = 'NO_TYPE'}
+	[62] = { type = STATEMENT, val = 'NO_TYPE'}
+	[63] = { type = STATEMENT, val = 'NO_TYPE'}
+	[64] = { type = STATEMENT, val = 'NO_TYPE'}
+	[65] = { type = STATEMENT, val = 'NO_TYPE'}
+	[66] = { type = STATEMENT, val = 'NO_TYPE'}
+	[67] = { type = STATEMENT, val = 'NO_TYPE'}
+	[68] = { type = STATEMENT, val = 'NO_TYPE'}
+	[69] = { type = STATEMENT, val = 'NO_TYPE'}
+	[70] = { type = STATEMENT, val = 'NO_TYPE'}
+	[71] = { type = STATEMENT, val = 'NO_TYPE'}
+	[72] = { type = STATEMENT, val = 'NO_TYPE'}
+	[73] = { type = STATEMENT, val = 'NO_TYPE'}
+	[74] = { type = STATEMENT, val = 'NO_TYPE'}
+	[75] = { type = STATEMENT, val = 'NO_TYPE'}
+	[76] = { type = STATEMENT, val = 'NO_TYPE'}
+	[77] = { type = STATEMENT, val = 'NO_TYPE'}
+	[78] = { type = STATEMENT, val = 'NO_TYPE'}
+	[79] = { type = STATEMENT, val = 'NO_TYPE'}
 };
-capacity = 20
-freeIndexNow = 6
-currentIndex = 6
+capacity = 80
+freeIndexNow = 48
+currentIndex = 48

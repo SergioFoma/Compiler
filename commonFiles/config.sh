@@ -28,8 +28,8 @@ if [ "$BUILD_STATUS" = false ]; then
 fi
 
 
-#echo "_______________FRONTEND STARTED_____________________"
-#"frontend/Build/frontend.out"
+echo "_______________FRONTEND STARTED_____________________"
+"frontend/Build/frontend.out"
 
 echo "___________BACKED STARTED________________"
 "backend/Build/backend.out"

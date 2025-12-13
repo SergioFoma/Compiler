@@ -7,9 +7,8 @@
 #include "stack.h"
 
 const size_t sizeOfRegs = 10;
-const size_t sizeRam = 100;
-const size_t sizeOfVideoMemory = 0;
-const size_t countOfSymbolInLine = 100;
+const size_t sizeRam = 30;
+const size_t countOfSymbolInLine = 10;
 const size_t startSizeForStk = 8;
 
 enum regsIndex {
@@ -61,7 +60,5 @@ void processorDestroy( Processor* SPU );
 void regsPrint( Processor* SPU );
 
 void ramPrint( Processor* SPU );
-
-void doColor( Processor* SPU, size_t index );
 
 #endif

@@ -32,26 +32,26 @@ const size_t sizeOfMathArray = sizeof( arrayWithMathInfo ) / sizeof( arrayWithMa
 informationWithStatements arrayWithStatements[] = {
         { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"  ,      translateAssignmentInASM       },
         { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="        ,      translateAssignmentInASM       },
-        { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"        ,      translateAssignmentInASM       },
-        { IF                    ,     "IF"          ,   "wool"              ,   "if"       ,      translateAssignmentInASM       },
+        { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"        ,      translateEndOperatorInASM      },
+        { IF                    ,     "IF"          ,   "wool"              ,   "if"       ,      translateIfInASM               },
         { PAR_OPEN              , "PAR_OPEN"        ,    "("                ,   "("        ,      translateAssignmentInASM       },
         { PAR_CLOSE             , "PAR_CLOSE"       ,    ")"                ,   ")"        ,      translateAssignmentInASM       },
         { CURLY_PAR_OPEN        , "CR_PAR_OPEND"    ,    "{"                ,   "{"        ,      translateAssignmentInASM       },
         { CURLY_PAR_CLOSE       , "CR_PAR_CLOSE"    ,    "}"                ,   "}"        ,      translateAssignmentInASM       },
-        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"    ,      translateAssignmentInASM       },
-        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"     ,      translateAssignmentInASM       }
+        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"    ,      translateWhileInASM            },
+        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"     ,      translateElseInASM             }
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 
 struct informationWithExpressions arrayWithExpressions[] = {
-        { AND                   ,       "AND"           ,  "|BMP|"       ,       "&&"             },
-        { OR                    ,       "OR"            ,  "|AIRDROP|"   ,       "||"             },
-        { ABOVE_OR_EQUAL        ,       "ABOVE_OR_EQ"   ,  ">="          ,       ">="             },
-        { BELOW_OR_EQUAL        ,       "BELOW_OR_EQ"   ,  "<="          ,       "<="             },
-        { EQUAL                 ,       "EQUAL"         ,  "=="          ,       "=="             },
-        { NOT_EQUAL             ,       "NOT_EQUAL"     ,  "!="          ,       "!="             },
-        { BELOW                 ,       "BELOW"         ,  "<"           ,       "<"              },
-        { ABOVE                 ,       "ABOVE"         ,  ">"           ,       ">"              }
+        { AND                   ,       "AND"           ,  "|BMP|"       ,       "&&"      ,      translateAboveOrEqualInASM      },
+        { OR                    ,       "OR"            ,  "|AIRDROP|"   ,       "||"      ,      translateAboveOrEqualInASM      },
+        { ABOVE_OR_EQUAL        ,       "ABOVE_OR_EQ"   ,  ">="          ,       ">="      ,      translateAboveOrEqualInASM      },
+        { BELOW_OR_EQUAL        ,       "BELOW_OR_EQ"   ,  "<="          ,       "<="      ,      translateBelowOrEqualInASM      },
+        { EQUAL                 ,       "EQUAL"         ,  "=="          ,       "=="      ,      translateEqualInASM             },
+        { NOT_EQUAL             ,       "NOT_EQUAL"     ,  "!="          ,       "!="      ,      translateNoteEqualInASM         },
+        { BELOW                 ,       "BELOW"         ,  "<"           ,       "<"       ,      translateBelowInASM             },
+        { ABOVE                 ,       "ABOVE"         ,  ">"           ,       ">"       ,      translateAboveInASM             }
 };
 const size_t sizeOfExpressionArray = sizeof( arrayWithExpressions ) / sizeof( arrayWithExpressions[ 0 ] );
 

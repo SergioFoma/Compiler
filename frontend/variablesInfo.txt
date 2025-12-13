@@ -1,6 +1,0 @@
-array with variables[ 1 ] = {
-	{ a  , 0  },
-};
-capacity = 2
-
-var[0] = 8

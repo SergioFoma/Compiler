@@ -9,36 +9,36 @@
 #include "paint.h"
 
 commandForPrint arrayWithOneCommand[] = {
-    { "PUSH",  PUSH },
-    { "IN",    IN },
-    { "MUL",   MUL },
-    { "SQRT", SQRT },
-    { "SUB",   SUB },
-    { "ADD",   ADD },
-    { "OUT",   OUT },
-    { "HLT",   HLT },
-    { "DRAW",  DRAW },
-    { "DIV",   DIV  },
-    { "MOD",   MOD },
-    { "JMP",   JMP },
-    { "RET",   RET },
+    { "PUSH"    ,   PUSH    },
+    { "IN"      ,   IN      },
+    { "MUL"     ,   MUL     },
+    { "SQRT"    ,   SQRT    },
+    { "SUB"     ,   SUB     },
+    { "ADD"     ,   ADD     },
+    { "OUT"     ,   OUT     },
+    { "HLT"     ,   HLT     },
+    { "DRAW"    ,   DRAW    },
+    { "DIV"     ,   DIV     },
+    { "MOD"     ,   MOD     },
+    { "RET"     ,   RET     },
 };
 size_t sizeArrayWithOneCommand = sizeof( arrayWithOneCommand ) / sizeof( arrayWithOneCommand[ 0 ] );
 
 commandForLabel arrayWithLabelCommand[] = {
-    { "JB", JB,  checkLabel },
-    { "JBE", JBE, checkLabel },
-    { "JA", JA, checkLabel },
-    { "JAE", JAE, checkLabel },
-    { "JE", JE, checkLabel },
-    { "JNE", JNE, checkLabel },
-    { "CALL", CALL, checkLabel },
+    { "JMP"   , JMP     , checkLabel },
+    { "JB"    , JB      , checkLabel },
+    { "JBE"   , JBE     , checkLabel },
+    { "JA"    , JA      , checkLabel },
+    { "JAE"   , JAE     , checkLabel },
+    { "JE"    , JE      , checkLabel },
+    { "JNE"   , JNE     , checkLabel },
+    { "CALL"  , CALL    , checkLabel },
 };
 size_t sizeArrayWithLabelCommand = sizeof( arrayWithLabelCommand ) / sizeof( arrayWithLabelCommand[ 0 ] );
 
 commandForRegs arrayWithRegsCommand[] = {
-    { "PUSHR", PUSHR, parsingRegsCommand },
-    { "POPR",  POPR, parsingRegsCommand }
+    { "PUSHR"   ,  PUSHR    , parsingRegsCommand },
+    { "POPR"    ,  POPR     , parsingRegsCommand }
 };
 size_t sizeArrayWithRegsCommand = sizeof( arrayWithRegsCommand ) / sizeof( arrayWithRegsCommand[ 0 ] );
 
@@ -51,8 +51,8 @@ typeOfRegs arrayWithRegs[] = {
 size_t sizeArrayWithRegs = sizeof( arrayWithRegs ) / sizeof( arrayWithRegs[ 0 ] );
 
 commandForRam arrayWithRamCommand[] = {
-    { "PUSHM", PUSHM, parsingRamCommand },
-    { "POPM",  POPM, parsingRamCommand }
+    { "PUSHM"   , PUSHM    ,    parsingRamCommand },
+    { "POPM"    , POPM     ,    parsingRamCommand }
 };
 size_t sizeArrayWithRamCommand = sizeof( arrayWithRamCommand ) / sizeof( arrayWithRamCommand[ 0 ] );
 

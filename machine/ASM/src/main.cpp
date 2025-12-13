@@ -5,7 +5,7 @@
 
 int main( int argc, char** argv){
 
-    const size_t labelsSize = 10;
+    const size_t labelsSize = 30;
     int labels[ labelsSize ] = {};
     typeOfErr codeWithError = OK;
 

@@ -222,10 +222,10 @@ calculatorErrors doJB( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first < last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -240,10 +240,10 @@ calculatorErrors doJBE( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first <= last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -258,10 +258,10 @@ calculatorErrors doJA( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first > last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -276,10 +276,10 @@ calculatorErrors doJAE( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first >= last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -294,10 +294,10 @@ calculatorErrors doJE( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first == last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -312,10 +312,10 @@ calculatorErrors doJNE( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     if( first != last ){
-        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
+        SPU->instructionPointer += 1;
     }
     else if( SPU->instructionPointer < ( (SPU->code).sizeOfCommands - 1) ){
-        SPU->instructionPointer += 1;
+        SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     }
     return SUCCESSFUL;
 }
@@ -323,12 +323,6 @@ calculatorErrors doJNE( Processor* SPU ){
 calculatorErrors doJMP( Processor* SPU ){
     assert( SPU != NULL );
 
-    int last = stackPop( &(SPU->stk) );
-    int first = stackPop( &(SPU->stk) );
-    if( first == poison_ || last == poison_ ){
-        colorPrintf( NOMODE, RED, "\n\nNot enough elements in stack:%s %s %d\n\n", __FILE__, __func__, __LINE__);
-        return FEW_ELEMENTS;
-    }
     SPU->instructionPointer = (SPU->code).command[ (SPU->instructionPointer) + 1 ] - 1;
     return SUCCESSFUL;
 }

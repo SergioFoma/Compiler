@@ -1,1 +1,1 @@
-(= (a nil nil)(8 nil nil))
+(; (= (a nil nil)(11 nil nil))(; (if (> (a nil nil)(10 nil nil))(else (; (while (> (a nil nil)(0 nil nil))(else (; (= (a nil nil)(- (a nil nil)(1 nil nil)))nil)nil))nil)(; (if (== (a nil nil)(10 nil nil))(else (; (= (a nil nil)(* (a nil nil)(2 nil nil)))nil)(; (= (new_var nil nil)(a nil nil))nil)))nil)))nil))

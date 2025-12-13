@@ -48,7 +48,7 @@ struct informationWithStatements {
     const char* nameOfStatement;
     const char* viewOfStatementInFile;
     const char* viewOfStatementInAST;
-    void(*translateStatementInASMcommand)( const node_t* node, FILE* fileForASM );
+    size_t(*translateStatementInASMcommand)( const node_t* node, FILE* fileForASM );
 };
 
 extern informationWithStatements arrayWithStatements[];
@@ -59,6 +59,7 @@ struct informationWithExpressions {
     const char* nameOfExpressions;
     const char* viewOfExpressionOperatorInFile;
     const char* viewOfExpressionInAST;
+    size_t(*translateExpressionInASMcommand)( const node_t* node, FILE* fileForASM );
 };
 
 extern informationWithExpressions arrayWithExpressions[];

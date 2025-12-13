@@ -2,30 +2,268 @@ digraph G{
 	rankdir = TB;
 	node[shape = "hexagon", color = "black", fontsize = 14, shape = record ];
 	edge[color = "red", fontsize = 12];
-	node504000000550 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000000550 </td></tr> <tr><td colspan = "2" > parent = (nil) </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000000690 </td><td> NULL </td></tr></table>>;];
+	node504000001490 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001490 </td></tr> <tr><td colspan = "2" > parent = (nil) </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001550 </td><td> 0x504000001590 </td></tr></table>>;];
 	{
 		rank = 1;
-		node504000000550;
+		node504000001490;
 	}
-		node504000000690;
-	node504000000550->node504000000690[color = "orange"];
-	node504000000690 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000000690 </td></tr> <tr><td colspan = "2" > parent = 0x504000000550 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ASSIGNMENT </td></tr> <tr><td> 0x504000000590 </td><td> 0x504000000650 </td></tr></table>>;];
+		node504000001550;
+	node504000001490->node504000001550[color = "orange"];
+	node504000001550 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001550 </td></tr> <tr><td colspan = "2" > parent = 0x504000001490 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ASSIGNMENT </td></tr> <tr><td> 0x5040000014d0 </td><td> 0x504000001510 </td></tr></table>>;];
 	{
 		rank = 2;
-		node504000000690;
+		node504000001550;
 	}
-		node504000000590;
-	node504000000690->node504000000590[color = "orange"];
-	node504000000590 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000000590 </td></tr> <tr><td colspan = "2" > parent = 0x504000000690 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+		node5040000014d0;
+	node504000001550->node5040000014d0[color = "orange"];
+	node5040000014d0 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x5040000014d0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001550 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
 	{
 		rank = 3;
-		node504000000590;
+		node5040000014d0;
 	}
-		node504000000650;
-	node504000000690->node504000000650[color = "orange"];
-	node504000000650 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000000650 </td></tr> <tr><td colspan = "2" > parent = 0x504000000690 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 8 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+		node504000001510;
+	node504000001550->node504000001510[color = "orange"];
+	node504000001510 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000001510 </td></tr> <tr><td colspan = "2" > parent = 0x504000001550 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 11 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
 	{
 		rank = 3;
-		node504000000650;
+		node504000001510;
+	}
+		node504000001590;
+	node504000001490->node504000001590[color = "orange"];
+	node504000001590 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001590 </td></tr> <tr><td colspan = "2" > parent = 0x504000001490 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001ed0 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 2;
+		node504000001590;
+	}
+		node504000001ed0;
+	node504000001590->node504000001ed0[color = "orange"];
+	node504000001ed0 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001ed0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001590 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = IF </td></tr> <tr><td> 0x504000001650 </td><td> 0x504000001e90 </td></tr></table>>;];
+	{
+		rank = 3;
+		node504000001ed0;
+	}
+		node504000001650;
+	node504000001ed0->node504000001650[color = "orange"];
+	node504000001650 [shape="plain"; style ="filled"; fillcolor ="goldenrod1"; label = <<table><tr><td colspan = "2" > 0x504000001650 </td></tr> <tr><td colspan = "2" > parent = 0x504000001ed0 </td></tr> <tr><td width = "100" colspan = "2" > type = EXPRESSION </td></tr> <tr><td width = "100" colspan = "2" > val = ABOVE </td></tr> <tr><td> 0x5040000015d0 </td><td> 0x504000001610 </td></tr></table>>;];
+	{
+		rank = 4;
+		node504000001650;
+	}
+		node5040000015d0;
+	node504000001650->node5040000015d0[color = "orange"];
+	node5040000015d0 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x5040000015d0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001650 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 5;
+		node5040000015d0;
+	}
+		node504000001610;
+	node504000001650->node504000001610[color = "orange"];
+	node504000001610 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000001610 </td></tr> <tr><td colspan = "2" > parent = 0x504000001650 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 10 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 5;
+		node504000001610;
+	}
+		node504000001e90;
+	node504000001ed0->node504000001e90[color = "orange"];
+	node504000001e90 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001e90 </td></tr> <tr><td colspan = "2" > parent = 0x504000001ed0 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ELSE </td></tr> <tr><td> 0x5040000016d0 </td><td> 0x504000001a10 </td></tr></table>>;];
+	{
+		rank = 4;
+		node504000001e90;
+	}
+		node5040000016d0;
+	node504000001e90->node5040000016d0[color = "orange"];
+	node5040000016d0 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x5040000016d0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e90 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x5040000019d0 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 5;
+		node5040000016d0;
+	}
+		node5040000019d0;
+	node5040000016d0->node5040000019d0[color = "orange"];
+	node5040000019d0 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x5040000019d0 </td></tr> <tr><td colspan = "2" > parent = 0x5040000016d0 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = WHILE </td></tr> <tr><td> 0x504000001790 </td><td> 0x504000001990 </td></tr></table>>;];
+	{
+		rank = 6;
+		node5040000019d0;
+	}
+		node504000001790;
+	node5040000019d0->node504000001790[color = "orange"];
+	node504000001790 [shape="plain"; style ="filled"; fillcolor ="goldenrod1"; label = <<table><tr><td colspan = "2" > 0x504000001790 </td></tr> <tr><td colspan = "2" > parent = 0x5040000019d0 </td></tr> <tr><td width = "100" colspan = "2" > type = EXPRESSION </td></tr> <tr><td width = "100" colspan = "2" > val = ABOVE </td></tr> <tr><td> 0x504000001710 </td><td> 0x504000001750 </td></tr></table>>;];
+	{
+		rank = 7;
+		node504000001790;
+	}
+		node504000001710;
+	node504000001790->node504000001710[color = "orange"];
+	node504000001710 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001710 </td></tr> <tr><td colspan = "2" > parent = 0x504000001790 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001710;
+	}
+		node504000001750;
+	node504000001790->node504000001750[color = "orange"];
+	node504000001750 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000001750 </td></tr> <tr><td colspan = "2" > parent = 0x504000001790 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 0 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001750;
+	}
+		node504000001990;
+	node5040000019d0->node504000001990[color = "orange"];
+	node504000001990 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001990 </td></tr> <tr><td colspan = "2" > parent = 0x5040000019d0 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ELSE </td></tr> <tr><td> 0x504000001810 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 7;
+		node504000001990;
+	}
+		node504000001810;
+	node504000001990->node504000001810[color = "orange"];
+	node504000001810 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001810 </td></tr> <tr><td colspan = "2" > parent = 0x504000001990 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001950 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001810;
+	}
+		node504000001950;
+	node504000001810->node504000001950[color = "orange"];
+	node504000001950 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001950 </td></tr> <tr><td colspan = "2" > parent = 0x504000001810 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ASSIGNMENT </td></tr> <tr><td> 0x504000001850 </td><td> 0x504000001910 </td></tr></table>>;];
+	{
+		rank = 9;
+		node504000001950;
+	}
+		node504000001850;
+	node504000001950->node504000001850[color = "orange"];
+	node504000001850 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001850 </td></tr> <tr><td colspan = "2" > parent = 0x504000001950 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001850;
+	}
+		node504000001910;
+	node504000001950->node504000001910[color = "orange"];
+	node504000001910 [shape="plain"; style ="filled"; fillcolor ="orange"; label = <<table><tr><td colspan = "2" > 0x504000001910 </td></tr> <tr><td colspan = "2" > parent = 0x504000001950 </td></tr> <tr><td width = "100" colspan = "2" > type = OPERATOR </td></tr> <tr><td width = "100" colspan = "2" > val = SUB </td></tr> <tr><td> 0x504000001890 </td><td> 0x5040000018d0 </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001910;
+	}
+		node504000001890;
+	node504000001910->node504000001890[color = "orange"];
+	node504000001890 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001890 </td></tr> <tr><td colspan = "2" > parent = 0x504000001910 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 11;
+		node504000001890;
+	}
+		node5040000018d0;
+	node504000001910->node5040000018d0[color = "orange"];
+	node5040000018d0 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x5040000018d0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001910 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 1 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 11;
+		node5040000018d0;
+	}
+		node504000001a10;
+	node504000001e90->node504000001a10[color = "orange"];
+	node504000001a10 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001a10 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e90 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001e50 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 5;
+		node504000001a10;
+	}
+		node504000001e50;
+	node504000001a10->node504000001e50[color = "orange"];
+	node504000001e50 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001e50 </td></tr> <tr><td colspan = "2" > parent = (nil) </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = IF </td></tr> <tr><td> 0x504000001ad0 </td><td> 0x504000001e10 </td></tr></table>>;];
+	{
+		rank = 6;
+		node504000001e50;
+	}
+		node504000001ad0;
+	node504000001e50->node504000001ad0[color = "orange"];
+	node504000001ad0 [shape="plain"; style ="filled"; fillcolor ="goldenrod1"; label = <<table><tr><td colspan = "2" > 0x504000001ad0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e50 </td></tr> <tr><td width = "100" colspan = "2" > type = EXPRESSION </td></tr> <tr><td width = "100" colspan = "2" > val = EQUAL </td></tr> <tr><td> 0x504000001a50 </td><td> 0x504000001a90 </td></tr></table>>;];
+	{
+		rank = 7;
+		node504000001ad0;
+	}
+		node504000001a50;
+	node504000001ad0->node504000001a50[color = "orange"];
+	node504000001a50 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001a50 </td></tr> <tr><td colspan = "2" > parent = 0x504000001ad0 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001a50;
+	}
+		node504000001a90;
+	node504000001ad0->node504000001a90[color = "orange"];
+	node504000001a90 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000001a90 </td></tr> <tr><td colspan = "2" > parent = 0x504000001ad0 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 10 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001a90;
+	}
+		node504000001e10;
+	node504000001e50->node504000001e10[color = "orange"];
+	node504000001e10 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001e10 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e50 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ELSE </td></tr> <tr><td> 0x504000001b50 </td><td> 0x504000001d10 </td></tr></table>>;];
+	{
+		rank = 7;
+		node504000001e10;
+	}
+		node504000001b50;
+	node504000001e10->node504000001b50[color = "orange"];
+	node504000001b50 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001b50 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e10 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001c90 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001b50;
+	}
+		node504000001c90;
+	node504000001b50->node504000001c90[color = "orange"];
+	node504000001c90 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001c90 </td></tr> <tr><td colspan = "2" > parent = 0x504000001b50 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ASSIGNMENT </td></tr> <tr><td> 0x504000001b90 </td><td> 0x504000001c50 </td></tr></table>>;];
+	{
+		rank = 9;
+		node504000001c90;
+	}
+		node504000001b90;
+	node504000001c90->node504000001b90[color = "orange"];
+	node504000001b90 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001b90 </td></tr> <tr><td colspan = "2" > parent = 0x504000001c90 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001b90;
+	}
+		node504000001c50;
+	node504000001c90->node504000001c50[color = "orange"];
+	node504000001c50 [shape="plain"; style ="filled"; fillcolor ="orange"; label = <<table><tr><td colspan = "2" > 0x504000001c50 </td></tr> <tr><td colspan = "2" > parent = 0x504000001c90 </td></tr> <tr><td width = "100" colspan = "2" > type = OPERATOR </td></tr> <tr><td width = "100" colspan = "2" > val = MUL </td></tr> <tr><td> 0x504000001bd0 </td><td> 0x504000001c10 </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001c50;
+	}
+		node504000001bd0;
+	node504000001c50->node504000001bd0[color = "orange"];
+	node504000001bd0 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001bd0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001c50 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 11;
+		node504000001bd0;
+	}
+		node504000001c10;
+	node504000001c50->node504000001c10[color = "orange"];
+	node504000001c10 [shape="plain"; style ="filled"; fillcolor ="hotpink2"; label = <<table><tr><td colspan = "2" > 0x504000001c10 </td></tr> <tr><td colspan = "2" > parent = 0x504000001c50 </td></tr> <tr><td width = "100" colspan = "2" > type = NUMBER </td></tr> <tr><td width = "100" colspan = "2" > val = 2 </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 11;
+		node504000001c10;
+	}
+		node504000001d10;
+	node504000001e10->node504000001d10[color = "orange"];
+	node504000001d10 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001d10 </td></tr> <tr><td colspan = "2" > parent = 0x504000001e10 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = OP_END </td></tr> <tr><td> 0x504000001dd0 </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 8;
+		node504000001d10;
+	}
+		node504000001dd0;
+	node504000001d10->node504000001dd0[color = "orange"];
+	node504000001dd0 [shape="plain"; style ="filled"; fillcolor ="slateblue1"; label = <<table><tr><td colspan = "2" > 0x504000001dd0 </td></tr> <tr><td colspan = "2" > parent = 0x504000001d10 </td></tr> <tr><td width = "100" colspan = "2" > type = STATEMENT </td></tr> <tr><td width = "100" colspan = "2" > val = ASSIGNMENT </td></tr> <tr><td> 0x504000001d50 </td><td> 0x504000001d90 </td></tr></table>>;];
+	{
+		rank = 9;
+		node504000001dd0;
+	}
+		node504000001d50;
+	node504000001dd0->node504000001d50[color = "orange"];
+	node504000001d50 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001d50 </td></tr> <tr><td colspan = "2" > parent = 0x504000001dd0 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = new_var </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001d50;
+	}
+		node504000001d90;
+	node504000001dd0->node504000001d90[color = "orange"];
+	node504000001d90 [shape="plain"; style ="filled"; fillcolor ="lightskyblue2"; label = <<table><tr><td colspan = "2" > 0x504000001d90 </td></tr> <tr><td colspan = "2" > parent = 0x504000001dd0 </td></tr> <tr><td width = "100" colspan = "2" > type = VARIABLE </td></tr> <tr><td width = "100" colspan = "2" > val = a </td></tr> <tr><td> NULL </td><td> NULL </td></tr></table>>;];
+	{
+		rank = 10;
+		node504000001d90;
 	}
 }

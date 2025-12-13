@@ -101,9 +101,9 @@ void ramPrint( Processor* SPU ){
     SPU_OK( SPU, (void)0 );
 
     colorPrintf( NOMODE, BLUE, "RAM:\n" );
-    for( size_t videoIndex = 0; videoIndex < sizeOfVideoMemory; videoIndex++){
-        printf("%c ", (SPU->RAM)[ videoIndex ] );
-        if( (videoIndex+1) % countOfSymbolInLine == 0 ){
+    for( size_t ramIndex = 0; ramIndex < sizeRam; ramIndex++){
+        printf( "[ %lu ] = %d ", ramIndex, (SPU->RAM)[ ramIndex ] );
+        if( (ramIndex+1) % countOfSymbolInLine == 0 ){
             printf("\n");
         }
     }
