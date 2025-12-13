@@ -13,7 +13,7 @@ FLAGS = -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop
 -fstrict-overflow -flto-odr-type-merging -fno-omit-frame-pointer -Wlarger-than=30000 -Wstack-usage=8192 -pie -fPIE -Werror=vla \
 -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr
 
-EXE_NAME = $(BUILD_DIR)/fronted.out
+EXE_NAME = $(BUILD_DIR)/frontend.out
 
 SOURCES = main.cpp tree.cpp treeDump.cpp myStringFunction.cpp paint.cpp parseFileDataBase.cpp mathematicalCalculator.cpp mathOperatorsInfo.cpp dataForBackend.cpp
 OBJECTS = $(SOURCES:.cpp=.obj)

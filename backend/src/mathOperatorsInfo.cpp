@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "mathOperatorsInfo.h"
+#include "dataForASMfromBackend.h"
 
 informationWithMathOperators arrayWithMathInfo[] = {
         { ADD   , "ADD"     , "+"       ,   TWO_ARG    },
@@ -29,16 +30,16 @@ informationWithMathOperators arrayWithMathInfo[] = {
 const size_t sizeOfMathArray = sizeof( arrayWithMathInfo ) / sizeof( arrayWithMathInfo[ 0 ] );
 
 informationWithStatements arrayWithStatements[] = {
-        { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"       },
-        { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="             },
-        { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"             },
-        { IF                    ,     "IF"          ,   "wool"              ,   "if"            },
-        { PAR_OPEN              , "PAR_OPEN"        ,    "("                ,   "("             },
-        { PAR_CLOSE             , "PAR_CLOSE"       ,    ")"                ,   ")"             },
-        { CURLY_PAR_OPEN        , "CR_PAR_OPEND"    ,    "{"                ,   "{"             },
-        { CURLY_PAR_CLOSE       , "CR_PAR_CLOSE"    ,    "}"                ,   "}"             },
-        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"         },
-        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"          }
+        { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"  ,      translateAssignmentInASM       },
+        { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="        ,      translateAssignmentInASM       },
+        { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"        ,      translateAssignmentInASM       },
+        { IF                    ,     "IF"          ,   "wool"              ,   "if"       ,      translateAssignmentInASM       },
+        { PAR_OPEN              , "PAR_OPEN"        ,    "("                ,   "("        ,      translateAssignmentInASM       },
+        { PAR_CLOSE             , "PAR_CLOSE"       ,    ")"                ,   ")"        ,      translateAssignmentInASM       },
+        { CURLY_PAR_OPEN        , "CR_PAR_OPEND"    ,    "{"                ,   "{"        ,      translateAssignmentInASM       },
+        { CURLY_PAR_CLOSE       , "CR_PAR_CLOSE"    ,    "}"                ,   "}"        ,      translateAssignmentInASM       },
+        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"    ,      translateAssignmentInASM       },
+        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"     ,      translateAssignmentInASM       }
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 

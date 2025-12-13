@@ -1,9 +1,1 @@
-wool( a == 10 ){
-    a pabgo_govnito 7 gusi
-    b pabgo_govnito 8 gusi
-}
-
-{
-    c pabgo_govnito 9 gusi
-    d pabgo_govnito 10 gusi
-}
+a pabgo_govnito 5 + 3 gusi

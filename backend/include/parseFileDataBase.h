@@ -44,9 +44,19 @@ expertSystemErrors createTreeFromFile( tree_t* tree );
 
 node_t* createNodeFromFile( char** ptrOnSymbolInPosition );
 
-char* readNodeNameFromFile( char** ptrOnSymbolInPosition );
-
 expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition );
+
+bool initializationNumberNode( node_t** node, char** ptrOnSymbolInPosition );
+
+bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition );
+
+bool appendOldVariableInTree( node_t** node, char** ptrOnSymbolInPosition, char* lineWithVar, size_t lineLen );
+
+node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen, size_t varIndex );
+
+size_t readingVariable( char** lineWithVariable, char** ptrOnSymbolInPosition );
+
+void isEnoughSize( char** lineWithWord, size_t* lineIndex, size_t* sizeOfLine );
 
 void cleanLineWithCode( char** ptrOnSymbolInPosition );
 

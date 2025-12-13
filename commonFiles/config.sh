@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD_DIRS=( "backend" "machine/ASM" "machine/Processor" )
+BUILD_DIRS=( "frontend" "backend" "machine/ASM" "machine/Processor" )
 
 OUT_PATTERN="*.out"
 
@@ -28,7 +28,8 @@ if [ "$BUILD_STATUS" = false ]; then
 fi
 
 
-echo "_______________STARTS Of PROGRAM_____________________"
+#echo "_______________FRONTEND STARTED_____________________"
+#"frontend/Build/frontend.out"
 
 echo "___________BACKED STARTED________________"
 "backend/Build/backend.out"

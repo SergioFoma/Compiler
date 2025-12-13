@@ -27,7 +27,7 @@ expertSystemErrors writeASMcommand( tree_t* tree ){
     return CORRECT_WORK;
 }
 
-void writeASMcommandFromNode( node_t* node, FILE* fileForASM ){
+void writeASMcommandFromNode( const node_t* node, FILE* fileForASM ){
     assert( node );
 
     if( node->left ){
@@ -40,7 +40,7 @@ void writeASMcommandFromNode( node_t* node, FILE* fileForASM ){
     writeCommand( node, fileForASM );
 }
 
-void writeCommand( node_t* node, FILE* fileForASM ){
+void writeCommand( const node_t* node, FILE* fileForASM ){
     assert( node );
 
     switch( node->nodeValueType ){
@@ -50,27 +50,28 @@ void writeCommand( node_t* node, FILE* fileForASM ){
         case OPERATOR:
             printMathInASM( node, fileForASM );
             break;
+        case STATEMENT:
+            printStatementInASM( node, fileForASM );
+            break;
         default:
             break;
     }
 }
 
-void printNumberInASM( node_t* node, FILE* fileForASM ){
+void printNumberInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
 
     fprintf( fileForASM, "PUSH %lg\n", node->data.number );
 }
 
-void printMathInASM( node_t* node, FILE* fileForASM ){
+void printMathInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
 
     fprintf( fileForASM, "%s\n", getStringOfMathOperator( node ) );
 }
 
 const char* getStringOfMathOperator( const node_t* node ){
-    if( node == NULL ){
-        return NULL;
-    }
+    assert( node );
 
     for( size_t mathIndex = 0; mathIndex < sizeOfMathArray; mathIndex++ ){
         if( node->data.mathOperation == arrayWithMathInfo[ mathIndex ].mathOperation ){
@@ -79,4 +80,34 @@ const char* getStringOfMathOperator( const node_t* node ){
     }
 
     return NULL;
+}
+
+void printStatementInASM( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    for( size_t statementIndex = 0; statementIndex < sizeOfStatementArray; statementIndex++ ){
+        if( node->data.statement == arrayWithStatements[ statementIndex ].statement ){
+            arrayWithStatements[ statementIndex ].translateStatementInASMcommand( node, fileForASM );
+            return ;
+        }
+    }
+
+}
+
+
+void translateAssignmentInASM( const node_t* node, FILE* fileForASM ){
+    assert( node );
+
+    if( node->left->nodeValueType != VARIABLE ){
+        return ;
+    }
+
+    for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
+        if( node->left->data.variableIndexInArray == arrayWithVariables[ varIndex ].variableIndexInArray ){
+            fprintf( fileForASM, "PUSH %lu\nPOPR RAX\nPOPM [RAX]\nPUSHM [RAX]\n", node->left->data.variableIndexInArray );
+            return ;
+        }
+    }
+
 }

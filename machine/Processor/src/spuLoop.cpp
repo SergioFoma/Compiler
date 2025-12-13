@@ -368,6 +368,7 @@ calculatorErrors doPopm( Processor* SPU ){
     }
     (SPU->RAM)[ (SPU->regs)[ramIndex] ] = ramElement;
     stackPrint( &(SPU->stk) );
+    regsPrint( SPU );
     return SUCCESSFUL;
 }
 

@@ -11,6 +11,7 @@
 #include "myStringFunction.h"
 
 const size_t nilLen = strlen( "nil" );
+const size_t startSizeForVariable = 7;
 
 #define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
 
@@ -143,24 +144,6 @@ node_t* createNodeFromFile( char** ptrOnSymbolInPosition ){
     return NULL;
 }
 
-char* readNodeNameFromFile( char** ptrOnSymbolInPosition ){
-    if( ptrOnSymbolInPosition == NULL || *(ptrOnSymbolInPosition) == NULL ){
-        return NULL;
-    }
-
-    char* startOfLineWithNodeName = *ptrOnSymbolInPosition;
-    char* endOfLineWithNodeName = strchr( startOfLineWithNodeName, ' ' );
-
-    char* nodeName = (char*)calloc( (size_t)(endOfLineWithNodeName - startOfLineWithNodeName) + 1, sizeof( char ) );
-    if( nodeName == NULL ){
-        return NULL;
-    }
-    sscanf( startOfLineWithNodeName, "%[^ ]", nodeName );
-    *ptrOnSymbolInPosition = endOfLineWithNodeName + 1;
-
-    return nodeName;
-}
-
 expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition ){
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
@@ -202,21 +185,122 @@ expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition ){
         }
     }
 
+    if( initializationNumberNode( node, ptrOnSymbolInPosition ) ){
+        return CORRECT_WORK;
+    }
+
+    if( initializationVariableNode( node, ptrOnSymbolInPosition ) ){
+        return CORRECT_WORK;
+    }
+
+    return CORRECT_WORK;
+}
+
+bool initializationNumberNode( node_t** node, char** ptrOnSymbolInPosition ){
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+    assert( node );
 
     if( '0' <= **ptrOnSymbolInPosition && **ptrOnSymbolInPosition <= '9' ){
-        printf( "char before = %c\n", **ptrOnSymbolInPosition );
         double value = 0;
         do{
             value = value * 10 + ( **ptrOnSymbolInPosition - '0' );
             ++(*ptrOnSymbolInPosition);
         }while( '0' <= **ptrOnSymbolInPosition && **ptrOnSymbolInPosition <= '9' );
 
+        treeElem_t data = {};
         data.number = value;
         initNode( node, NUMBER, data );
-        return CORRECT_WORK;
+        return true;
     }
 
-    return CORRECT_WORK;
+    return false;
+}
+
+bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition ){
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+    assert( node );
+
+    if( isalpha( **ptrOnSymbolInPosition ) || **ptrOnSymbolInPosition == '_' ){
+        char* lineWithVar = NULL;
+        size_t lineLen = readingVariable( &lineWithVar, ptrOnSymbolInPosition );
+        bool statusOfSearching = appendOldVariableInTree( node, ptrOnSymbolInPosition, lineWithVar, lineLen );
+        if( !statusOfSearching ){
+            (*node) = makeNodeWithNewVariable( lineWithVar, ptrOnSymbolInPosition, lineLen, infoForVarArray.freeIndexNow );
+        }
+
+        return true;
+    }
+
+    return false;
+
+}
+
+bool appendOldVariableInTree( node_t** node, char** ptrOnSymbolInPosition, char* lineWithVar, size_t lineLen ){
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+    assert( lineWithVar );
+
+    size_t varIndex = 0;
+    for( varIndex = 0 ;varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
+        if( arrayWithVariables[ varIndex ].nameOfVariable &&
+            strcmp( lineWithVar, arrayWithVariables[ varIndex ].nameOfVariable ) == 0 ){
+            treeElem_t data = {};
+            data.variableIndexInArray = arrayWithVariables[ varIndex ].variableIndexInArray;
+            initNode( node, VARIABLE, data );
+            *ptrOnSymbolInPosition += lineLen;
+            free( lineWithVar );
+            return true;
+        }
+    }
+    return false;
+}
+
+node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen, size_t varIndex ){
+    assert( lineWithVar );
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+
+    if( infoForVarArray.freeIndexNow == infoForVarArray.capacity - 1){
+            infoForVarArray.capacity *= 2;
+            arrayWithVariables = (informationWithVariables*)realloc( arrayWithVariables, infoForVarArray.capacity * sizeof( informationWithVariables ) );
+            arrayWithVariableValue = (double*)realloc( arrayWithVariableValue, infoForVarArray.capacity * sizeof( double ) );
+        }
+
+    arrayWithVariables[ infoForVarArray.freeIndexNow ] = { lineWithVar , infoForVarArray.freeIndexNow  };
+    treeElem_t data = {};
+    data.variableIndexInArray = arrayWithVariables[ varIndex ].variableIndexInArray;
+    node_t* nodeWithVar = NULL;
+    initNode( &nodeWithVar, VARIABLE, data );
+    ++(infoForVarArray.freeIndexNow);
+    *ptrOnSymbolInPosition += lineLen;
+
+    cleanLineWithCode( ptrOnSymbolInPosition );
+    return nodeWithVar;
+}
+
+size_t readingVariable( char** lineWithVariable, char** ptrOnSymbolInPosition ){
+    assert( lineWithVariable );
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+
+    cleanLineWithCode( ptrOnSymbolInPosition );
+
+    size_t lineIndex = 0;
+    size_t sizeOfLine = startSizeForVariable;
+    *lineWithVariable = (char*)calloc( sizeOfLine, sizeof( char ) );
+
+    while( isalpha( (*ptrOnSymbolInPosition)[ lineIndex ] ) || (*ptrOnSymbolInPosition)[ lineIndex ] == '_' ||
+          ( '0' <= (*ptrOnSymbolInPosition)[ lineIndex ]  && (*ptrOnSymbolInPosition)[ lineIndex ]  <= '9')  ){
+            isEnoughSize( lineWithVariable, &lineIndex, &sizeOfLine );
+            (*lineWithVariable)[ lineIndex ] = (*ptrOnSymbolInPosition)[ lineIndex ];
+            ++lineIndex;
+    }
+    (*lineWithVariable)[ lineIndex ] = '\0';
+
+    cleanLineWithCode( ptrOnSymbolInPosition );
+    return lineIndex;
 }
 
 void cleanLineWithCode( char** ptrOnSymbolInPostion ){
@@ -224,3 +308,14 @@ void cleanLineWithCode( char** ptrOnSymbolInPostion ){
         ++(*ptrOnSymbolInPostion);
     }
 }
+
+void isEnoughSize( char** lineWithWord, size_t* lineIndex, size_t* sizeOfLine ){
+    assert( lineWithWord );
+    assert( lineIndex );
+    assert( sizeOfLine );
+
+    if( *lineIndex == *sizeOfLine - 1 ){
+        *sizeOfLine *= 2;
+        *lineWithWord = (char*)realloc( *lineWithWord, *sizeOfLine * sizeof( char ) );
+    }
+};

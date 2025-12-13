@@ -1,12 +1,6 @@
-array with variables[ 4 ] = {
+array with variables[ 1 ] = {
 	{ a  , 0  },
-	{ b  , 1  },
-	{ c  , 2  },
-	{ d  , 3  },
 };
-capacity = 8
+capacity = 2
 
-var[0] = 7
-var[1] = 8
-var[2] = 9
-var[3] = 10
+var[0] = 8

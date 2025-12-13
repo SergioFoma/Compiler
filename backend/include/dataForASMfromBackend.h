@@ -8,14 +8,18 @@
 
 expertSystemErrors writeASMcommand( tree_t* tree );
 
-void writeASMcommandFromNode( node_t* node, FILE* fileForTree );
+void writeASMcommandFromNode( const node_t* node, FILE* fileForASM );
 
-void writeCommand( node_t* node, FILE* fileForTree );
+void writeCommand( const node_t* node, FILE* fileForASM );
 
-void printNumberInASM( node_t* node, FILE* fileForTree );
+void printNumberInASM( const node_t* node, FILE* fileForASM );
 
-void printMathInASM( node_t* node, FILE* fileForTree );
+void printMathInASM( const node_t* node, FILE* fileForASM );
+
+void printStatementInASM( const node_t* node, FILE* fileForASM );
 
 const char* getStringOfMathOperator( const node_t* node );
+
+void translateAssignmentInASM( const node_t* node, FILE* fileForASM );
 
 #endif

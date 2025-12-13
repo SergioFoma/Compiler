@@ -48,6 +48,7 @@ struct informationWithStatements {
     const char* nameOfStatement;
     const char* viewOfStatementInFile;
     const char* viewOfStatementInAST;
+    void(*translateStatementInASMcommand)( const node_t* node, FILE* fileForASM );
 };
 
 extern informationWithStatements arrayWithStatements[];

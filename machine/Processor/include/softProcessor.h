@@ -7,8 +7,8 @@
 #include "stack.h"
 
 const size_t sizeOfRegs = 10;
-const size_t sizeRam = 10000;
-const size_t sizeOfVideoMemory = 10000;
+const size_t sizeRam = 100;
+const size_t sizeOfVideoMemory = 0;
 const size_t countOfSymbolInLine = 100;
 const size_t startSizeForStk = 8;
 

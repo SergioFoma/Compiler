@@ -14,7 +14,7 @@ int main(){
 
     createTreeByRecursiveDescent( &tree );
 
-    //summaryOfConstants( &tree );
+    summaryOfConstants( &tree );
 
     writeAST( &tree );
 
