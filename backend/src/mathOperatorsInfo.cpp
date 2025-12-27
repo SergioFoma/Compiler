@@ -33,13 +33,16 @@ informationWithStatements arrayWithStatements[] = {
         { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"  ,      translateAssignmentInASM       },
         { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="        ,      translateAssignmentInASM       },
         { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"        ,      translateEndOperatorInASM      },
+        { OPERATOR_END          ,   "OP_END"        ,    ","                ,   ";"        ,      translateEndOperatorInASM      },
         { IF                    ,     "IF"          ,   "wool"              ,   "if"       ,      translateIfInASM               },
-        { PAR_OPEN              , "PAR_OPEN"        ,    "("                ,   "("        ,      translateAssignmentInASM       },
-        { PAR_CLOSE             , "PAR_CLOSE"       ,    ")"                ,   ")"        ,      translateAssignmentInASM       },
-        { CURLY_PAR_OPEN        , "CR_PAR_OPEND"    ,    "{"                ,   "{"        ,      translateAssignmentInASM       },
-        { CURLY_PAR_CLOSE       , "CR_PAR_CLOSE"    ,    "}"                ,   "}"        ,      translateAssignmentInASM       },
-        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"    ,      translateWhileInASM            },
-        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"     ,      translateElseInASM             }
+        { PAR_OPEN              ,   "PAR_OPEN"      ,    "("                ,   "("        ,      translateAssignmentInASM       },
+        { PAR_CLOSE             ,   "PAR_CLOSE"     ,    ")"                ,   ")"        ,      translateAssignmentInASM       },
+        { CURLY_PAR_OPEN        ,   "CR_PAR_OPEND"  ,    "{"                ,   "{"        ,      translateAssignmentInASM       },
+        { CURLY_PAR_CLOSE       ,   "CR_PAR_CLOSE"  ,    "}"                ,   "}"        ,      translateAssignmentInASM       },
+        { WHILE                 ,   "WHILE"         ,    "beka"             ,   "while"    ,      translateWhileInASM            },
+        { ELSE                  ,   "ELSE"          ,    "dandruff"         ,   "else"     ,      translateElseInASM             },
+        { PRINT                 ,   "PRINT"         ,    "give_info"        ,   "print"    ,      translatePrintInASM            },
+        { INPUT                 ,   "INPUT"         ,    "get_info"         ,   "input"    ,      translateInputInASM            },
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 

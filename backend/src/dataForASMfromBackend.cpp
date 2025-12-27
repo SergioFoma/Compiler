@@ -230,6 +230,35 @@ size_t printElseForWhileInASM( const node_t* node, FILE* fileForASM, size_t oldL
     return NOT_USED_LABELS;
 }
 
+size_t translatePrintInASM( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    if( !( node->nodeValueType == STATEMENT && ( node->data.statement == OPERATOR_END || node->data.statement == PRINT ) ) ){
+        writeASMcommandFromNode( node, fileForASM );
+        fprintf( fileForASM, "OUT\n" );
+        return NOT_USED_LABELS;
+    }
+
+    if( node->left ){
+        translatePrintInASM( node->left, fileForASM );
+    }
+    if( node->right ){
+        translatePrintInASM( node->right, fileForASM );
+    }
+
+    return NOT_USED_LABELS;
+}
+
+size_t translateInputInASM( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    fprintf( fileForASM, "IN\nPUSHR RDX\n" );
+
+    return NOT_USED_LABELS;
+}
+
 size_t printExpressionInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );

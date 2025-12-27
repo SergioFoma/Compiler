@@ -1,0 +1,10 @@
+array with variables[ 3 ] = {
+	{ a  , 0  },
+	{ res  , 1  },
+	{ new_var  , 2  },
+};
+capacity = 4
+
+var[0] = 4
+var[1] = 5
+var[2] = 0

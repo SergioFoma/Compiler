@@ -337,6 +337,9 @@ double calculateValue( node_t* node ){
     else if( node->nodeValueType == VARIABLE ){
         return arrayWithVariableValue[ node->data.variableIndexInArray ];
     }
+    else if( node->nodeValueType == STATEMENT && node->data.statement == INPUT ){
+        return 0;
+    }
 
     double firstNumber = calculateValue( node->left );
     double secondNumber = calculateValue( node->right );

@@ -376,6 +376,9 @@ node_t* getOperator( infoForCreateTree* infoForTree ){
     if( nodeOperator->left = getAssignment( infoForTree )  ){}
     else if( nodeOperator->left = getCondition( infoForTree ) ){}
     else if( nodeOperator->left = getCycle( infoForTree ) ){}
+    else if( nodeOperator->left = getPrint( infoForTree ) ){}
+    else if( nodeOperator->left = getInput( infoForTree ) ){}
+    else if( nodeOperator->left = getPrimaryExpression( infoForTree ) ){}
     else{
 
         if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
@@ -517,7 +520,85 @@ node_t* getAssignment( infoForCreateTree* infoForTree ){
             return newStatementNode( STATEMENT, ASSIGNMENT, left, right );
         }
     }
+
+    destroyNode( left );
+    --( infoForTree->currentIndex );
     return NULL;
+}
+
+node_t* getPrint( infoForCreateTree* infoForTree ){
+    assert( infoForTree );
+    assert( infoForTree->tokens );
+
+    node_t* printNode = NULL;
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PRINT ){
+
+        ++( infoForTree->currentIndex );
+
+        if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+            ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_OPEN ){
+            ++( infoForTree->currentIndex );
+        }
+
+        printNode = getArgumentInFunction( infoForTree );
+
+        if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+            ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_CLOSE ){
+            ++( infoForTree->currentIndex );
+        }
+
+        printNode = newStatementNode( STATEMENT, PRINT, printNode, NULL );
+    }
+
+    return printNode;
+}
+
+node_t* getArgumentInFunction( infoForCreateTree* infoForTree ){
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_CLOSE ) {
+        ++( infoForTree->currentIndex );
+        return NULL;
+    }
+
+    node_t* nodeOperator = getOperator( infoForTree );
+    nodeOperator->right = getArgumentInFunction( infoForTree );
+
+    if( nodeOperator->left ){
+        nodeOperator->left->parent = nodeOperator;
+    }
+    if( nodeOperator->right ){
+        nodeOperator->right->parent = nodeOperator;
+    }
+
+    return nodeOperator;
+}
+
+
+node_t* getInput( infoForCreateTree* infoForTree ){
+    assert( infoForTree );
+    assert( infoForTree->tokens );
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == INPUT ) {
+        ++( infoForTree->currentIndex );
+    }
+    else{
+        return NULL;
+    }
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_OPEN ) {
+        ++( infoForTree->currentIndex );
+    }
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_CLOSE ) {
+        ++( infoForTree->currentIndex );
+    }
+
+    return newStatementNode( STATEMENT, INPUT, NULL, NULL );
 }
 
 const char* getEndOfAssignment(){
@@ -706,7 +787,12 @@ node_t* getPrimaryExpression( infoForCreateTree* infoForTree ){
         return nodeFromExpression;
     }
 
-    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType != NUMBER ){
+    node_t* currentNode = ( infoForTree->tokens )[ infoForTree->currentIndex ];
+
+    if( currentNode->nodeValueType == STATEMENT && currentNode->data.statement == INPUT ){
+        return getInput( infoForTree );
+    }
+    else if( currentNode->nodeValueType != NUMBER ){
         return getVariable( infoForTree );
     }
     else{

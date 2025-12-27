@@ -62,7 +62,9 @@ enum typeOfStatement {
     CURLY_PAR_OPEN     = 6,
     CURLY_PAR_CLOSE    = 7,
     WHILE              = 8,
-    ELSE               = 9
+    ELSE               = 9,
+    PRINT              = 10,
+    INPUT              = 11
 };
 
 enum typeOfExpressions {

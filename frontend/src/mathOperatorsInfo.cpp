@@ -33,13 +33,16 @@ informationWithStatements arrayWithStatements[] = {
         { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"       },
         { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="             },
         { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"             },
+        { OPERATOR_END          ,   "OP_END"        ,    ","                ,   ";"             },
         { IF                    ,     "IF"          ,   "wool"              ,   "if"            },
-        { PAR_OPEN              , "PAR_OPEN"        ,    "("                ,   "("             },
-        { PAR_CLOSE             , "PAR_CLOSE"       ,    ")"                ,   ")"             },
-        { CURLY_PAR_OPEN        , "CR_PAR_OPEND"    ,    "{"                ,   "{"             },
-        { CURLY_PAR_CLOSE       , "CR_PAR_CLOSE"    ,    "}"                ,   "}"             },
-        { WHILE                 , "WHILE"           ,    "beka"             ,   "while"         },
-        { ELSE                  , "ELSE"            ,    "dandruff"         ,   "else"          }
+        { PAR_OPEN              ,   "PAR_OPEN"      ,    "("                ,   "("             },
+        { PAR_CLOSE             ,   "PAR_CLOSE"     ,    ")"                ,   ")"             },
+        { CURLY_PAR_OPEN        ,   "CR_PAR_OPEND"  ,    "{"                ,   "{"             },
+        { CURLY_PAR_CLOSE       ,   "CR_PAR_CLOSE"  ,    "}"                ,   "}"             },
+        { WHILE                 ,   "WHILE"         ,    "beka"             ,   "while"         },
+        { ELSE                  ,   "ELSE"          ,    "dandruff"         ,   "else"          },
+        { PRINT                 ,   "PRINT"         ,    "give_info"        ,   "print"         },
+        { INPUT                 ,   "INPUT"         ,    "get_info"         ,   "input"         },
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 

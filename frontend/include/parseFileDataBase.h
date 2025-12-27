@@ -85,6 +85,12 @@ node_t* getCondition( infoForCreateTree* infoForTree );
 
 node_t* getCycle( infoForCreateTree* infoForTree );
 
+node_t* getPrint( infoForCreateTree* infoForTree );
+
+node_t* getArgumentInFunction( infoForCreateTree* infoForTree );
+
+node_t* getInput( infoForCreateTree* infoForTree );
+
 const char* getEndOfAssignment();
 
 node_t* getExpression( infoForCreateTree* infoForTree );

@@ -160,7 +160,7 @@ calculatorErrors doMathOperation( Processor* SPU, int( *mathFunction )( int firs
 void doOut( Processor* SPU ){
     assert( SPU != NULL );
 
-    printf("%d\n", stackPop( &(SPU->stk ) ) );
+    colorPrintf( NOMODE, PURPLE, "VALUE FROM OUT: %d\n", stackPop( &(SPU->stk ) ) );
     stackPrint( &(SPU->stk) );
 }
 calculatorErrors doSqrt( Processor* SPU ){

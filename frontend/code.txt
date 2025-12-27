@@ -1,17 +1,14 @@
-a pabgo_govnito 11 gusi
 
-wool( a > 10 ){
-    beka( a > 0 ){
-        a pabgo_govnito a - 1 gusi
-    }
-}
-dandruff wool( a == 10 ){
-    a pabgo_govnito a * 2 gusi
-}
-dandruff{
+a pabgo_govnito 5 gusi
+res pabgo_govnito 1 gusi
+new_var pabgo_govnito 0 gusi
 
-    new_var pabgo_govnito a gusi
+beka( a > 0 ){
+    res pabgo_govnito res * a gusi
+    a pabgo_govnito a - 1 gusi
+    new_var pabgo_govnito new_var + get_info() gusi
 }
 
+give_info( 96, res, new_var ) gusi
 
 

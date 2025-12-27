@@ -36,6 +36,10 @@ size_t translateWhileInASM( const node_t* node, FILE* fileForASM );
 
 size_t printElseForWhileInASM( const node_t* node, FILE* fileForASM, size_t labelIndexForStartWhile, size_t labelIndexFromExpression );
 
+size_t translatePrintInASM( const node_t* node, FILE* fileForASM );
+
+size_t translateInputInASM( const node_t* node, FILE* fileForASM );
+
 size_t translateAboveOrEqualInASM( const node_t* node, FILE* fileForASM );
 
 size_t translateBelowOrEqualInASM( const node_t* node, FILE* fileForASM );
