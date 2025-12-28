@@ -1,1 +1,1 @@
-(; (FUNC (; (func_name nil nil)(; (par1 nil nil)(; (par2 nil nil)(; (par3 nil nil)nil))))(; (= (d nil nil)(5 nil nil))(; (= (c nil nil)(5 nil nil))nil)))(; (FUNC (; (func_name nil nil)nil)(; (= (d nil nil)(5 nil nil))(; (= (c nil nil)(5 nil nil))nil)))nil))
+(; (FUNC (; (func_name nil nil)(; (par1 nil nil)(; (par2 nil nil)(; (par3 nil nil)nil))))(; (= (d nil nil)(5 nil nil))(; (= (c nil nil)(5 nil nil))(; (RET (d nil nil)nil)nil))))(; (FUNC (; (func_name nil nil)nil)(; (= (d nil nil)(5 nil nil))(; (= (c nil nil)(5 nil nil))nil)))nil))

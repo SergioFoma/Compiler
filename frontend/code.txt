@@ -1,6 +1,8 @@
 IN_PUBG func_name(par1, par2, par3){
     d pabgo_govnito 5 gusi
     c pabgo_govnito 5 gusi
+
+    rolling_back d gusi
 }
 
 IN_PUBG func_name(){

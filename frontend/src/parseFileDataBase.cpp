@@ -380,6 +380,7 @@ node_t* getOperator( infoForCreateTree* infoForTree ){
     else if( nodeOperator->left = getInput( infoForTree ) ){}
     else if( nodeOperator->left = getFunctionDefinition( infoForTree ) ){}
     else if( nodeOperator->left = getFunctionDeclaration( infoForTree ) ){}
+    else if( nodeOperator->left = getReturn( infoForTree ) ){}
     else if( nodeOperator->left = getPrimaryExpression( infoForTree ) ){}
     else{
 
@@ -589,6 +590,23 @@ node_t* getFunctionDeclaration( infoForCreateTree* infoForTree ){
     }
 
     return newStatementNode( STATEMENT, FUNC, nameOfFunction, functionArgument );
+}
+
+node_t* getReturn( infoForCreateTree* infoForTree ){
+    assert( infoForTree );
+    assert( infoForTree->tokens );
+
+    if( !( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == RET ) ){
+
+        return NULL;
+    }
+
+    ++( infoForTree->currentIndex );
+    
+    node_t* left = getExpression( infoForTree );
+
+    return newStatementNode( STATEMENT, RET, left, NULL );
 }
 
 node_t* getPrint( infoForCreateTree* infoForTree ){

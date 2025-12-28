@@ -91,6 +91,8 @@ node_t* getFunctionDefinition( infoForCreateTree* infoForTree );
 
 node_t* getFunctionDeclaration( infoForCreateTree* infoForTree );
 
+node_t* getReturn( infoForCreateTree* infoForTree );
+
 node_t* getArgumentInFunction( infoForCreateTree* infoForTree );
 
 node_t* getInput( infoForCreateTree* infoForTree );

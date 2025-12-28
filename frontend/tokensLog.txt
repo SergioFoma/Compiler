@@ -17,29 +17,29 @@ array with tokens[ 40 ] = {
 	[15] = { type = STATEMENT, val = 'ASSIGNMENT'}
 	[16] = { type = NUMBER, val = 5}
 	[17] = { type = STATEMENT, val = 'OP_END'}
-	[18] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
-	[19] = { type = STATEMENT, val = 'DEF'}
-	[20] = { type = VARIABLE, val = 'func_name'}
-	[21] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[22] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[23] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
-	[24] = { type = VARIABLE, val = 'd'}
-	[25] = { type = STATEMENT, val = 'ASSIGNMENT'}
-	[26] = { type = NUMBER, val = 5}
-	[27] = { type = STATEMENT, val = 'OP_END'}
-	[28] = { type = VARIABLE, val = 'c'}
-	[29] = { type = STATEMENT, val = 'ASSIGNMENT'}
-	[30] = { type = NUMBER, val = 5}
-	[31] = { type = STATEMENT, val = 'OP_END'}
-	[32] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
-	[33] = { type = STATEMENT, val = 'NO_TYPE'}
-	[34] = { type = STATEMENT, val = 'NO_TYPE'}
-	[35] = { type = STATEMENT, val = 'NO_TYPE'}
+	[18] = { type = STATEMENT, val = 'RET'}
+	[19] = { type = VARIABLE, val = 'd'}
+	[20] = { type = STATEMENT, val = 'OP_END'}
+	[21] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[22] = { type = STATEMENT, val = 'DEF'}
+	[23] = { type = VARIABLE, val = 'func_name'}
+	[24] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[25] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[26] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[27] = { type = VARIABLE, val = 'd'}
+	[28] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[29] = { type = NUMBER, val = 5}
+	[30] = { type = STATEMENT, val = 'OP_END'}
+	[31] = { type = VARIABLE, val = 'c'}
+	[32] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[33] = { type = NUMBER, val = 5}
+	[34] = { type = STATEMENT, val = 'OP_END'}
+	[35] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
 	[36] = { type = STATEMENT, val = 'NO_TYPE'}
 	[37] = { type = STATEMENT, val = 'NO_TYPE'}
 	[38] = { type = STATEMENT, val = 'NO_TYPE'}
 	[39] = { type = STATEMENT, val = 'NO_TYPE'}
 };
 capacity = 40
-freeIndexNow = 33
-currentIndex = 33
+freeIndexNow = 36
+currentIndex = 36
