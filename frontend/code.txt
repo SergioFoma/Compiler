@@ -1,14 +1,9 @@
-
-a pabgo_govnito 5 gusi
-res pabgo_govnito 1 gusi
-new_var pabgo_govnito 0 gusi
-
-beka( a > 0 ){
-    res pabgo_govnito res * a gusi
-    a pabgo_govnito a - 1 gusi
-    new_var pabgo_govnito new_var + get_info() gusi
+IN_PUBG func_name(par1, par2, par3){
+    d pabgo_govnito 5 gusi
+    c pabgo_govnito 5 gusi
 }
 
-give_info( 96, res, new_var ) gusi
-
-
+IN_PUBG func_name(){
+    d pabgo_govnito 5 gusi
+    c pabgo_govnito 5 gusi
+}

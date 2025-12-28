@@ -378,6 +378,8 @@ node_t* getOperator( infoForCreateTree* infoForTree ){
     else if( nodeOperator->left = getCycle( infoForTree ) ){}
     else if( nodeOperator->left = getPrint( infoForTree ) ){}
     else if( nodeOperator->left = getInput( infoForTree ) ){}
+    else if( nodeOperator->left = getFunctionDefinition( infoForTree ) ){}
+    else if( nodeOperator->left = getFunctionDeclaration( infoForTree ) ){}
     else if( nodeOperator->left = getPrimaryExpression( infoForTree ) ){}
     else{
 
@@ -465,6 +467,7 @@ node_t* getElse( infoForCreateTree* infoForTree ){
     return newStatementNode( STATEMENT, ELSE, left, right );
 
 }
+
 node_t* getCycle( infoForCreateTree* infoForTree ){
     assert( infoForTree );
     assert( infoForTree->tokens );
@@ -495,6 +498,7 @@ node_t* getCycle( infoForCreateTree* infoForTree ){
     return NULL;
 
 }
+
 node_t* getAssignment( infoForCreateTree* infoForTree ){
     assert( infoForTree );
     assert( infoForTree->tokens );
@@ -524,6 +528,67 @@ node_t* getAssignment( infoForCreateTree* infoForTree ){
     destroyNode( left );
     --( infoForTree->currentIndex );
     return NULL;
+}
+
+node_t* getFunctionDefinition( infoForCreateTree* infoForTree ){
+    assert( infoForTree );
+    assert( infoForTree->tokens );
+
+    if( !( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+           ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == DEF ) ){
+
+            return NULL;
+    }
+
+    ++( infoForTree->currentIndex );
+
+    node_t* nameOfFunction = getVariable( infoForTree );
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+            ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_OPEN ){
+            ++( infoForTree->currentIndex );
+        }
+
+    node_t* functionArgument = getArgumentInFunction( infoForTree );
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_CLOSE ){
+        ++( infoForTree->currentIndex );
+    }
+
+    node_t* left = newStatementNode( STATEMENT, OPERATOR_END, nameOfFunction, functionArgument );
+    node_t* right = getOperator( infoForTree );
+
+    return newStatementNode( STATEMENT, FUNC, left, right );
+}
+
+node_t* getFunctionDeclaration( infoForCreateTree* infoForTree ){
+    assert( infoForTree );
+    assert( infoForTree->tokens );
+
+    if( !( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == VARIABLE ) ){
+        return NULL;
+    }
+
+    node_t* nameOfFunction = getVariable( infoForTree );
+
+    if( !( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+           ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_OPEN ) ){
+
+        destroyNode( nameOfFunction );
+        --( infoForTree->currentIndex );
+        return NULL;
+    }
+
+    ++( infoForTree->currentIndex );                                                             // skipping the opening par
+    node_t* functionArgument = getArgumentInFunction( infoForTree );
+
+    if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&
+        ( infoForTree->tokens )[ infoForTree->currentIndex ]->data.statement == PAR_CLOSE ){
+        ++( infoForTree->currentIndex );
+    }
+
+    return newStatementNode( STATEMENT, FUNC, nameOfFunction, functionArgument );
 }
 
 node_t* getPrint( infoForCreateTree* infoForTree ){
@@ -788,10 +853,10 @@ node_t* getPrimaryExpression( infoForCreateTree* infoForTree ){
     }
 
     node_t* currentNode = ( infoForTree->tokens )[ infoForTree->currentIndex ];
+    node_t* resultNode = NULL;
 
-    if( currentNode->nodeValueType == STATEMENT && currentNode->data.statement == INPUT ){
-        return getInput( infoForTree );
-    }
+    if( resultNode = getInput( infoForTree ) ){}
+    else if( resultNode = getFunctionDeclaration( infoForTree ) ){}
     else if( currentNode->nodeValueType != NUMBER ){
         return getVariable( infoForTree );
     }
@@ -799,6 +864,7 @@ node_t* getPrimaryExpression( infoForCreateTree* infoForTree ){
         return getNumber( infoForTree );
     }
 
+    return resultNode;
 }
 
 node_t* getFunctionWithOneArgument( infoForCreateTree* infoForTree ){
@@ -871,6 +937,7 @@ node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition
     ++(infoForVarArray.freeIndexNow);
     *ptrOnSymbolInPosition += lineLen;
 
+    arrayWithVariableValue[  infoForVarArray.freeIndexNow ] = 0;        // initialization
     cleanLineWithCode( ptrOnSymbolInPosition );
     return nodeWithVar;
 }

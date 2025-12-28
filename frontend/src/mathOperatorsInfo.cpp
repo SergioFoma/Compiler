@@ -43,6 +43,9 @@ informationWithStatements arrayWithStatements[] = {
         { ELSE                  ,   "ELSE"          ,    "dandruff"         ,   "else"          },
         { PRINT                 ,   "PRINT"         ,    "give_info"        ,   "print"         },
         { INPUT                 ,   "INPUT"         ,    "get_info"         ,   "input"         },
+        { DEF                   ,   "DEF"           ,    "IN_PUBG"          ,   "def"           },
+        { FUNC                  ,   "FUNC"          ,    "FUNC"             ,   "FUNC"          },
+        { RET                   ,   "RET"           ,    "rolling_back"     ,   "RET"           }
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 

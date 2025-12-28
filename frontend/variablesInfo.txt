@@ -1,10 +1,16 @@
-array with variables[ 3 ] = {
-	{ a  , 0  },
-	{ res  , 1  },
-	{ new_var  , 2  },
+array with variables[ 6 ] = {
+	{ func_name  , 0  },
+	{ par1  , 1  },
+	{ par2  , 2  },
+	{ par3  , 3  },
+	{ d  , 4  },
+	{ c  , 5  },
 };
-capacity = 4
+capacity = 8
 
-var[0] = 4
-var[1] = 5
+var[0] = 0
+var[1] = 0
 var[2] = 0
+var[3] = 0
+var[4] = 5
+var[5] = 5
