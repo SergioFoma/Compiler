@@ -32,6 +32,7 @@ extern const size_t sizeOfMathArray;
 struct informationWithVariables {
     char* nameOfVariable;
     size_t variableIndexInArray;
+    int variableLabel;                   // for Function
 };
 
 struct informationWithVariablesArray {

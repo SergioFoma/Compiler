@@ -30,19 +30,22 @@ informationWithMathOperators arrayWithMathInfo[] = {
 const size_t sizeOfMathArray = sizeof( arrayWithMathInfo ) / sizeof( arrayWithMathInfo[ 0 ] );
 
 informationWithStatements arrayWithStatements[] = {
-        { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"  ,      translateAssignmentInASM       },
+        { NO_TYPE               ,   "NO_TYPE"       ,   "NO_TYPE"           ,   "NO_TYPE"  ,      notTranslateInASM              },
         { ASSIGNMENT            ,   "ASSIGNMENT"    ,   "pabgo_govnito"     ,   "="        ,      translateAssignmentInASM       },
         { OPERATOR_END          ,   "OP_END"        ,   "gusi"              ,   ";"        ,      translateEndOperatorInASM      },
         { OPERATOR_END          ,   "OP_END"        ,    ","                ,   ";"        ,      translateEndOperatorInASM      },
         { IF                    ,     "IF"          ,   "wool"              ,   "if"       ,      translateIfInASM               },
-        { PAR_OPEN              ,   "PAR_OPEN"      ,    "("                ,   "("        ,      translateAssignmentInASM       },
-        { PAR_CLOSE             ,   "PAR_CLOSE"     ,    ")"                ,   ")"        ,      translateAssignmentInASM       },
-        { CURLY_PAR_OPEN        ,   "CR_PAR_OPEND"  ,    "{"                ,   "{"        ,      translateAssignmentInASM       },
-        { CURLY_PAR_CLOSE       ,   "CR_PAR_CLOSE"  ,    "}"                ,   "}"        ,      translateAssignmentInASM       },
+        { PAR_OPEN              ,   "PAR_OPEN"      ,    "("                ,   "("        ,      notTranslateInASM              },
+        { PAR_CLOSE             ,   "PAR_CLOSE"     ,    ")"                ,   ")"        ,      notTranslateInASM              },
+        { CURLY_PAR_OPEN        ,   "CR_PAR_OPEND"  ,    "{"                ,   "{"        ,      notTranslateInASM              },
+        { CURLY_PAR_CLOSE       ,   "CR_PAR_CLOSE"  ,    "}"                ,   "}"        ,      notTranslateInASM              },
         { WHILE                 ,   "WHILE"         ,    "beka"             ,   "while"    ,      translateWhileInASM            },
         { ELSE                  ,   "ELSE"          ,    "dandruff"         ,   "else"     ,      translateElseInASM             },
         { PRINT                 ,   "PRINT"         ,    "give_info"        ,   "print"    ,      translatePrintInASM            },
         { INPUT                 ,   "INPUT"         ,    "get_info"         ,   "input"    ,      translateInputInASM            },
+        { DEF                   ,   "DEF"           ,    "IN_PUBG"          ,   "def"      ,      notTranslateInASM              },
+        { FUNC                  ,   "FUNC"          ,    "FUNC"             ,   "FUNC"     ,      translateFunction              },
+        { RET                   ,   "RET"           ,    "rolling_back"     ,   "RET"      ,      translateReturnInASM           }
 };
 const size_t sizeOfStatementArray = sizeof( arrayWithStatements ) / sizeof( arrayWithStatements[ 0 ] );
 

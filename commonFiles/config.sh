@@ -32,8 +32,8 @@ echo "_______________FRONTEND STARTED_____________________"
 "frontend/Build/frontend.out"
 
 echo "___________BACKED STARTED________________"
-#"backend/Build/backend.out"
+"backend/Build/backend.out"
 
 echo "_____________ASSEMBLER STARTED_____________"
-#"machine/ASM/Build/ASM.out" "commonFiles/assemble.asm"
+"machine/ASM/Build/ASM.out" "commonFiles/assemble.asm"
 

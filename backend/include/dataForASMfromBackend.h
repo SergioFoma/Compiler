@@ -36,6 +36,20 @@ size_t translateWhileInASM( const node_t* node, FILE* fileForASM );
 
 size_t printElseForWhileInASM( const node_t* node, FILE* fileForASM, size_t labelIndexForStartWhile, size_t labelIndexFromExpression );
 
+size_t translateFunction( const node_t* node, FILE* fileForASM );
+
+size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM );
+
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM );
+
+size_t printFunctionArguments( const node_t* node, FILE* fileForASM );
+
+size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM );
+
+size_t printFunctionLabel( const node_t* node, FILE* fileForASM );
+
+size_t translateReturnInASM( const node_t* node, FILE* fileForASM );
+
 size_t translatePrintInASM( const node_t* node, FILE* fileForASM );
 
 size_t translateInputInASM( const node_t* node, FILE* fileForASM );
@@ -51,5 +65,7 @@ size_t translateNoteEqualInASM( const node_t* node, FILE* fileForASM );
 size_t translateBelowInASM( const node_t* node, FILE* fileForASM );
 
 size_t translateAboveInASM( const node_t* node, FILE* fileForASM );
+
+size_t notTranslateInASM( const node_t* node, FILE* fileForASM );
 
 #endif

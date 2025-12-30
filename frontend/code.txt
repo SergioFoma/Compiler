@@ -1,11 +1,18 @@
-IN_PUBG func_name(par1, par2, par3){
-    d pabgo_govnito 5 gusi
-    c pabgo_govnito 5 gusi
 
-    rolling_back d gusi
+number pabgo_govnito get_info() gusi
+otvet pabgo_govnito factorial( number ) gusi
+
+give_info( number, otvet ) gusi
+
+IN_PUBG factorial( number ){
+
+    result pabgo_govnito 1 gusi
+
+    beka( number > 0 ){
+        result pabgo_govnito result * number gusi
+        number pabgo_govnito number - 1 gusi
+    }
+
+    rolling_back result gusi
 }
 
-IN_PUBG func_name(){
-    d pabgo_govnito 5 gusi
-    c pabgo_govnito 5 gusi
-}

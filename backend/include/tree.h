@@ -64,7 +64,10 @@ enum typeOfStatement {
     WHILE              = 8,
     ELSE               = 9,
     PRINT              = 10,
-    INPUT              = 11
+    INPUT              = 11,
+    DEF                = 12,
+    FUNC               = 13,
+    RET                = 14
 };
 
 enum typeOfExpressions {

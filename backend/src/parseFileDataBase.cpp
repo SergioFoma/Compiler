@@ -14,6 +14,7 @@ const size_t nilLen = strlen( "nil" );
 const size_t startSizeForVariable = 7;
 
 #define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
+#define ZERO_LABEL  -1
 
 errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile ){
     assert( bufferFromFile );
@@ -268,7 +269,7 @@ node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition
             arrayWithVariableValue = (double*)realloc( arrayWithVariableValue, infoForVarArray.capacity * sizeof( double ) );
         }
 
-    arrayWithVariables[ infoForVarArray.freeIndexNow ] = { lineWithVar , infoForVarArray.freeIndexNow  };
+    arrayWithVariables[ infoForVarArray.freeIndexNow ] = { lineWithVar , infoForVarArray.freeIndexNow, ZERO_LABEL };
     treeElem_t data = {};
     data.variableIndexInArray = arrayWithVariables[ varIndex ].variableIndexInArray;
     node_t* nodeWithVar = NULL;
@@ -276,6 +277,7 @@ node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition
     ++(infoForVarArray.freeIndexNow);
     *ptrOnSymbolInPosition += lineLen;
 
+    arrayWithVariableValue[  infoForVarArray.freeIndexNow ] = 0;        // initialization
     cleanLineWithCode( ptrOnSymbolInPosition );
     return nodeWithVar;
 }

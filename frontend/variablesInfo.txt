@@ -1,16 +1,12 @@
-array with variables[ 6 ] = {
-	{ func_name  , 0  },
-	{ par1  , 1  },
-	{ par2  , 2  },
-	{ par3  , 3  },
-	{ d  , 4  },
-	{ c  , 5  },
+array with variables[ 4 ] = {
+	{ number  , 0  },
+	{ otvet  , 1  },
+	{ factorial  , 2  },
+	{ result  , 3  },
 };
 capacity = 8
 
-var[0] = 0
-var[1] = 0
+var[0] = -1
+var[1] = 1.5708
 var[2] = 0
 var[3] = 0
-var[4] = 5
-var[5] = 5

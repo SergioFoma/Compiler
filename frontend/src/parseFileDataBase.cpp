@@ -589,7 +589,8 @@ node_t* getFunctionDeclaration( infoForCreateTree* infoForTree ){
         ++( infoForTree->currentIndex );
     }
 
-    return newStatementNode( STATEMENT, FUNC, nameOfFunction, functionArgument );
+    node_t* left = newStatementNode( STATEMENT, OPERATOR_END, nameOfFunction, functionArgument );
+    return newStatementNode( STATEMENT, FUNC, left, NULL );
 }
 
 node_t* getReturn( infoForCreateTree* infoForTree ){
@@ -603,7 +604,7 @@ node_t* getReturn( infoForCreateTree* infoForTree ){
     }
 
     ++( infoForTree->currentIndex );
-    
+
     node_t* left = getExpression( infoForTree );
 
     return newStatementNode( STATEMENT, RET, left, NULL );

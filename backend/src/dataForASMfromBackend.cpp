@@ -11,7 +11,8 @@
 #define NOT_USED_LABELS 0
 
 size_t currentLabelsIndex = 0;
-const size_t stepForLabelsIndex = 2;
+
+#define STEP_FOR_LABELS_INDEX 2
 
 expertSystemErrors writeASMcommand( tree_t* tree ){
     assert( tree );
@@ -172,7 +173,7 @@ size_t printElseForIfInASM( const node_t* node, FILE* fileForASM, size_t labelIn
     fprintf( fileForASM, "JMP :%lu\n", labelIndexForOutFromIf );
     fprintf( fileForASM, ":%lu\n", labelIndexFromExpression );
 
-    currentLabelsIndex += stepForLabelsIndex;
+    currentLabelsIndex += STEP_FOR_LABELS_INDEX;
 
     if( node->right ){
         writeASMcommandFromNode( node->right, fileForASM );
@@ -192,7 +193,7 @@ size_t translateElseInASM( const node_t* node, FILE* fileForASM ){
     fprintf( fileForASM, "JMP :%lu\n", labelIndexInIf );
     fprintf( fileForASM, ":%lu\n", currentLabelsIndex );
 
-    currentLabelsIndex += 2;
+    currentLabelsIndex += STEP_FOR_LABELS_INDEX;
 
     if( node->right ){
         writeASMcommandFromNode( node->right, fileForASM );
@@ -226,6 +227,93 @@ size_t printElseForWhileInASM( const node_t* node, FILE* fileForASM, size_t oldL
 
     fprintf( fileForASM, "JMP :%lu\n", oldLabelsIndex );
     fprintf( fileForASM, ":%lu\n", labelIndexFromExpression );
+
+    return NOT_USED_LABELS;
+}
+
+size_t translateFunction( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    if( node->right == NULL ){
+        return translateFunctionDeclaration( node->left, fileForASM );
+    }
+
+    return translateFunctionDefinition( node, fileForASM );
+}
+
+size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    size_t labelAfterFunction = currentLabelsIndex;
+    fprintf( fileForASM, "JMP :%lu\n", labelAfterFunction );
+    ++currentLabelsIndex;
+
+    printFunctionParameters( node->left, fileForASM );
+
+    writeASMcommandFromNode( node->right, fileForASM );
+
+    fprintf( fileForASM, "RET\n:%lu\n", labelAfterFunction );
+
+    return NOT_USED_LABELS;
+}
+
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    printFunctionLabel( node->left, fileForASM );
+
+    if( node->right ){
+        printFunctionArguments( node->right, fileForASM );
+    }
+
+    return NOT_USED_LABELS;
+}
+
+size_t printFunctionArguments( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    writeASMcommandFromNode( node->left, fileForASM );
+
+    if( node->right ){
+        printFunctionArguments( node->right, fileForASM );
+    }
+
+    return NOT_USED_LABELS;
+}
+
+size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    fprintf( fileForASM, "CALL " );
+    printFunctionLabel( node->left, fileForASM );
+
+    return NOT_USED_LABELS;
+}
+
+size_t printFunctionLabel( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    if( arrayWithVariables[ node->data.variableIndexInArray ].variableLabel == -1 ){
+        arrayWithVariables[ node->data.variableIndexInArray ].variableLabel = currentLabelsIndex;
+        ++currentLabelsIndex;
+    }
+
+    fprintf( fileForASM, ":%d\n", arrayWithVariables[ node->data.variableIndexInArray ].variableLabel );
+
+    return NOT_USED_LABELS;
+}
+
+size_t translateReturnInASM( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    writeASMcommandFromNode( node->left, fileForASM );
 
     return NOT_USED_LABELS;
 }
@@ -342,4 +430,8 @@ size_t translateAboveInASM( const node_t* node, FILE* fileForASM ){
     fprintf( fileForASM, "JA :%lu\n", currentLabelsIndex );
 
     return currentLabelsIndex;
+}
+
+size_t notTranslateInASM( const node_t* node, FILE* fileForASM ){
+    return NOT_USED_LABELS;
 }
