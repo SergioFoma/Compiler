@@ -265,9 +265,9 @@ size_t printFunctionParameters( const node_t* node, FILE* fileForASM ){
 
     printFunctionLabel( node->left, fileForASM );
 
-    if( node->right ){
+    /*if( node->right ){
         printFunctionArguments( node->right, fileForASM );
-    }
+    }*/
 
     return NOT_USED_LABELS;
 }

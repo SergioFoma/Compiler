@@ -1,8 +1,15 @@
 
 number pabgo_govnito get_info() gusi
-otvet pabgo_govnito factorial( number ) gusi
+otvet pabgo_govnito math( number ) gusi
 
 give_info( number, otvet ) gusi
+
+
+IN_PUBG math( number ){
+
+    rolling_back 2 * factorial( number ) gusi
+
+}
 
 IN_PUBG factorial( number ){
 

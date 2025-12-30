@@ -1,8 +1,9 @@
-array with variables[ 4 ] = {
+array with variables[ 5 ] = {
 	{ number  , 0  },
 	{ otvet  , 1  },
-	{ factorial  , 2  },
-	{ result  , 3  },
+	{ math  , 2  },
+	{ factorial  , 3  },
+	{ result  , 4  },
 };
 capacity = 8
 
@@ -10,3 +11,4 @@ var[0] = -1
 var[1] = 1.5708
 var[2] = 0
 var[3] = 0
+var[4] = 0
