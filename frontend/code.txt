@@ -1,3 +1,4 @@
+
 n pabgo_govnito get_info() gusi
 
 result pabgo_govnito factorial( n ) gusi
@@ -9,6 +10,6 @@ IN_PUBG factorial( n ){
     wool( n == 1 ){
         rolling_back 1 gusi
     }
-    
+
     rolling_back n * factorial( n - 1 ) gusi
 }

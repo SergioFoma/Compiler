@@ -1,60 +1,60 @@
 array with tokens[ 80 ] = {
-	[0] = { type = VARIABLE, val = 'n'}
-	[1] = { type = STATEMENT, val = 'ASSIGNMENT'}
-	[2] = { type = STATEMENT, val = 'INPUT'}
-	[3] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[4] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[5] = { type = STATEMENT, val = 'OP_END'}
-	[6] = { type = VARIABLE, val = 'result'}
-	[7] = { type = STATEMENT, val = 'ASSIGNMENT'}
-	[8] = { type = VARIABLE, val = 'factorial'}
-	[9] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[10] = { type = VARIABLE, val = 'n'}
-	[11] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[12] = { type = STATEMENT, val = 'OP_END'}
-	[13] = { type = STATEMENT, val = 'PRINT'}
-	[14] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[0] = { type = VARIABLE, val = 'main'}
+	[1] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[2] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[3] = { type = STATEMENT, val = 'OP_END'}
+	[4] = { type = STATEMENT, val = 'DEF'}
+	[5] = { type = VARIABLE, val = 'main'}
+	[6] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[7] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[8] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[9] = { type = VARIABLE, val = 'n'}
+	[10] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[11] = { type = STATEMENT, val = 'INPUT'}
+	[12] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[13] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[14] = { type = STATEMENT, val = 'OP_END'}
 	[15] = { type = VARIABLE, val = 'result'}
-	[16] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[17] = { type = STATEMENT, val = 'OP_END'}
-	[18] = { type = STATEMENT, val = 'DEF'}
-	[19] = { type = VARIABLE, val = 'factorial'}
-	[20] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[21] = { type = VARIABLE, val = 'n'}
-	[22] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[23] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
-	[24] = { type = STATEMENT, val = 'IF'}
-	[25] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[26] = { type = VARIABLE, val = 'n'}
-	[27] = { type = EXPRESSION, val = 'EQUAL'}
-	[28] = { type = NUMBER, val = 1}
-	[29] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[30] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
-	[31] = { type = STATEMENT, val = 'RET'}
-	[32] = { type = NUMBER, val = 1}
-	[33] = { type = STATEMENT, val = 'OP_END'}
-	[34] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
-	[35] = { type = STATEMENT, val = 'RET'}
+	[16] = { type = STATEMENT, val = 'ASSIGNMENT'}
+	[17] = { type = VARIABLE, val = 'factorial'}
+	[18] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[19] = { type = VARIABLE, val = 'n'}
+	[20] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[21] = { type = STATEMENT, val = 'OP_END'}
+	[22] = { type = STATEMENT, val = 'PRINT'}
+	[23] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[24] = { type = VARIABLE, val = 'result'}
+	[25] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[26] = { type = STATEMENT, val = 'OP_END'}
+	[27] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[28] = { type = STATEMENT, val = 'DEF'}
+	[29] = { type = VARIABLE, val = 'factorial'}
+	[30] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[31] = { type = VARIABLE, val = 'n'}
+	[32] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[33] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[34] = { type = STATEMENT, val = 'IF'}
+	[35] = { type = STATEMENT, val = 'PAR_OPEN'}
 	[36] = { type = VARIABLE, val = 'n'}
-	[37] = { type = OPERATOR, val = 'MUL'}
-	[38] = { type = VARIABLE, val = 'factorial'}
-	[39] = { type = STATEMENT, val = 'PAR_OPEN'}
-	[40] = { type = VARIABLE, val = 'n'}
-	[41] = { type = OPERATOR, val = 'SUB'}
+	[37] = { type = EXPRESSION, val = 'EQUAL'}
+	[38] = { type = NUMBER, val = 1}
+	[39] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[40] = { type = STATEMENT, val = 'CR_PAR_OPEND'}
+	[41] = { type = STATEMENT, val = 'RET'}
 	[42] = { type = NUMBER, val = 1}
-	[43] = { type = STATEMENT, val = 'PAR_CLOSE'}
-	[44] = { type = STATEMENT, val = 'OP_END'}
-	[45] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
-	[46] = { type = STATEMENT, val = 'NO_TYPE'}
-	[47] = { type = STATEMENT, val = 'NO_TYPE'}
-	[48] = { type = STATEMENT, val = 'NO_TYPE'}
-	[49] = { type = STATEMENT, val = 'NO_TYPE'}
-	[50] = { type = STATEMENT, val = 'NO_TYPE'}
-	[51] = { type = STATEMENT, val = 'NO_TYPE'}
-	[52] = { type = STATEMENT, val = 'NO_TYPE'}
-	[53] = { type = STATEMENT, val = 'NO_TYPE'}
-	[54] = { type = STATEMENT, val = 'NO_TYPE'}
-	[55] = { type = STATEMENT, val = 'NO_TYPE'}
+	[43] = { type = STATEMENT, val = 'OP_END'}
+	[44] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
+	[45] = { type = STATEMENT, val = 'RET'}
+	[46] = { type = VARIABLE, val = 'n'}
+	[47] = { type = OPERATOR, val = 'MUL'}
+	[48] = { type = VARIABLE, val = 'factorial'}
+	[49] = { type = STATEMENT, val = 'PAR_OPEN'}
+	[50] = { type = VARIABLE, val = 'n'}
+	[51] = { type = OPERATOR, val = 'SUB'}
+	[52] = { type = NUMBER, val = 1}
+	[53] = { type = STATEMENT, val = 'PAR_CLOSE'}
+	[54] = { type = STATEMENT, val = 'OP_END'}
+	[55] = { type = STATEMENT, val = 'CR_PAR_CLOSE'}
 	[56] = { type = STATEMENT, val = 'NO_TYPE'}
 	[57] = { type = STATEMENT, val = 'NO_TYPE'}
 	[58] = { type = STATEMENT, val = 'NO_TYPE'}
@@ -81,5 +81,5 @@ array with tokens[ 80 ] = {
 	[79] = { type = STATEMENT, val = 'NO_TYPE'}
 };
 capacity = 80
-freeIndexNow = 46
-currentIndex = 46
+freeIndexNow = 56
+currentIndex = 56

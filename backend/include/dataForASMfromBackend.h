@@ -52,11 +52,13 @@ size_t translateFunction( const node_t* node, FILE* fileForASM );
 
 size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM );
 
-size_t printFunctionParameters( const node_t* node, FILE* fileForASM, partOfFunction functionPart );
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM );
 
-size_t printFunctionArguments( const node_t* node, FILE* fileForASM, partOfFunction functionPart );
+size_t printFunctionArgumentsInDefinition( const node_t* node, FILE* fileForASM );
 
 size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM );
+
+size_t printFunctionArgumentsInDeclaration( const node_t* node, FILE* fileForASM );
 
 size_t printFunctionLabel( const node_t* node, FILE* fileForASM );
 

@@ -256,7 +256,7 @@ size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM ){
     fprintf( fileForASM, "JMP :%lu\n", labelAfterFunction );
     ++asmInfo.currentLabelsIndex;
 
-    printFunctionParameters( node->left, fileForASM, DEFINITION );
+    printFunctionParameters( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
     fprintf( fileForASM, ":%lu\n", labelAfterFunction );
@@ -264,7 +264,7 @@ size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM ){
     return NOT_USED_LABELS;
 }
 
-size_t printFunctionParameters( const node_t* node, FILE* fileForASM, partOfFunction functionPart ){
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
@@ -273,31 +273,22 @@ size_t printFunctionParameters( const node_t* node, FILE* fileForASM, partOfFunc
     fprintf( fileForASM, "PUSHR RCX\nPUSH 1\nADD\nPOPR RCX\n" );    // make new memory area
 
     if( node->right ){
-        printFunctionArguments( node->right, fileForASM, functionPart );
+        printFunctionArgumentsInDefinition( node->right, fileForASM );
     }
 
     return NOT_USED_LABELS;
 }
 
-size_t printFunctionArguments( const node_t* node, FILE* fileForASM, partOfFunction functionPart ){
+size_t printFunctionArgumentsInDefinition( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    switch( functionPart ){
-        case DEFINITION:
-            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
-                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
-            break;
-        case DECLARATION:
-            writeASMcommandFromNode( node->left, fileForASM );
-            break;
-        default:
-            break;
+    if( node->right ){
+        printFunctionArgumentsInDefinition( node->right, fileForASM );
     }
 
-    if( node->right ){
-        printFunctionArguments( node->right, fileForASM, functionPart );
-    }
+    fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
+                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
 
     return NOT_USED_LABELS;
 }
@@ -306,9 +297,25 @@ size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    printFunctionArguments( node->right, fileForASM, DECLARATION );
+    if( node->right ){
+        printFunctionArgumentsInDeclaration( node->right, fileForASM );
+    }
+    
     fprintf( fileForASM, "CALL " );
     printFunctionLabel( node->left, fileForASM );
+
+    return NOT_USED_LABELS;
+}
+
+size_t printFunctionArgumentsInDeclaration( const node_t* node, FILE* fileForASM ){
+    assert( node );
+    assert( fileForASM );
+
+    writeASMcommandFromNode( node->left, fileForASM );
+
+    if( node->right ){
+        printFunctionArgumentsInDeclaration( node->right, fileForASM );
+    }
 
     return NOT_USED_LABELS;
 }
