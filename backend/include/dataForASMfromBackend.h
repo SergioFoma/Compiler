@@ -6,6 +6,18 @@
 #include "tree.h"
 #include "parseFileDataBase.h"
 
+
+struct informationForASM {
+    size_t currentLabelsIndex;
+    size_t indexOfMemoryArea;
+    size_t countOfVariables;
+};
+
+enum partOfFunction {
+    DEFINITION      = 0,
+    DECLARATION     = 1
+};
+
 expertSystemErrors writeASMcommand( tree_t* tree );
 
 size_t writeASMcommandFromNode( const node_t* node, FILE* fileForASM );
@@ -40,9 +52,9 @@ size_t translateFunction( const node_t* node, FILE* fileForASM );
 
 size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM );
 
-size_t printFunctionParameters( const node_t* node, FILE* fileForASM );
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM, partOfFunction functionPart );
 
-size_t printFunctionArguments( const node_t* node, FILE* fileForASM );
+size_t printFunctionArguments( const node_t* node, FILE* fileForASM, partOfFunction functionPart );
 
 size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM );
 

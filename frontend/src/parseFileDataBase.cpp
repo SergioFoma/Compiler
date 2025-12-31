@@ -381,7 +381,7 @@ node_t* getOperator( infoForCreateTree* infoForTree ){
     else if( nodeOperator->left = getFunctionDefinition( infoForTree ) ){}
     else if( nodeOperator->left = getFunctionDeclaration( infoForTree ) ){}
     else if( nodeOperator->left = getReturn( infoForTree ) ){}
-    else if( nodeOperator->left = getPrimaryExpression( infoForTree ) ){}
+    else if( nodeOperator->left = getExpression( infoForTree ) ){}
     else{
 
         if( ( infoForTree->tokens )[ infoForTree->currentIndex ]->nodeValueType == STATEMENT &&

@@ -1,25 +1,14 @@
+n pabgo_govnito get_info() gusi
 
-number pabgo_govnito get_info() gusi
-otvet pabgo_govnito math( number ) gusi
+result pabgo_govnito factorial( n ) gusi
 
-give_info( number, otvet ) gusi
+give_info( result ) gusi
 
+IN_PUBG factorial( n ){
 
-IN_PUBG math( number ){
-
-    rolling_back 2 * factorial( number ) gusi
-
-}
-
-IN_PUBG factorial( number ){
-
-    result pabgo_govnito 1 gusi
-
-    beka( number > 0 ){
-        result pabgo_govnito result * number gusi
-        number pabgo_govnito number - 1 gusi
+    wool( n == 1 ){
+        rolling_back 1 gusi
     }
-
-    rolling_back result gusi
+    
+    rolling_back n * factorial( n - 1 ) gusi
 }
-

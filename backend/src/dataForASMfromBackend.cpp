@@ -9,13 +9,15 @@
 
 #define FILE_NAME_FOR_ASM "commonFiles/assemble.asm"            // hardcoding, because the user should not know about the intermediate files.
 #define NOT_USED_LABELS 0
-
-size_t currentLabelsIndex = 0;
-
 #define STEP_FOR_LABELS_INDEX 2
+
+informationForASM asmInfo = { };
 
 expertSystemErrors writeASMcommand( tree_t* tree ){
     assert( tree );
+
+    asmInfo.countOfVariables = infoForVarArray.freeIndexNow;
+    printf( "count of variables: %lu\n", asmInfo.countOfVariables );
 
     FILE* fileForASM = fopen( FILE_NAME_FOR_ASM, "w" );
     if( fileForASM == NULL ){
@@ -55,6 +57,8 @@ size_t writeASMcommandFromNode( const node_t* node, FILE* fileForASM ){
         default:
             break;
     }
+
+    return NOT_USED_LABELS;
 }
 
 size_t printNumberInASM( const node_t* node, FILE* fileForASM ){
@@ -72,7 +76,8 @@ size_t printVariableInASM( const node_t* node, FILE* fileForASM ){
 
     for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
         if( node->data.variableIndexInArray == arrayWithVariables[ varIndex ].variableIndexInArray ){
-            fprintf( fileForASM, "PUSH %lu\nPOPR RAX\nPUSHM [RAX]\n", node->data.variableIndexInArray );
+            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RAX\nPUSHM [RAX]\n",
+                     asmInfo.countOfVariables, node->data.variableIndexInArray );
             return NOT_USED_LABELS;
         }
     }
@@ -129,7 +134,8 @@ size_t translateAssignmentInASM( const node_t* node, FILE* fileForASM ){
 
     for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
         if( node->left->data.variableIndexInArray == arrayWithVariables[ varIndex ].variableIndexInArray ){
-            fprintf( fileForASM, "PUSH %lu\nPOPR RBX\nPOPM [RBX]\n", node->left->data.variableIndexInArray );
+            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
+                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
             return NOT_USED_LABELS;
         }
     }
@@ -158,7 +164,7 @@ size_t translateIfInASM( const node_t* node, FILE* fileForASM ){
     size_t labelIndexFromExpression = writeASMcommandFromNode( node->left, fileForASM );
     printElseForIfInASM( node->right, fileForASM, labelIndexFromExpression );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t printElseForIfInASM( const node_t* node, FILE* fileForASM, size_t labelIndexFromExpression ){
@@ -167,20 +173,20 @@ size_t printElseForIfInASM( const node_t* node, FILE* fileForASM, size_t labelIn
 
     writeASMcommandFromNode( node->left, fileForASM );
 
-    ++currentLabelsIndex;
-    size_t labelIndexForOutFromIf = currentLabelsIndex;
+    ++asmInfo.currentLabelsIndex;
+    size_t labelIndexForOutFromIf = asmInfo.currentLabelsIndex;
 
     fprintf( fileForASM, "JMP :%lu\n", labelIndexForOutFromIf );
     fprintf( fileForASM, ":%lu\n", labelIndexFromExpression );
 
-    currentLabelsIndex += STEP_FOR_LABELS_INDEX;
+    asmInfo.currentLabelsIndex += STEP_FOR_LABELS_INDEX;
 
     if( node->right ){
         writeASMcommandFromNode( node->right, fileForASM );
     }
     fprintf( fileForASM, ":%lu\n", labelIndexForOutFromIf );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 
 }
 size_t translateElseInASM( const node_t* node, FILE* fileForASM ){
@@ -189,11 +195,11 @@ size_t translateElseInASM( const node_t* node, FILE* fileForASM ){
 
     writeASMcommandFromNode( node->left, fileForASM );
 
-    size_t labelIndexInIf = currentLabelsIndex + 1;
+    size_t labelIndexInIf = asmInfo.currentLabelsIndex + 1;
     fprintf( fileForASM, "JMP :%lu\n", labelIndexInIf );
-    fprintf( fileForASM, ":%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, ":%lu\n", asmInfo.currentLabelsIndex );
 
-    currentLabelsIndex += STEP_FOR_LABELS_INDEX;
+    asmInfo.currentLabelsIndex += STEP_FOR_LABELS_INDEX;
 
     if( node->right ){
         writeASMcommandFromNode( node->right, fileForASM );
@@ -207,13 +213,13 @@ size_t translateWhileInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    ++currentLabelsIndex;
-    size_t labelsIndexForStartWhile = currentLabelsIndex;
+    ++asmInfo.currentLabelsIndex;
+    size_t labelsIndexForStartWhile = asmInfo.currentLabelsIndex;
     fprintf( fileForASM, ":%lu\n", labelsIndexForStartWhile );
 
-    ++currentLabelsIndex;
+    ++asmInfo.currentLabelsIndex;
     size_t labelIndexFromExpression = writeASMcommandFromNode( node->left, fileForASM );
-    ++currentLabelsIndex;
+    ++asmInfo.currentLabelsIndex;
     printElseForWhileInASM( node->right, fileForASM, labelsIndexForStartWhile, labelIndexFromExpression );
 
     return NOT_USED_LABELS;
@@ -246,40 +252,51 @@ size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    size_t labelAfterFunction = currentLabelsIndex;
+    size_t labelAfterFunction = asmInfo.currentLabelsIndex;
     fprintf( fileForASM, "JMP :%lu\n", labelAfterFunction );
-    ++currentLabelsIndex;
+    ++asmInfo.currentLabelsIndex;
 
-    printFunctionParameters( node->left, fileForASM );
-
+    printFunctionParameters( node->left, fileForASM, DEFINITION );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "RET\n:%lu\n", labelAfterFunction );
+    fprintf( fileForASM, ":%lu\n", labelAfterFunction );
 
     return NOT_USED_LABELS;
 }
 
-size_t printFunctionParameters( const node_t* node, FILE* fileForASM ){
+size_t printFunctionParameters( const node_t* node, FILE* fileForASM, partOfFunction functionPart ){
     assert( node );
     assert( fileForASM );
 
     printFunctionLabel( node->left, fileForASM );
 
-    /*if( node->right ){
-        printFunctionArguments( node->right, fileForASM );
-    }*/
+    fprintf( fileForASM, "PUSHR RCX\nPUSH 1\nADD\nPOPR RCX\n" );    // make new memory area
+
+    if( node->right ){
+        printFunctionArguments( node->right, fileForASM, functionPart );
+    }
 
     return NOT_USED_LABELS;
 }
 
-size_t printFunctionArguments( const node_t* node, FILE* fileForASM ){
+size_t printFunctionArguments( const node_t* node, FILE* fileForASM, partOfFunction functionPart ){
     assert( node );
     assert( fileForASM );
 
-    writeASMcommandFromNode( node->left, fileForASM );
+    switch( functionPart ){
+        case DEFINITION:
+            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
+                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
+            break;
+        case DECLARATION:
+            writeASMcommandFromNode( node->left, fileForASM );
+            break;
+        default:
+            break;
+    }
 
     if( node->right ){
-        printFunctionArguments( node->right, fileForASM );
+        printFunctionArguments( node->right, fileForASM, functionPart );
     }
 
     return NOT_USED_LABELS;
@@ -289,6 +306,7 @@ size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
+    printFunctionArguments( node->right, fileForASM, DECLARATION );
     fprintf( fileForASM, "CALL " );
     printFunctionLabel( node->left, fileForASM );
 
@@ -300,8 +318,8 @@ size_t printFunctionLabel( const node_t* node, FILE* fileForASM ){
     assert( fileForASM );
 
     if( arrayWithVariables[ node->data.variableIndexInArray ].variableLabel == -1 ){
-        arrayWithVariables[ node->data.variableIndexInArray ].variableLabel = currentLabelsIndex;
-        ++currentLabelsIndex;
+        arrayWithVariables[ node->data.variableIndexInArray ].variableLabel = asmInfo.currentLabelsIndex;
+        ++asmInfo.currentLabelsIndex;
     }
 
     fprintf( fileForASM, ":%d\n", arrayWithVariables[ node->data.variableIndexInArray ].variableLabel );
@@ -314,6 +332,8 @@ size_t translateReturnInASM( const node_t* node, FILE* fileForASM ){
     assert( fileForASM );
 
     writeASMcommandFromNode( node->left, fileForASM );
+
+    fprintf( fileForASM, "PUSHR RCX\nPUSH 1\nSUB\nPOPR RCX\nRET\n" );       // return to the previous memory area
 
     return NOT_USED_LABELS;
 }
@@ -367,9 +387,9 @@ size_t translateAboveOrEqualInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JAE :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JAE :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t translateBelowOrEqualInASM( const node_t* node, FILE* fileForASM ){
@@ -379,9 +399,9 @@ size_t translateBelowOrEqualInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JBE :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JBE :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t translateEqualInASM( const node_t* node, FILE* fileForASM ){
@@ -391,9 +411,9 @@ size_t translateEqualInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JE :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JE :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t translateNoteEqualInASM( const node_t* node, FILE* fileForASM ){
@@ -403,9 +423,9 @@ size_t translateNoteEqualInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JNE :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JNE :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t translateBelowInASM( const node_t* node, FILE* fileForASM ){
@@ -415,9 +435,9 @@ size_t translateBelowInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JB :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JB :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t translateAboveInASM( const node_t* node, FILE* fileForASM ){
@@ -427,9 +447,9 @@ size_t translateAboveInASM( const node_t* node, FILE* fileForASM ){
     writeASMcommandFromNode( node->left, fileForASM );
     writeASMcommandFromNode( node->right, fileForASM );
 
-    fprintf( fileForASM, "JA :%lu\n", currentLabelsIndex );
+    fprintf( fileForASM, "JA :%lu\n", asmInfo.currentLabelsIndex );
 
-    return currentLabelsIndex;
+    return asmInfo.currentLabelsIndex;
 }
 
 size_t notTranslateInASM( const node_t* node, FILE* fileForASM ){
