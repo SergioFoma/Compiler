@@ -1,12 +1,12 @@
 array with variables[ 4 ] = {
-	{ main  , 0  },
-	{ n  , 1  },
+	{ var_from_keyboard  , 0  },
+	{ number_for_factorial  , 1  },
 	{ result  , 2  },
 	{ factorial  , 3  },
 };
 capacity = 8
 
 var[0] = 0
-var[1] = 0
+var[1] = 1
 var[2] = 1.5708
 var[3] = 0

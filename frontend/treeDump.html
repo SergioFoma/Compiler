@@ -4,10 +4,10 @@
 <h1> TREE { ./src/treeDump.cpp:dumpTree:105 } </h1>
 
 <h2 style = "color: green;">tree: 
-(; (FUNC (; (main nil nil)nil)nil)(; (FUNC (; (main nil nil)nil)(; (= (n nil nil)(input nil nil))(; (= (result nil nil)(FUNC (; (factorial nil nil)(; (n nil nil)nil))nil))(; (print (; (result nil nil)nil)nil)nil))))(; (FUNC (; (factorial nil nil)(; (n nil nil)nil))(; (if (== (n nil nil)(1 nil nil))(else (; (RET (1 nil nil)nil)nil)nil))(; (RET (* (n nil nil)(FUNC (; (factorial nil nil)(; (- (n nil nil)(1 nil nil))nil))nil))nil)nil)))nil)))</h2>
+(; (= (var_from_keyboard nil nil)(input nil nil))(; (= (number_for_factorial nil nil)(0 nil nil))(; (while (!= (number_for_factorial nil nil)(var_from_keyboard nil nil))(else (; (= (number_for_factorial nil nil)(+ (number_for_factorial nil nil)(1 nil nil)))nil)nil))(; (= (result nil nil)(FUNC (; (factorial nil nil)(; (number_for_factorial nil nil)nil))nil))(; (print (; (result nil nil)(; (var_from_keyboard nil nil)(; (number_for_factorial nil nil)nil)))nil)(; (FUNC (; (factorial nil nil)(; (number_for_factorial nil nil)nil))(; (if (== (number_for_factorial nil nil)(1 nil nil))(else (; (RET (1 nil nil)nil)nil)(; (RET (* (number_for_factorial nil nil)(FUNC (; (factorial nil nil)(; (- (number_for_factorial nil nil)(1 nil nil))nil))nil))nil)nil)))nil))nil))))))</h2>
 
 <h2 style = "color: orange;">sorted tree: 
- main  gusi  FUNC  gusi  main  gusi  FUNC  n  pabgo_govnito  get_info  gusi  result  pabgo_govnito  factorial  gusi  n  gusi  FUNC  gusi  result  gusi  give_info  gusi  gusi  factorial  gusi  n  gusi  FUNC  n  ==  1  wool  1  rolling_back  gusi  dandruff  gusi  n  *  factorial  gusi  n  -  1  gusi  FUNC  rolling_back  gusi  gusi </h2>
+ var_from_keyboard  pabgo_govnito  get_info  gusi  number_for_factorial  pabgo_govnito  0  gusi  number_for_factorial  !=  var_from_keyboard  beka  number_for_factorial  pabgo_govnito  number_for_factorial  +  1  gusi  dandruff  gusi  result  pabgo_govnito  factorial  gusi  number_for_factorial  gusi  FUNC  gusi  result  gusi  var_from_keyboard  gusi  number_for_factorial  gusi  give_info  gusi  factorial  gusi  number_for_factorial  gusi  FUNC  number_for_factorial  ==  1  wool  1  rolling_back  gusi  dandruff  number_for_factorial  *  factorial  gusi  number_for_factorial  -  1  gusi  FUNC  rolling_back  gusi  gusi  gusi </h2>
 
 <h1>Image:</h1>
 <img src=treeDump.png width = 2000px>

@@ -1,0 +1,21 @@
+var_from_keyboard пабго_говнито получаю_инфу() гуси
+
+number_for_factorial пабго_говнито 0 гуси
+
+бека( number_for_factorial != var_from_keyboard ){
+    number_for_factorial пабго_говнито number_for_factorial + 1 гуси
+}
+
+result пабго_говнито factorial( number_for_factorial ) гуси
+
+даю_инфу( result, var_from_keyboard, number_for_factorial ) гуси
+
+В_ПАБГЕ factorial( number_for_factorial ){
+
+    шерсть( number_for_factorial == 1 ){
+        откатываюсь 1 гуси
+    }
+    перхоть{
+        откатываюсь number_for_factorial * factorial( number_for_factorial - 1 ) гуси
+    }
+}

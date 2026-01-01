@@ -1,15 +1,21 @@
+var_from_keyboard pabgo_govnito get_info() gusi
 
-n pabgo_govnito get_info() gusi
+number_for_factorial pabgo_govnito 0 gusi
 
-result pabgo_govnito factorial( n ) gusi
+beka( number_for_factorial != var_from_keyboard ){
+    number_for_factorial pabgo_govnito number_for_factorial + 1 gusi
+}
 
-give_info( result ) gusi
+result pabgo_govnito factorial( number_for_factorial ) gusi
 
-IN_PUBG factorial( n ){
+give_info( result, var_from_keyboard, number_for_factorial ) gusi
 
-    wool( n == 1 ){
+IN_PUBG factorial( number_for_factorial ){
+
+    wool( number_for_factorial == 1 ){
         rolling_back 1 gusi
     }
-
-    rolling_back n * factorial( n - 1 ) gusi
+    dandruff{
+        rolling_back number_for_factorial * factorial( number_for_factorial - 1 ) gusi
+    }
 }
