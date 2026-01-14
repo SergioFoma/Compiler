@@ -7,7 +7,7 @@
 #include "stack.h"
 
 const size_t sizeOfRegs = 10;
-const size_t sizeRam = 30;
+const size_t sizeRam = 50;
 const size_t countOfSymbolInLine = 10;
 const size_t startSizeForStk = 8;
 

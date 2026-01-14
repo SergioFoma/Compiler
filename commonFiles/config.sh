@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD_DIRS=( "frontend" "backend" "machine/ASM" "machine/Processor" "translator" )
+BUILD_DIRS=( "frontend" "middleend" "backend" "machine/ASM" "machine/Processor" "translator")
 
 OUT_PATTERN="*.out"
 
@@ -31,6 +31,9 @@ fi
 echo "_______________FRONTEND STARTED_____________________"
 "frontend/Build/frontend.out"
 
+echo "______________MIDDLEEND STARTED_____________"
+"middleend/Build/middleend.out"
+
 echo "___________BACKED STARTED________________"
 "backend/Build/backend.out"
 
@@ -39,4 +42,3 @@ echo "_____________ASSEMBLER STARTED_____________"
 
 echo "_____________TRANSLATOR STARTED______________"
 "translator/Build/translator.out"
-

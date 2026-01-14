@@ -12,7 +12,7 @@ int main(){
     expertSystemErrors statusOfCreate = createTreeFromFile( &treeFromAST );
 
     if( statusOfCreate != CORRECT_WORK ){
-        colorPrintf( NOMODE, RED, "Error of create tree for AST:%s %s %d\n", __FILE__, __func__, __LINE__ );
+        colorPrintf( NOMODE, RED, "Error of create tree from AST in backend:%s %s %d\n", __FILE__, __func__, __LINE__ );
     }
 
     writeASMcommand( &treeFromAST );

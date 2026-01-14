@@ -1,0 +1,6 @@
+frontend/Build
+middleend/Build
+backend/Build
+machine/ASM/Build
+machine/Processor/Build
+translator/Build

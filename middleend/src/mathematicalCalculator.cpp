@@ -6,6 +6,7 @@
 #include "paint.h"
 #include "myStringFunction.h"
 #include "mathOperatorsInfo.h"
+#include "../../commonFiles/config.h"   // first - enter from src, second - enter from fronted
 
 const double epsilon = 1e-5;
 
