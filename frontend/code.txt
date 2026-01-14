@@ -1,11 +1,8 @@
 number_for_factorial pabgo_govnito get_info() gusi
 
-test_var pabgo_govnito 5 + 2 * 3 gusi
+test_var pabgo_govnito 5 ^ 3 + 2 * 3 gusi
 
-
-result pabgo_govnito factorial( number_for_factorial ) gusi
-
-give_info( result, test_var, number_for_factorial ) gusi
+give_info( factorial( number_for_factorial ), test_var, number_for_factorial ) gusi
 
 IN_PUBG factorial( number_for_factorial ){
 
@@ -19,5 +16,6 @@ IN_PUBG factorial( number_for_factorial ){
     }
 
     give_info( var_in_factorial ) gusi
+
     rolling_back var_in_factorial gusi
 }

@@ -1,14 +1,12 @@
-array with variables[ 5 ] = {
+array with variables[ 4 ] = {
 	{ number_for_factorial  , 0  },
 	{ test_var  , 1  },
-	{ result  , 2  },
-	{ factorial  , 3  },
-	{ var_in_factorial  , 4  },
+	{ factorial  , 2  },
+	{ var_in_factorial  , 3  },
 };
 capacity = 8
 
 var[0] = 0
-var[1] = 11
-var[2] = 1.5708
+var[1] = 131
+var[2] = 0
 var[3] = 0
-var[4] = 0
