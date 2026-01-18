@@ -120,7 +120,7 @@ void doPush( Processor* SPU ){
     assert( SPU != NULL );
 
     stackPush( &(SPU->stk), (SPU->code).command[ ++(SPU->instructionPointer) ] );
-    stackPrint( &(SPU->stk) );
+    //stackPrint( &(SPU->stk) );
 }
 int sumNumbers( int first, int last ){
     return first + last;
@@ -154,14 +154,14 @@ calculatorErrors doMathOperation( Processor* SPU, int( *mathFunction )( int firs
         return FEW_ELEMENTS;
     }
     stackPush( &(SPU->stk), mathFunction( first, last ) );
-    stackPrint( &(SPU->stk) );
+    //stackPrint( &(SPU->stk) );
     return SUCCESSFUL;
 }
 void doOut( Processor* SPU ){
     assert( SPU != NULL );
 
     colorPrintf( NOMODE, PURPLE, "VALUE FROM OUT: %d\n", stackPop( &(SPU->stk ) ) );
-    stackPrint( &(SPU->stk) );
+    //stackPrint( &(SPU->stk) );
 }
 calculatorErrors doSqrt( Processor* SPU ){
     assert( SPU != NULL );
@@ -173,7 +173,7 @@ calculatorErrors doSqrt( Processor* SPU ){
     }
     else if( last >= 0 ){
         stackPush( &(SPU->stk), (int)sqrt( last ) );
-        stackPrint( &(SPU->stk) );
+        //stackPrint( &(SPU->stk) );
         return SUCCESSFUL;
     }
     colorPrintf( NOMODE, RED, "\n\nThe root of a negative numbers:%s %s %d\n\n", __FILE__, __func__, __LINE__);
@@ -186,7 +186,7 @@ void doIn( Processor* SPU ){
     colorPrintf( NOMODE, BLUE, "Enter number from keyboard: " );
     scanf("%d", &number );
     (SPU->regs)[ RDX ] = number;
-    stackPrint( &(SPU->stk) );
+    //stackPrint( &(SPU->stk) );
 }
 calculatorErrors doPopr( Processor* SPU ){
     assert( SPU != NULL );
@@ -199,8 +199,8 @@ calculatorErrors doPopr( Processor* SPU ){
     int indexOfRegister = (SPU->code).command[ ++(SPU->instructionPointer) ];
     (SPU->regs)[ indexOfRegister ] = last;
     (SPU->indexForRegister) = (regsIndex)indexOfRegister;
-    stackPrint( &(SPU->stk) );
-    regsPrint( SPU );
+    //stackPrint( &(SPU->stk) );
+    //regsPrint( SPU );
     return SUCCESSFUL;
 }
 void doPushr( Processor* SPU ){
@@ -209,8 +209,8 @@ void doPushr( Processor* SPU ){
     int indexOfRegister = (SPU->code).command[ ++(SPU->instructionPointer) ];
     SPU->indexForRegister = (regsIndex)( indexOfRegister );
     stackPush( &(SPU->stk), (SPU->regs)[ indexOfRegister ] );
-    stackPrint( &(SPU->stk) );
-    regsPrint( SPU );
+    //stackPrint( &(SPU->stk) );
+    //regsPrint( SPU );
 }
 calculatorErrors doJB( Processor* SPU ){
     assert( SPU != NULL );
@@ -361,8 +361,8 @@ calculatorErrors doPopm( Processor* SPU ){
         return FEW_ELEMENTS;
     }
     (SPU->RAM)[ (SPU->regs)[ramIndex] ] = ramElement;
-    stackPrint( &(SPU->stk) );
-    regsPrint( SPU );
+    //stackPrint( &(SPU->stk) );
+    //regsPrint( SPU );
     return SUCCESSFUL;
 }
 
@@ -370,7 +370,7 @@ void doPushm( Processor* SPU ){
     assert( SPU != NULL );
     size_t ramIndex = (SPU->code).command[ ++(SPU->instructionPointer) ];
     stackPush( &(SPU->stk), (SPU->RAM)[ (SPU->regs)[ramIndex] ] );
-    stackPrint( &(SPU->stk) );
+    //stackPrint( &(SPU->stk) );
 }
 
 void analysisOfCalculateError( calculatorErrors calculateError ){

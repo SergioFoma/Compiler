@@ -135,10 +135,12 @@ node_t* createNodeFromFile( char** ptrOnSymbolInPosition ){
         newNode->left = createNodeFromFile( ptrOnSymbolInPosition );
         newNode->right = createNodeFromFile( ptrOnSymbolInPosition );
         ++(*ptrOnSymbolInPosition);
+        cleanLineWithCode( ptrOnSymbolInPosition );
         return newNode;
     }
     else if( strncmp( *ptrOnSymbolInPosition, "nil", nilLen ) == 0 ){
         *ptrOnSymbolInPosition += nilLen;
+        cleanLineWithCode( ptrOnSymbolInPosition );
         return NULL;
     }
 

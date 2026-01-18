@@ -143,7 +143,7 @@ void dumpNodeInFile( const node_t* node, FILE* fileForPrint ){
         fprintf( fileForPrint, "nil" );
     }
 
-    fprintf( fileForPrint, ")" );
+    fprintf( fileForPrint, ") " );
 }
 
 void dumpTreeInFile( const tree_t* tree, FILE* fileForPrint ){

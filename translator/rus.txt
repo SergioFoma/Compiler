@@ -1,0 +1,21 @@
+number_for_factorial пабго_говнито получаю_инфу() гуси
+
+test_var пабго_говнито 5 ^ 3 + 2 * 3 гуси
+
+даю_инфу( factorial( number_for_factorial ), test_var, number_for_factorial ) гуси
+
+В_ПАБГЕ factorial( number_for_factorial ){
+
+    var_in_factorial пабго_говнито 0 гуси
+
+    шерсть( number_for_factorial == 1 ){
+        var_in_factorial пабго_говнито 1 гуси
+    }
+    перхоть{
+        var_in_factorial пабго_говнито number_for_factorial * factorial( number_for_factorial - 1 ) гуси
+    }
+
+    даю_инфу( var_in_factorial ) гуси
+
+    откатываюсь var_in_factorial гуси
+}
