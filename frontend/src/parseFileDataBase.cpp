@@ -325,7 +325,7 @@ expertSystemErrors createTreeByRecursiveDescent( tree_t* tree ){
     printf( "\n freeIndex = %lu\ncurrentIndex = %lu\n", infoForTree.freeIndexNow, infoForTree.currentIndex  );
     tree->rootTree = getGeneral( &infoForTree );
     colorPrintf( NOMODE, GREEN, "\nSuccessfully reading an expression from a file\n");
-    dumpLexArrayInFile( &infoForTree );
+    //dumpLexArrayInFile( &infoForTree );
 
     destroyLexArray( &infoForTree );
     destroyBufferInformation( &dataBaseFromFile );
