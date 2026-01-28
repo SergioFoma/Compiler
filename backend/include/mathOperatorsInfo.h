@@ -29,21 +29,6 @@ struct informationWithMathOperators {
 extern informationWithMathOperators arrayWithMathInfo[];
 extern const size_t sizeOfMathArray;
 
-struct informationWithVariables {
-    char* nameOfVariable;
-    size_t variableIndexInArray;
-    int variableLabel;                   // for Function
-};
-
-struct informationWithVariablesArray {
-    size_t capacity;
-    size_t freeIndexNow;
-};
-
-extern informationWithVariables* arrayWithVariables;
-extern informationWithVariablesArray infoForVarArray;
-extern double* arrayWithVariableValue;
-
 struct informationWithStatements {
     typeOfStatement statement;
     const char* nameOfStatement;

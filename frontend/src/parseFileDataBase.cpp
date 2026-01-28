@@ -11,13 +11,17 @@
 #include "paint.h"
 #include "mathOperatorsInfo.h"
 #include "mathematicalCalculator.h"
+
+// TODO use -I flag
 #include "../../commonFiles/config.h"   // first - enter from src, second - enter from fronted
 
 const size_t startSizeForWord = 7;
 const size_t startSizeForTokens = 20;
 
+// TODO use consts
 #define COMMENT_BEGIN   "##!"
 #define COMMENT_END     "!##"
+// TODO use sizeof
 #define COMMENT_LEN     strlen( COMMENT_BEGIN )
 
 errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile ){
@@ -85,7 +89,7 @@ bufferInformation getBufferFromFile( FILE** fileWithBuffer ){
     if( fileForReading == NULL ){
         colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
         free( nameOfFile );
-        return dataBaseFromFile;
+        return dataBaseFromFile; // TODO code error, no print
     }
 
     errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForReading, nameOfFile );
@@ -320,12 +324,13 @@ expertSystemErrors createTreeByRecursiveDescent( tree_t* tree ){
     initializationTokens( &infoForTree );
 
     lexAnalysis( &ptrOnSymbolInPosition, &infoForTree );
+    dumpLexArrayInFile( &infoForTree );
     infoForTree.currentIndex = 0;                               // start position - zero index
 
     printf( "\n freeIndex = %lu\ncurrentIndex = %lu\n", infoForTree.freeIndexNow, infoForTree.currentIndex  );
     tree->rootTree = getGeneral( &infoForTree );
     colorPrintf( NOMODE, GREEN, "\nSuccessfully reading an expression from a file\n");
-    //dumpLexArrayInFile( &infoForTree );
+
 
     destroyLexArray( &infoForTree );
     destroyBufferInformation( &dataBaseFromFile );

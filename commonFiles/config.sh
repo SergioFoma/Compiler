@@ -40,5 +40,5 @@ echo "___________BACKED STARTED________________"
 echo "_____________ASSEMBLER STARTED_____________"
 "machine/ASM/Build/ASM.out" "commonFiles/assemble.asm"
 
-echo "_____________TRANSLATOR STARTED______________"
-"translator/Build/translator.out"
+#echo "_____________TRANSLATOR STARTED______________"
+#"translator/Build/translator.out"

@@ -46,7 +46,8 @@ typeOfRegs arrayWithRegs[] = {
     { "RAX",   RAX },
     { "RBX",   RBX },
     { "RCX",   RCX },
-    { "RDX",   RDX }
+    { "RDX",   RDX },
+    { "REX",   REX }
 };
 size_t sizeArrayWithRegs = sizeof( arrayWithRegs ) / sizeof( arrayWithRegs[ 0 ] );
 

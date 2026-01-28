@@ -6,12 +6,16 @@
 #include <ctype.h>
 
 #include "parseFileDataBase.h"
+#include "functionsData.h"
 #include "paint.h"
 #include "mathOperatorsInfo.h"
 #include "myStringFunction.h"
 
 const size_t nilLen = strlen( "nil" );
+const size_t funcLen = sizeof( "FUNC" ) - 1;
 const size_t startSizeForVariable = 7;
+const size_t zeroPosition = 0;
+const size_t specialIndex = 52;
 
 #define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
 #define ZERO_LABEL  -1
@@ -111,7 +115,8 @@ expertSystemErrors createTreeFromFile( tree_t* tree ){
     }
 
     char* ptrOnBuffer = dataBaseFromFile.buffer;
-    tree->rootTree = createNodeFromFile( &ptrOnBuffer );
+    bool doNeedToCreateNodeWithVar = true;
+    tree->rootTree = createNodeFromFile( &ptrOnBuffer, doNeedToCreateNodeWithVar );
 
     fclose( fileForDataBase );
     destroyBufferInformation( &dataBaseFromFile );
@@ -121,7 +126,7 @@ expertSystemErrors createTreeFromFile( tree_t* tree ){
 }
 
 
-node_t* createNodeFromFile( char** ptrOnSymbolInPosition ){
+node_t* createNodeFromFile( char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar ){
     if( ptrOnSymbolInPosition == NULL || *( ptrOnSymbolInPosition) == NULL ){
         return NULL;
     }
@@ -131,9 +136,20 @@ node_t* createNodeFromFile( char** ptrOnSymbolInPosition ){
     if( **ptrOnSymbolInPosition == '(' ){
         ++(*ptrOnSymbolInPosition);
         node_t* newNode = NULL;
-        buildNewNode( &newNode, ptrOnSymbolInPosition );
-        newNode->left = createNodeFromFile( ptrOnSymbolInPosition );
-        newNode->right = createNodeFromFile( ptrOnSymbolInPosition );
+
+        buildNewNode( &newNode, ptrOnSymbolInPosition, doNeedToCreateNodeWithVar );
+
+        if( newNode->nodeValueType == STATEMENT && newNode->data.statement == FUNC ){
+            searchRightChildOfFunction( ptrOnSymbolInPosition );
+        }
+
+        newNode->left = createNodeFromFile( ptrOnSymbolInPosition, doNeedToCreateNodeWithVar );
+        newNode->right = createNodeFromFile( ptrOnSymbolInPosition, doNeedToCreateNodeWithVar );
+
+        if( newNode->nodeValueType == STATEMENT && newNode->data.statement == FUNC && newNode->right ){
+            functionInformations.currentFunctionIndex = 0;
+        }
+
         ++(*ptrOnSymbolInPosition);
         cleanLineWithCode( ptrOnSymbolInPosition );
         return newNode;
@@ -147,7 +163,27 @@ node_t* createNodeFromFile( char** ptrOnSymbolInPosition ){
     return NULL;
 }
 
-expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition ){
+void searchRightChildOfFunction( char** ptrOnSymbolInPosition ){
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+
+    isEnoughSizeForFunctionArray();
+
+    char* copySymbolForFunction = *ptrOnSymbolInPosition;
+    bool doNeedToCreateNodeWithVar = false;
+
+    node_t* left = createNodeFromFile( &copySymbolForFunction, doNeedToCreateNodeWithVar );
+    node_t* right = createNodeFromFile( &copySymbolForFunction, doNeedToCreateNodeWithVar );
+
+    if( right ){
+        functionInformations.currentFunctionIndex = functionInformations.countOfFunction;
+        ++(functionInformations.countOfFunction);
+    }
+    destroyNode( left );
+    destroyNode( right );
+}
+
+expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar ){
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
     assert( node );
@@ -192,7 +228,7 @@ expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition ){
         return CORRECT_WORK;
     }
 
-    if( initializationVariableNode( node, ptrOnSymbolInPosition ) ){
+    if( initializationVariableNode( node, ptrOnSymbolInPosition, doNeedToCreateNodeWithVar ) ){
         return CORRECT_WORK;
     }
 
@@ -220,7 +256,7 @@ bool initializationNumberNode( node_t** node, char** ptrOnSymbolInPosition ){
     return false;
 }
 
-bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition ){
+bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar ){
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
     assert( node );
@@ -228,9 +264,15 @@ bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition ){
     if( isalpha( **ptrOnSymbolInPosition ) || **ptrOnSymbolInPosition == '_' ){
         char* lineWithVar = NULL;
         size_t lineLen = readingVariable( &lineWithVar, ptrOnSymbolInPosition );
+
+        if( initializationDummyVariable( node, ptrOnSymbolInPosition, doNeedToCreateNodeWithVar, lineLen ) ){
+            free( lineWithVar );
+            return true;
+        }
+
         bool statusOfSearching = appendOldVariableInTree( node, ptrOnSymbolInPosition, lineWithVar, lineLen );
         if( !statusOfSearching ){
-            (*node) = makeNodeWithNewVariable( lineWithVar, ptrOnSymbolInPosition, lineLen, infoForVarArray.freeIndexNow );
+            (*node) = makeNodeWithNewVariable( lineWithVar, ptrOnSymbolInPosition, lineLen );
         }
 
         return true;
@@ -240,46 +282,78 @@ bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition ){
 
 }
 
+bool initializationDummyVariable( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar, size_t lineLen ){
+    assert( ptrOnSymbolInPosition );
+    assert( *ptrOnSymbolInPosition );
+    assert( node );
+
+    if( doNeedToCreateNodeWithVar == false ){
+        *ptrOnSymbolInPosition += lineLen;
+        treeElem_t data = {};
+        data.variableIndexInArray = specialIndex;
+        initNode( node, VARIABLE, data );
+        return true;
+    }
+
+    return false;
+}
+
 bool appendOldVariableInTree( node_t** node, char** ptrOnSymbolInPosition, char* lineWithVar, size_t lineLen ){
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
     assert( lineWithVar );
 
     size_t varIndex = 0;
-    for( varIndex = 0 ;varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
-        if( arrayWithVariables[ varIndex ].nameOfVariable &&
-            strcmp( lineWithVar, arrayWithVariables[ varIndex ].nameOfVariable ) == 0 ){
+    for( varIndex = 0; varIndex < arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].freeIndexNow; varIndex++ ){
+        if( arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ varIndex ].nameOfVariable &&
+            strcmp( lineWithVar, arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ varIndex ].nameOfVariable ) == 0 ){
+
+            size_t* freeIndexNow = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].freeIndexNow);
+            size_t* capacity = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].capacity);
+
+            if( *freeIndexNow == *capacity - 1){
+                (*capacity) *= 2;
+                arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ] =
+                (informationWithVariables*)realloc( arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ],
+                (*capacity) * sizeof( informationWithVariables ) );
+            }
+
             treeElem_t data = {};
-            data.variableIndexInArray = arrayWithVariables[ varIndex ].variableIndexInArray;
+            data.variableIndexInArray = arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ varIndex ].variableIndexInArray;
             initNode( node, VARIABLE, data );
+            arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ *freeIndexNow ] = { lineWithVar , data.variableIndexInArray, *node };
+
+            ++(*freeIndexNow);
             *ptrOnSymbolInPosition += lineLen;
-            free( lineWithVar );
             return true;
         }
     }
     return false;
 }
 
-node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen, size_t varIndex ){
+node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen ){
     assert( lineWithVar );
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
 
-    if( infoForVarArray.freeIndexNow == infoForVarArray.capacity - 1){
-            infoForVarArray.capacity *= 2;
-            arrayWithVariables = (informationWithVariables*)realloc( arrayWithVariables, infoForVarArray.capacity * sizeof( informationWithVariables ) );
-            arrayWithVariableValue = (double*)realloc( arrayWithVariableValue, infoForVarArray.capacity * sizeof( double ) );
+    size_t* freeIndexNow = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].freeIndexNow);
+    size_t* capacity = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].capacity);
+
+    if( *freeIndexNow == *capacity - 1){
+            (*capacity) *= 2;
+            arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ] =
+            (informationWithVariables*)realloc( arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ],
+            (*capacity) * sizeof( informationWithVariables ) );
         }
 
-    arrayWithVariables[ infoForVarArray.freeIndexNow ] = { lineWithVar , infoForVarArray.freeIndexNow, ZERO_LABEL };
     treeElem_t data = {};
-    data.variableIndexInArray = arrayWithVariables[ varIndex ].variableIndexInArray;
+    data.variableIndexInArray = *freeIndexNow;
     node_t* nodeWithVar = NULL;
     initNode( &nodeWithVar, VARIABLE, data );
-    ++(infoForVarArray.freeIndexNow);
+    arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ *freeIndexNow ] = { lineWithVar , data.variableIndexInArray, nodeWithVar };
+    ++(*freeIndexNow);
     *ptrOnSymbolInPosition += lineLen;
 
-    arrayWithVariableValue[  infoForVarArray.freeIndexNow ] = 0;        // initialization
     cleanLineWithCode( ptrOnSymbolInPosition );
     return nodeWithVar;
 }

@@ -26,7 +26,7 @@ enum expertSystemErrors {
     ROOT_NULL_PTR           = 9
 };
 
-struct bufferInformation{
+struct bufferInformation {
     char* buffer;
     size_t fileSize;
     size_t bufferSize;
@@ -42,17 +42,21 @@ bufferInformation getBufferFromFile( FILE** fileWithBuffer );
 
 expertSystemErrors createTreeFromFile( tree_t* tree );
 
-node_t* createNodeFromFile( char** ptrOnSymbolInPosition );
+node_t* createNodeFromFile( char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar );
 
-expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition );
+void searchRightChildOfFunction( char** ptrOnSymbolInPosition );
+
+expertSystemErrors buildNewNode( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar );
 
 bool initializationNumberNode( node_t** node, char** ptrOnSymbolInPosition );
 
-bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition );
+bool initializationVariableNode( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar );
+
+bool initializationDummyVariable( node_t** node, char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar, size_t lineLen );
 
 bool appendOldVariableInTree( node_t** node, char** ptrOnSymbolInPosition, char* lineWithVar, size_t lineLen );
 
-node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen, size_t varIndex );
+node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition, size_t lineLen );
 
 size_t readingVariable( char** lineWithVariable, char** ptrOnSymbolInPosition );
 
@@ -60,5 +64,6 @@ void isEnoughSize( char** lineWithWord, size_t* lineIndex, size_t* sizeOfLine );
 
 void cleanLineWithCode( char** ptrOnSymbolInPosition );
 
+void destroyArrayWithVariables();
 #endif
 

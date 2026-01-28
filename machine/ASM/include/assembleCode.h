@@ -24,7 +24,7 @@ enum regsIndex {
     RBX             = 1,
     RCX             = 2,
     RDX             = 3,
-    VM              = 4,
+    REX             = 4,
     NOT_IDENTIFIED  = 9
 };
 

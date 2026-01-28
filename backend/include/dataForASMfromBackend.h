@@ -48,6 +48,12 @@ size_t translateWhileInASM( const node_t* node, FILE* fileForASM );
 
 size_t printElseForWhileInASM( const node_t* node, FILE* fileForASM, size_t labelIndexForStartWhile, size_t labelIndexFromExpression );
 
+char* searchNameOfFunction( const node_t* nodeWithFunction );
+
+size_t getIndexOfFunctionAndHerLabel( char* nameOfFunction );
+
+size_t countingVariablesInFunction( const node_t* node );
+
 size_t translateFunction( const node_t* node, FILE* fileForASM );
 
 size_t translateFunctionDefinition( const node_t* node, FILE* fileForASM );

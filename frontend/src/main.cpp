@@ -19,7 +19,7 @@ int main(){
     dumpTree( &tree );
     destroyTree( &tree );
 
-    //printArrayWithVariablesInFile();
+    printArrayWithVariablesInFile();
     destroyArrayWithVariables();
 
     return 0;

@@ -1,12 +1,16 @@
-array with variables[ 4 ] = {
+array with variables[ 6 ] = {
 	{ number_for_factorial  , 0  },
-	{ test_var  , 1  },
+	{ getPrint  , 1  },
 	{ factorial  , 2  },
-	{ var_in_factorial  , 3  },
+	{ result  , 3  },
+	{ var  , 4  },
+	{ n  , 5  },
 };
 capacity = 8
 
 var[0] = 0
-var[1] = 131
+var[1] = 0
 var[2] = 0
 var[3] = 0
+var[4] = 1.5708
+var[5] = 0

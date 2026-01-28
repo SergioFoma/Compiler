@@ -4,6 +4,7 @@
 
 #include "dataForASMfromBackend.h"
 #include "mathOperatorsInfo.h"
+#include "functionsData.h"
 #include "paint.h"
 #include "myStringFunction.h"
 
@@ -16,14 +17,14 @@ informationForASM asmInfo = { };
 expertSystemErrors writeASMcommand( tree_t* tree ){
     assert( tree );
 
-    asmInfo.countOfVariables = infoForVarArray.freeIndexNow;
-    printf( "count of variables: %lu\n", asmInfo.countOfVariables );
-
     FILE* fileForASM = fopen( FILE_NAME_FOR_ASM, "w" );
     if( fileForASM == NULL ){
         colorPrintf( NOMODE, RED, "\nError with write data base in:%s %s %d\n", __FILE__, __func__, __LINE__ );
         return ERROR_WITH_FILE;
     }
+
+    fprintf( fileForASM, "PUSH 0\n"
+                         "POPR RCX\n" );
 
     writeASMcommandFromNode( tree->rootTree, fileForASM );
 
@@ -74,13 +75,13 @@ size_t printVariableInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
-        if( node->data.variableIndexInArray == arrayWithVariables[ varIndex ].variableIndexInArray ){
-            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RAX\nPUSHM [RAX]\n",
-                     asmInfo.countOfVariables, node->data.variableIndexInArray );
-            return NOT_USED_LABELS;
-        }
-    }
+    fprintf( fileForASM, "PUSHR RCX\n"
+                         "PUSH %lu\n"
+                         "ADD\n"
+                         "POPR RAX\n"
+                         "PUSHM [RAX]\n",
+                node->data.variableIndexInArray );
+
     return NOT_USED_LABELS;
 }
 
@@ -89,7 +90,6 @@ size_t printMathInASM( const node_t* node, FILE* fileForASM ){
     assert( fileForASM );
 
     writeASMcommandFromNode( node->left, fileForASM );
-
     writeASMcommandFromNode( node->right, fileForASM );
 
     fprintf( fileForASM, "%s\n", getStringOfMathOperator( node ) );
@@ -132,13 +132,12 @@ size_t translateAssignmentInASM( const node_t* node, FILE* fileForASM ){
 
     writeASMcommandFromNode( node->right, fileForASM );
 
-    for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
-        if( node->left->data.variableIndexInArray == arrayWithVariables[ varIndex ].variableIndexInArray ){
-            fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
-                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
-            return NOT_USED_LABELS;
-        }
-    }
+    fprintf( fileForASM, "PUSHR RCX\n"
+                         "PUSH %lu\n"
+                         "ADD\n"
+                         "POPR RBX\n"
+                         "POPM [RBX]\n",
+            node->left->data.variableIndexInArray );
 
     return NOT_USED_LABELS;
 }
@@ -270,13 +269,32 @@ size_t printFunctionParameters( const node_t* node, FILE* fileForASM ){
 
     printFunctionLabel( node->left, fileForASM );
 
-    fprintf( fileForASM, "PUSHR RCX\nPUSH 1\nADD\nPOPR RCX\n" );    // make new memory area
+    fprintf( fileForASM, "PUSHR REX\n"
+                         "PUSHR RCX\n"
+                         "PUSHR REX\n"
+                         "ADD\n"
+                         "POPR RCX\n"
+                         "POPM [RCX]\n" );    // make new memory area
 
     if( node->right ){
         printFunctionArgumentsInDefinition( node->right, fileForASM );
     }
 
     return NOT_USED_LABELS;
+}
+
+size_t countingVariablesInFunction( const node_t* node ){
+    assert( node );
+
+    for( size_t funcIndex = 0; funcIndex < functionInformations.countOfFunction; funcIndex++ ){
+        for( size_t varIndex = 0; varIndex < arrayWithSizeOfEveryFunctions[ funcIndex ].freeIndexNow; varIndex++ ){
+            if( node == arrayWithInfoForFunctions[ funcIndex ][ varIndex ].nodeAddress ){
+                return arrayWithSizeOfEveryFunctions[ funcIndex ].freeIndexNow;
+            }
+        }
+    }
+
+    return 0;
 }
 
 size_t printFunctionArgumentsInDefinition( const node_t* node, FILE* fileForASM ){
@@ -287,8 +305,12 @@ size_t printFunctionArgumentsInDefinition( const node_t* node, FILE* fileForASM 
         printFunctionArgumentsInDefinition( node->right, fileForASM );
     }
 
-    fprintf( fileForASM, "PUSH %lu\nPUSHR RCX\nMUL\nPUSH %lu\nADD\nPOPR RBX\nPOPM [RBX]\n",
-                     asmInfo.countOfVariables, node->left->data.variableIndexInArray );
+    fprintf( fileForASM, "PUSHR RCX\n"
+                         "PUSH %lu\n"
+                         "ADD\n"
+                         "POPR RBX\n"
+                         "POPM [RBX]\n",
+            node->left->data.variableIndexInArray );
 
     return NOT_USED_LABELS;
 }
@@ -297,13 +319,17 @@ size_t translateFunctionDeclaration( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
+    size_t countOfVariablesInFunction = countingVariablesInFunction( node->left );
+    fprintf( fileForASM, "PUSH %lu\n"
+                         "POPR REX\n", countOfVariablesInFunction );
+
     if( node->right ){
         printFunctionArgumentsInDeclaration( node->right, fileForASM );
     }
-    
-    fprintf( fileForASM, "CALL " );
-    printFunctionLabel( node->left, fileForASM );
 
+    fprintf( fileForASM, "CALL " );
+
+    printFunctionLabel( node->left, fileForASM );
     return NOT_USED_LABELS;
 }
 
@@ -324,14 +350,45 @@ size_t printFunctionLabel( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    if( arrayWithVariables[ node->data.variableIndexInArray ].variableLabel == -1 ){
-        arrayWithVariables[ node->data.variableIndexInArray ].variableLabel = asmInfo.currentLabelsIndex;
+    char* nameOfFunction = searchNameOfFunction( node );
+
+    size_t indexInLabelsArray = getIndexOfFunctionAndHerLabel( nameOfFunction );
+
+    if( arrayWithFunctionAndLabels[ indexInLabelsArray ].label == -1 ){
+        arrayWithFunctionAndLabels[ indexInLabelsArray ].label = asmInfo.currentLabelsIndex;
         ++asmInfo.currentLabelsIndex;
     }
 
-    fprintf( fileForASM, ":%d\n", arrayWithVariables[ node->data.variableIndexInArray ].variableLabel );
+    fprintf( fileForASM, ":%d\n", arrayWithFunctionAndLabels[ indexInLabelsArray ].label );
 
     return NOT_USED_LABELS;
+}
+
+char* searchNameOfFunction( const node_t* nodeWithFunction ){
+    assert( nodeWithFunction );
+
+    for( size_t functionIndex = 0; functionIndex < functionInformations.countOfFunction; functionIndex++ ){
+        for( size_t varIndex = 0; varIndex < arrayWithSizeOfEveryFunctions[ functionIndex ].freeIndexNow; varIndex++ ){
+            if( arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nodeAddress == nodeWithFunction ){
+                printf( "%s\n", arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nameOfVariable );
+                return arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nameOfVariable;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+size_t getIndexOfFunctionAndHerLabel( char* nameOfFunction ){
+    assert( nameOfFunction );
+
+    for( size_t labelIndex = 0; functionInformations.countOfFunction - 1; labelIndex++ ){
+        if( strcmp( nameOfFunction, arrayWithFunctionAndLabels[ labelIndex ].nameOfFunction ) == 0 ){
+            return labelIndex;
+        }
+    }
+
+    return 0;
 }
 
 size_t translateReturnInASM( const node_t* node, FILE* fileForASM ){
@@ -340,7 +397,11 @@ size_t translateReturnInASM( const node_t* node, FILE* fileForASM ){
 
     writeASMcommandFromNode( node->left, fileForASM );
 
-    fprintf( fileForASM, "PUSHR RCX\nPUSH 1\nSUB\nPOPR RCX\nRET\n" );       // return to the previous memory area
+    fprintf( fileForASM, "PUSHR RCX\n"
+                         "PUSHM [RCX]\n"
+                         "SUB\n"
+                         "POPR RCX\n"
+                         "RET\n" );       // return to the previous memory area
 
     return NOT_USED_LABELS;
 }
@@ -369,7 +430,8 @@ size_t translateInputInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    fprintf( fileForASM, "IN\nPUSHR RDX\n" );
+    fprintf( fileForASM, "IN\n"
+                         "PUSHR RDX\n" );
 
     return NOT_USED_LABELS;
 }
@@ -462,3 +524,4 @@ size_t translateAboveInASM( const node_t* node, FILE* fileForASM ){
 size_t notTranslateInASM( const node_t* node, FILE* fileForASM ){
     return NOT_USED_LABELS;
 }
+
