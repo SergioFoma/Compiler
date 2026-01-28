@@ -21,7 +21,7 @@ functionAndLabels* arrayWithFunctionAndLabels = NULL;
 workWithFunctionsData initFunctionsData( const size_t startIndex, const size_t finishIndex ){
 
     for( size_t functionsSize = startIndex; functionsSize < finishIndex; functionsSize++ ){
-        arrayWithSizeOfEveryFunctions[ functionsSize ] = { startVariablesIndex + 1, startVariablesIndex };
+        arrayWithSizeOfEveryFunctions[ functionsSize ] = { startVariablesIndex + 1, startVariablesIndex, startVariablesIndex };
     }
 
     for( size_t functionsData = startIndex; functionsData < finishIndex; functionsData++ ){
@@ -86,7 +86,8 @@ void dumpDataAboutOneFunction( const size_t functionIndex, FILE* fileForDump ){
                  varArray[ varIndex ].nameOfVariable, varArray[ varIndex ].variableIndexInArray, varArray[ varIndex ].nodeAddress);
     }
 
-    fprintf( fileForDump, "};\ncount of variables = %lu\ncapacity = %lu", sizeVarArray.freeIndexNow, sizeVarArray.capacity );
+    fprintf( fileForDump, "};\ncount of variables = %lu\ncapacity = %lu\nmaximumIndexOfVariable = %lu\n",
+             sizeVarArray.freeIndexNow, sizeVarArray.capacity, sizeVarArray.maximumIndexOfVariable );
 }
 
 workWithFunctionsData destroyVariablesData( const size_t functionIndex ){
@@ -95,7 +96,7 @@ workWithFunctionsData destroyVariablesData( const size_t functionIndex ){
         free( arrayWithInfoForFunctions[functionIndex][ varIndex ].nameOfVariable );
     }
 
-    arrayWithSizeOfEveryFunctions[ functionIndex ] = { startVariablesIndex + 1, startVariablesIndex };
+    arrayWithSizeOfEveryFunctions[ functionIndex ] = { startVariablesIndex + 1, startVariablesIndex, startVariablesIndex };
 
     return CORRECT_DESTROY;
 }

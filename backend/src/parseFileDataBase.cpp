@@ -338,6 +338,7 @@ node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition
 
     size_t* freeIndexNow = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].freeIndexNow);
     size_t* capacity = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].capacity);
+    size_t* maxIndex = &(arrayWithSizeOfEveryFunctions[ functionInformations.currentFunctionIndex ].maximumIndexOfVariable);
 
     if( *freeIndexNow == *capacity - 1){
             (*capacity) *= 2;
@@ -347,11 +348,12 @@ node_t* makeNodeWithNewVariable( char* lineWithVar, char** ptrOnSymbolInPosition
         }
 
     treeElem_t data = {};
-    data.variableIndexInArray = *freeIndexNow;
+    data.variableIndexInArray = *maxIndex;
     node_t* nodeWithVar = NULL;
     initNode( &nodeWithVar, VARIABLE, data );
     arrayWithInfoForFunctions[ functionInformations.currentFunctionIndex ][ *freeIndexNow ] = { lineWithVar , data.variableIndexInArray, nodeWithVar };
     ++(*freeIndexNow);
+    ++(*maxIndex);
     *ptrOnSymbolInPosition += lineLen;
 
     cleanLineWithCode( ptrOnSymbolInPosition );

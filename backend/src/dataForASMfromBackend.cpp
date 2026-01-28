@@ -289,7 +289,7 @@ size_t countingVariablesInFunction( const node_t* node ){
     for( size_t funcIndex = 0; funcIndex < functionInformations.countOfFunction; funcIndex++ ){
         for( size_t varIndex = 0; varIndex < arrayWithSizeOfEveryFunctions[ funcIndex ].freeIndexNow; varIndex++ ){
             if( node == arrayWithInfoForFunctions[ funcIndex ][ varIndex ].nodeAddress ){
-                return arrayWithSizeOfEveryFunctions[ funcIndex ].freeIndexNow;
+                return arrayWithSizeOfEveryFunctions[ funcIndex ].maximumIndexOfVariable;
             }
         }
     }

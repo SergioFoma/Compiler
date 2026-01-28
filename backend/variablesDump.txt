@@ -1,36 +1,42 @@
 array №0 = {
-	{ number_for_factorial, 0, 0x5040000000d0 },
-	{ getPrint, 1, 0x504000000390 },
-	{ number_for_factorial, 0, 0x504000000410 },
-	{ number_for_factorial, 0, 0x504000000490 },
+	{ number_for_factorial, 0, 0x504000000110 },
+	{ getPrint, 1, 0x5040000003d0 },
+	{ number_for_factorial, 0, 0x504000000450 },
+	{ number_for_factorial, 0, 0x5040000004d0 },
 };
 count of variables = 4
 capacity = 8
+maximumIndexOfVariable = 2
+	
 
 array №1 = {
-	{ factorial, 0, 0x504000000e50 },
-	{ result, 1, 0x504000000ed0 },
-	{ result, 1, 0x504000000fd0 },
-	{ var, 3, 0x5040000011d0 },
-	{ result, 1, 0x504000001250 },
-	{ factorial, 0, 0x504000001490 },
-	{ result, 1, 0x504000001550 },
-	{ var, 3, 0x504000001650 },
+	{ factorial, 0, 0x504000000e90 },
+	{ result, 1, 0x504000000f10 },
+	{ result, 1, 0x504000001010 },
+	{ var, 2, 0x504000001210 },
+	{ result, 1, 0x504000001290 },
+	{ factorial, 0, 0x5040000014d0 },
+	{ result, 1, 0x504000001590 },
+	{ var, 2, 0x504000001690 },
 };
 count of variables = 8
 capacity = 16
+maximumIndexOfVariable = 3
+
 
 array №2 = {
-	{ getPrint, 0, 0x504000001d50 },
-	{ n, 1, 0x504000001dd0 },
-	{ var, 2, 0x504000001e90 },
-	{ factorial, 3, 0x504000002050 },
-	{ n, 1, 0x5040000020d0 },
-	{ var, 2, 0x5040000021d0 },
-	{ var, 2, 0x504000002290 },
+	{ getPrint, 0, 0x504000001d90 },
+	{ n, 1, 0x504000001e10 },
+	{ var, 2, 0x504000001ed0 },
+	{ factorial, 3, 0x504000002090 },
+	{ n, 1, 0x504000002110 },
+	{ var, 2, 0x504000002210 },
+	{ var, 2, 0x5040000022d0 },
 };
 count of variables = 7
 capacity = 8
+maximumIndexOfVariable = 4
+
 
 count of functions = 3
 capacity of array = 8

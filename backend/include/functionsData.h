@@ -27,6 +27,7 @@ struct informationWithVariables {
 struct informationWithVariablesArray {
     size_t capacity;
     size_t freeIndexNow;
+    size_t maximumIndexOfVariable;
 };
 
 struct functionAndLabels {
