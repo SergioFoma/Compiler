@@ -14,19 +14,17 @@
 const size_t nilLen = strlen( "nil" );
 const size_t startSizeForVariable = 7;
 
-static const char* fileWithTree =  "commonFiles/AST.txt";     // hardcoding, because the user should not know about the intermediate files.
-
-expertSystemErrors createTreeFromFile( tree_t* tree ){
+expertSystemErrors createTreeFromFile( tree_t* tree, const char* fileNameWithAST ){
     assert( tree );
 
-    FILE* fileForDataBase = fopen( fileWithTree, "r" );
+    FILE* fileForDataBase = fopen( fileNameWithAST, "r" );
     if( fileForDataBase == NULL ){
         colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
         return ERROR_WITH_FILE;
     }
 
     bufferInformation dataBaseFromFile = {};
-    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, fileWithTree );
+    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, fileNameWithAST );
     if( statusOfReadFromFile != correct ){
         return ERROR_WITH_FILE;
     }

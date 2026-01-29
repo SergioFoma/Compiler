@@ -18,7 +18,7 @@ enum partOfFunction {
     DECLARATION     = 1
 };
 
-expertSystemErrors writeASMcommand( tree_t* tree );
+expertSystemErrors writeASMcommand( tree_t* tree, const char* fileNameForASM );
 
 size_t writeASMcommandFromNode( const node_t* node, FILE* fileForASM );
 

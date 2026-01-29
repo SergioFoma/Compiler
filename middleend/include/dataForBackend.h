@@ -4,6 +4,6 @@
 #include "tree.h"
 #include "parseFileDataBase.h"
 
-expertSystemErrors writeAST( tree_t* tree );
+expertSystemErrors writeAST( tree_t* tree, const char* fileNameWithAST );
 
 #endif

@@ -1,6 +1,6 @@
 array №0 = {
 	{ number_for_factorial, 0, 0x504000000110 },
-	{ getPrint, 1, 0x5040000003d0 },
+	{ factorial, 1, 0x5040000003d0 },
 	{ number_for_factorial, 0, 0x504000000450 },
 	{ number_for_factorial, 0, 0x5040000004d0 },
 };
@@ -10,37 +10,23 @@ maximumIndexOfVariable = 2
 
 
 array №1 = {
-	{ factorial, 0, 0x504000000e90 },
-	{ result, 1, 0x504000000f10 },
+	{ factorial, 0, 0x504000000f90 },
 	{ result, 1, 0x504000001010 },
-	{ var, 2, 0x504000001210 },
-	{ result, 1, 0x504000001290 },
-	{ factorial, 0, 0x5040000014d0 },
-	{ result, 1, 0x504000001590 },
-	{ var, 2, 0x504000001690 },
+	{ result, 1, 0x504000001110 },
+	{ var, 2, 0x504000001310 },
+	{ result, 1, 0x504000001390 },
+	{ factorial, 0, 0x5040000015d0 },
+	{ result, 1, 0x504000001690 },
+	{ var, 2, 0x5040000017d0 },
+	{ var, 2, 0x504000001890 },
 };
-count of variables = 8
+count of variables = 9
 capacity = 16
 maximumIndexOfVariable = 3
 
 
-array №2 = {
-	{ getPrint, 0, 0x504000001d90 },
-	{ n, 1, 0x504000001e10 },
-	{ var, 2, 0x504000001ed0 },
-	{ factorial, 3, 0x504000002090 },
-	{ n, 1, 0x504000002110 },
-	{ var, 2, 0x504000002210 },
-	{ var, 2, 0x5040000022d0 },
-};
-count of variables = 7
-capacity = 8
-maximumIndexOfVariable = 4
-
-
-count of functions = 3
-capacity of array = 8
+count of functions = 2
+capacity of array = 4
 
 All functions and they labels:
-{ factorial, 2 },
-{ getPrint, 0 },
+{ factorial, 0 },

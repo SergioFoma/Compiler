@@ -13,13 +13,18 @@
 #include "lexer.h"
 #include "fileBufferInfo.h"
 
-expertSystemErrors createTreeByRecursiveDescent( tree_t* tree ){
-    colorPrintf( NOMODE, YELLOW, "Enter the name of file, where i will find mathematical statement: " );
+expertSystemErrors createTreeByRecursiveDescent( tree_t* tree, const char* fileNameWithLanguage, const char* fileNameForTokensDump ){
+    assert( fileNameWithLanguage );
+    assert( fileNameForTokensDump );
 
-    FILE* fileForMathStatement = NULL;
+    FILE* fileForMathStatement = fopen( fileNameWithLanguage, "r" );
+    if( fileForMathStatement == NULL ){
+        return ERROR_WITH_FILE;
+    }
 
-    bufferInformation dataBaseFromFile = getBufferFromFile( &fileForMathStatement );
-    if( dataBaseFromFile.typeOfErr != correct ){
+    bufferInformation dataBaseFromFile = {};
+    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForMathStatement, fileNameWithLanguage );
+    if( statusOfReadFromFile != correct ){
         return ERROR_WITH_FILE;
     }
     char* ptrOnSymbolInPosition = dataBaseFromFile.buffer;
@@ -28,7 +33,7 @@ expertSystemErrors createTreeByRecursiveDescent( tree_t* tree ){
     initializationTokens( &infoForTree );
 
     lexAnalysis( &ptrOnSymbolInPosition, &infoForTree );
-    dumpLexArrayInFile( &infoForTree );
+    dumpLexArrayInFile( &infoForTree, fileNameForTokensDump );
     infoForTree.currentIndex = 0;                               // start position - zero index
 
     tree->rootTree = getGeneral( &infoForTree );

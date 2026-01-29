@@ -14,18 +14,6 @@ const char* commentBegin  = "##!";
 const char* commentEnd = "!##";
 size_t commentLen = sizeof( commentBegin ) - 1;
 
-char* getNameOfFile( const char* sentenceForPrint ){
-    assert( sentenceForPrint );
-
-    colorPrintf( NOMODE, YELLOW, "%s", sentenceForPrint );
-
-    char* nameOfFileFromKeyboard = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfFileFromKeyboard, &sizeOfAllocationMemory, stdin );
-
-    return nameOfFileFromKeyboard;
-}
-
 translationErrors translateLanguageOnRussian( char* fileWithOriginalLanguage, char* fileWithLanguageOnRussian ){
     assert( fileWithOriginalLanguage );
     assert( fileWithLanguageOnRussian );

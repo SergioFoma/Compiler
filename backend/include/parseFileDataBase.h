@@ -40,7 +40,7 @@ void destroyBufferInformation( bufferInformation *bufferFromFile );
 
 bufferInformation getBufferFromFile( FILE** fileWithBuffer );
 
-expertSystemErrors createTreeFromFile( tree_t* tree );
+expertSystemErrors createTreeFromFile( tree_t* tree, const char* fileNameWithAST );
 
 node_t* createNodeFromFile( char** ptrOnSymbolInPosition, bool doNeedToCreateNodeWithVar );
 

@@ -7,12 +7,10 @@
 #include "paint.h"
 #include "dataForBackend.h"
 
-const char* fileWithTree = "commonFiles/AST.txt";     // hardcoding, because the user should not know about the intermediate files.
-
-expertSystemErrors writeAST( tree_t* tree ){
+expertSystemErrors writeAST( tree_t* tree, const char* fileNameWithAST ){
     assert( tree );
 
-    FILE* fileForTree = fopen( fileWithTree, "w" );
+    FILE* fileForTree = fopen( fileNameWithAST, "w" );
     if( fileForTree == NULL ){
         colorPrintf( NOMODE, RED, "\nError with write data base in file\n" );
         return ERROR_WITH_FILE;

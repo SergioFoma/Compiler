@@ -21,7 +21,7 @@ enum expertSystemErrors {
     ROOT_NULL_PTR           = 9
 };
 
-expertSystemErrors createTreeByRecursiveDescent( tree_t* tree );
+expertSystemErrors createTreeByRecursiveDescent( tree_t* tre, const char* fileNameWithLanguage, const char* fileNameForTokensDump );
 
 node_t* getGeneral( infoForCreateTree* infoForTree );
 

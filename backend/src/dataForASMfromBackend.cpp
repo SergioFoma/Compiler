@@ -8,13 +8,12 @@
 #include "paint.h"
 #include "myStringFunction.h"
 
-const char* fileNameForASM = "commonFiles/assemble.asm";           // hardcoding, because the user should not know about the intermediate files.
 const size_t notUsedLabels = 0;
 const size_t stepForLabelsIndex = 2;
 
 informationForASM asmInfo = { };
 
-expertSystemErrors writeASMcommand( tree_t* tree ){
+expertSystemErrors writeASMcommand( tree_t* tree, const char* fileNameForASM ){
     assert( tree );
 
     FILE* fileForASM = fopen( fileNameForASM, "w" );
@@ -370,7 +369,6 @@ char* searchNameOfFunction( const node_t* nodeWithFunction ){
     for( size_t functionIndex = 0; functionIndex < functionInformations.countOfFunction; functionIndex++ ){
         for( size_t varIndex = 0; varIndex < arrayWithSizeOfEveryFunctions[ functionIndex ].freeIndexNow; varIndex++ ){
             if( arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nodeAddress == nodeWithFunction ){
-                printf( "%s\n", arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nameOfVariable );
                 return arrayWithInfoForFunctions[ functionIndex ][ varIndex ].nameOfVariable;
             }
         }

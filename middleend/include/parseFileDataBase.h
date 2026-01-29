@@ -20,7 +20,7 @@ enum expertSystemErrors {
     ROOT_NULL_PTR           = 9
 };
 
-expertSystemErrors createTreeFromFile( tree_t* tree );
+expertSystemErrors createTreeFromFile( tree_t* tree, const char* fileNameWithAST );
 
 node_t* createNodeFromFile( char** ptrOnSymbolInPosition );
 

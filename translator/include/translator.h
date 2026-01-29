@@ -8,8 +8,6 @@ enum translationErrors {
 
 };
 
-char* getNameOfFile( const char* sentenceForPrint );
-
 translationErrors translateLanguageOnRussian( char* fileWithOriginalLanguage, char* fileWithLanguageOnRussian );
 
 translationErrors translateOnRussian( FILE* translateLanguage, char** ptrOnSymbolInPosition );

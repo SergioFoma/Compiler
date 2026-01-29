@@ -435,12 +435,3 @@ void analysisOfAssembleError( typeOfErr assembleError ){
     }
 }
 
-char* getNameOfFileForSPU(){
-    colorPrintf( NOMODE, YELLOW, "Enter the name of file, where i will save command for SPU: " );
-
-    char* nameOfSPUfile = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfSPUfile, &sizeOfAllocationMemory, stdin );
-
-    return nameOfSPUfile;
-}

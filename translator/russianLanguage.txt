@@ -1,0 +1,17 @@
+number_for_factorial пабго_говнито получаю_инфу() гуси
+
+даю_инфу( factorial( number_for_factorial ), number_for_factorial ) гуси
+
+В_ПАБГЕ factorial( result ){
+
+    шерсть( result == 1 ){
+
+        откатываюсь 1 гуси
+    }
+    перхоть{
+        var пабго_говнито result * factorial( result - 1 ) гуси
+        даю_инфу( var ) гуси
+        
+        откатываюсь var гуси
+    }
+}

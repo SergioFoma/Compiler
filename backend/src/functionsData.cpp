@@ -53,9 +53,9 @@ workWithFunctionsData reallocFunctionsData( size_t oldSize, size_t newSize ){
     return CORRECT_REALLOC;
 }
 
-void dumpFunctionArrayInFile(){
+void dumpFunctionArrayInFile( const char* fileNameForFuncDump ){
 
-    FILE* fileForFunctionDump = fopen( "backend/variablesDump.txt", "w" );
+    FILE* fileForFunctionDump = fopen( fileNameForFuncDump, "w" );
 
     for( size_t functionIndex = 0; functionIndex < functionInformations.countOfFunction; functionIndex++ ){
         dumpDataAboutOneFunction( functionIndex, fileForFunctionDump );

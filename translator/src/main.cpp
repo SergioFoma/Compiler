@@ -3,18 +3,11 @@
 
 #include "translator.h"
 
-int main(){
+int main( int argc, char** argv ){
 
-    const char* sentenceForOriginalLanguage = "Enter the name of file with original language: ";
-    const char* sentenceForLanguageOnRussian = "Enter the name of file where i will save language on Russian: ";
-
-    char* fileWithOriginalLanguage = getNameOfFile( sentenceForOriginalLanguage );
-    char* fileWithLanguageOnRussian = getNameOfFile( sentenceForLanguageOnRussian );
-
-    translateLanguageOnRussian( fileWithOriginalLanguage, fileWithLanguageOnRussian );
-
-    free( fileWithOriginalLanguage );
-    free( fileWithLanguageOnRussian );
-
+    if( argc > 2 ){
+        translateLanguageOnRussian( argv[1], argv[2] );
+    }
+    
     return 0;
 }

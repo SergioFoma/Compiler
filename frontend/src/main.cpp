@@ -8,18 +8,24 @@
 #include "dataForBackend.h"
 #include "mathData.h"
 
-int main(){
+int main( int argc, char** argv ){
 
     tree_t tree = {};
 
-    createTreeByRecursiveDescent( &tree );
+    if( argc > 2 ){
+        createTreeByRecursiveDescent( &tree, argv[1], argv[2] );
+    }
 
-    writeAST( &tree );
+    if( argc > 3 ){
+        writeAST( &tree, argv[3] );
+    }
 
     dumpTree( &tree );
     destroyTree( &tree );
 
-    printArrayWithVariablesInFile();
+    if( argc > 4 ){
+        printArrayWithVariablesInFile( argv[4] );
+    }
     destroyArrayWithVariables();
 
     return 0;

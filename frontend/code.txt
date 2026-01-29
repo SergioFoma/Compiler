@@ -1,6 +1,6 @@
 number_for_factorial pabgo_govnito get_info() gusi
 
-give_info( getPrint( number_for_factorial ), number_for_factorial ) gusi
+give_info( factorial( number_for_factorial ), number_for_factorial ) gusi
 
 IN_PUBG factorial( result ){
 
@@ -10,15 +10,8 @@ IN_PUBG factorial( result ){
     }
     dandruff{
         var pabgo_govnito result * factorial( result - 1 ) gusi
+        give_info( var ) gusi
+        
         rolling_back var gusi
     }
-}
-
-IN_PUBG getPrint( n ){
-
-    var pabgo_govnito factorial( n ) gusi
-
-    give_info( var ) gusi
-
-    rolling_back var gusi
 }

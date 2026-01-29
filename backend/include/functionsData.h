@@ -47,7 +47,7 @@ workWithFunctionsData isEnoughSizeForFunctionArray();
 
 workWithFunctionsData reallocFunctionsData( size_t oldSize, size_t newSize );
 
-void dumpFunctionArrayInFile();
+void dumpFunctionArrayInFile( const char* fileNameForFuncDump );
 
 void dumpDataAboutOneFunction( const size_t functionIndex, FILE* fileForDump );
 

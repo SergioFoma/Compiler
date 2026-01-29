@@ -312,20 +312,11 @@ void cleanLineWithCode( char** ptrOnSymbolInPostion ){
     }
 }
 
-void dumpLexArrayInFile( infoForCreateTree* infoForTree ){
+void dumpLexArrayInFile( infoForCreateTree* infoForTree, const char* fileNameForTokensDump ){
     assert( infoForTree );
+    assert( fileNameForTokensDump );
 
-    colorPrintf( NOMODE, YELLOW, "Enter the name of file, where i will save info about tokens: " );
-
-    char* nameOfFileForTokens = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfFileForTokens, &sizeOfAllocationMemory, stdin );
-
-    if( sizeOfLine == -1 ){
-        return ;
-    }
-
-    FILE* fileForTokens = fopen( nameOfFileForTokens, "w" );
+    FILE* fileForTokens = fopen( fileNameForTokensDump, "w" );
     fprintf( fileForTokens, "array with tokens[ %lu ] = {\n", infoForTree->countOfTokens );
 
     for( size_t tokenIndex = 0; tokenIndex < infoForTree->countOfTokens; tokenIndex++ ){
@@ -343,8 +334,6 @@ void dumpLexArrayInFile( infoForCreateTree* infoForTree ){
     }
     fprintf( fileForTokens, "};\ncapacity = %lu\nfreeIndexNow = %lu\ncurrentIndex = %lu\n", infoForTree->countOfTokens, infoForTree->freeIndexNow, infoForTree->currentIndex );
 
-
-    free( nameOfFileForTokens );
     fclose( fileForTokens );
 }
 

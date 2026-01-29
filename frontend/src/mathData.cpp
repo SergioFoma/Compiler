@@ -77,18 +77,10 @@ void destroyArrayWithVariables(){
     free( arrayWithVariableValue );
 }
 
-void printArrayWithVariablesInFile(){
-    colorPrintf( NOMODE, YELLOW, "Enter the name of file, where i will save info about variables: " );
+void printArrayWithVariablesInFile( const char* fileNameForVarDump ){
+    assert( fileNameForVarDump );
 
-    char* nameOfFileForVar = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfFileForVar, &sizeOfAllocationMemory, stdin );
-
-    if( sizeOfLine == -1 ){
-        return ;
-    }
-
-    FILE* fileForVar = fopen( nameOfFileForVar, "w" );
+    FILE* fileForVar = fopen( fileNameForVarDump, "w" );
     fprintf( fileForVar, "array with variables[ %lu ] = {\n", infoForVarArray.freeIndexNow );
 
     for( size_t varIndex = 0; varIndex < infoForVarArray.freeIndexNow; varIndex++ ){
@@ -100,6 +92,5 @@ void printArrayWithVariablesInFile(){
         fprintf( fileForVar, "var[%lu] = %lg\n", varIndex, arrayWithVariableValue[ varIndex ] );
     }
 
-    free( nameOfFileForVar );
     fclose( fileForVar );
 }

@@ -40,7 +40,7 @@ void isEnoughSize( char** lineWithWord, size_t* lineIndex, size_t* sizeOfLine );
 
 void cleanLineWithCode( char** ptrOnSymbolInPosition );
 
-void dumpLexArrayInFile( infoForCreateTree* infoForTree );
+void dumpLexArrayInFile( infoForCreateTree* infoForTree, const char* fileNameForTokensDump );
 
 void destroyLexArray( infoForCreateTree* infoForTree );
 

@@ -6,13 +6,16 @@
 #include "tree.h"
 #include "parseFileDataBase.h"
 
-int main(){
+int main( int argc, char** argv ){
 
     tree_t treeFromAST = {};
 
     initFunctionsData( countOfFunctionsForInitialization, functionInformations.capacityOfFuncArray );
+    expertSystemErrors statusOfCreate = CORRECT_WORK;
 
-    expertSystemErrors statusOfCreate = createTreeFromFile( &treeFromAST );
+    if( argc > 1 ){
+        statusOfCreate = createTreeFromFile( &treeFromAST, argv[1] );
+    }
 
     if( statusOfCreate != CORRECT_WORK ){
         colorPrintf( NOMODE, RED, "Error of create tree from AST in backend:%s %s %d\n", __FILE__, __func__, __LINE__ );
@@ -20,9 +23,13 @@ int main(){
 
     makeArrayWithFunctionAndLabels();
 
-    writeASMcommand( &treeFromAST );
+    if( argc > 2 ){
+        writeASMcommand( &treeFromAST, argv[2]);
+    }
 
-    dumpFunctionArrayInFile();
+    if( argc > 3 ){
+        dumpFunctionArrayInFile( argv[3] );
+    }
 
     destroyFunctionsData();
 
