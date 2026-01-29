@@ -17,8 +17,7 @@ const size_t startSizeForVariable = 7;
 const size_t zeroPosition = 0;
 const size_t specialIndex = 52;
 
-#define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
-#define ZERO_LABEL  -1
+const char* fileWithTree = "commonFiles/AST.txt";     // hardcoding, because the user should not know about the intermediate files.
 
 errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile ){
     assert( bufferFromFile );
@@ -102,14 +101,14 @@ bufferInformation getBufferFromFile( FILE** fileWithBuffer ){
 expertSystemErrors createTreeFromFile( tree_t* tree ){
     assert( tree );
 
-    FILE* fileForDataBase = fopen( FILE_WITH_TREE, "r" );
+    FILE* fileForDataBase = fopen( fileWithTree, "r" );
     if( fileForDataBase == NULL ){
         colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
         return ERROR_WITH_FILE;
     }
 
     bufferInformation dataBaseFromFile = {};
-    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, FILE_WITH_TREE );
+    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, fileWithTree );
     if( statusOfReadFromFile != correct ){
         return ERROR_WITH_FILE;
     }

@@ -4,7 +4,6 @@
 
 #include "treeDump.h"
 #include "mathOperatorsInfo.h"
-#include "../../commonFiles/config.h"   // first - enter from src, second - enter from fronted
 
 static int firstRank = 1;
 

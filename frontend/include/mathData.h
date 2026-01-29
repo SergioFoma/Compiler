@@ -1,5 +1,5 @@
-#ifndef H_MATHEMATICAL_CALCULATOR
-#define H_MATHEMATICAL_CALCULATOR
+#ifndef H_MATH_DATA
+#define H_MATH_DATA
 
 #include "tree.h"
 

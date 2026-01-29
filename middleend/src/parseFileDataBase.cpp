@@ -9,103 +9,24 @@
 #include "paint.h"
 #include "mathOperatorsInfo.h"
 #include "myStringFunction.h"
+#include "fileBufferInfo.h"
 
 const size_t nilLen = strlen( "nil" );
 const size_t startSizeForVariable = 7;
 
-#define FILE_WITH_TREE "commonFiles/AST.txt"     // hardcoding, because the user should not know about the intermediate files.
-#define ZERO_LABEL  -1
-
-errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile ){
-    assert( bufferFromFile );
-    assert( nameOfFile );
-
-    if( myFile == NULL ){
-        return fileOpenErr;
-    }
-
-    getFileSize( bufferFromFile, nameOfFile );
-    bufferFromFile->buffer = (char*)calloc( bufferFromFile->fileSize + 1, sizeof( char ) );
-    if( bufferFromFile->buffer == NULL ){
-        return memoryErr;
-    }
-    bufferFromFile->bufferSize = fread( bufferFromFile->buffer, sizeof( char ), bufferFromFile->fileSize, myFile );
-    if( bufferFromFile->bufferSize == 0 ){
-        return fileOpenErr;
-    }
-
-    (bufferFromFile->buffer)[ bufferFromFile->fileSize ]= '\0';
-    (bufferFromFile->buffer)[ bufferFromFile->bufferSize ] = '\0';
-
-    return correct;
-}
-
-void getFileSize( bufferInformation* bufferFromFile, const char* nameOfFile ){
-    assert( bufferFromFile != NULL );
-    assert( nameOfFile != NULL );
-
-    struct stat fileText;
-    int status = stat( nameOfFile, &fileText );
-    if( status == -1 ){
-        colorPrintf( NOMODE, RED, "\nError of get information from file\n" );
-        return ;
-    }
-
-    bufferFromFile->fileSize = fileText.st_size;
-}
-
-void destroyBufferInformation( bufferInformation *bufferFromFile ){
-    if( bufferFromFile == NULL ){
-        return ;
-    }
-
-    free( bufferFromFile->buffer );
-    bufferFromFile->bufferSize = 0;
-    bufferFromFile->fileSize = 0;
-    bufferFromFile = NULL;
-}
-
-bufferInformation getBufferFromFile( FILE** fileWithBuffer ){
-
-    bufferInformation dataBaseFromFile = {};
-    char* nameOfFile = NULL;
-    size_t sizeOfAllocationMemory = 0;
-    ssize_t sizeOfLine = getlineWrapper( &nameOfFile, &sizeOfAllocationMemory, stdin );
-
-    if( sizeOfLine == -1 ){
-        free( nameOfFile );
-        return dataBaseFromFile;
-    }
-
-    FILE* fileForReading = fopen( nameOfFile, "r" );
-    if( fileForReading == NULL ){
-        colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
-        free( nameOfFile );
-        return dataBaseFromFile;
-    }
-
-    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForReading, nameOfFile );
-    if( statusOfReadFromFile != correct ){
-        free( nameOfFile );
-        return dataBaseFromFile;
-    }
-
-    *fileWithBuffer = fileForReading;
-    free( nameOfFile );
-    return dataBaseFromFile;
-}
+static const char* fileWithTree =  "commonFiles/AST.txt";     // hardcoding, because the user should not know about the intermediate files.
 
 expertSystemErrors createTreeFromFile( tree_t* tree ){
     assert( tree );
 
-    FILE* fileForDataBase = fopen( FILE_WITH_TREE, "r" );
+    FILE* fileForDataBase = fopen( fileWithTree, "r" );
     if( fileForDataBase == NULL ){
         colorPrintf( NOMODE, RED, "\ncan not open file:%s %s %d\n", __FILE__, __func__, __LINE__ );
         return ERROR_WITH_FILE;
     }
 
     bufferInformation dataBaseFromFile = {};
-    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, FILE_WITH_TREE );
+    errorCode statusOfReadFromFile = initBufferInformation( &dataBaseFromFile, fileForDataBase, fileWithTree );
     if( statusOfReadFromFile != correct ){
         return ERROR_WITH_FILE;
     }

@@ -8,10 +8,11 @@
 #include "parseFileDataBase.h"
 #include "mathOperatorsInfo.h"
 #include "myStringFunction.h"
+#include "fileBufferInfo.h"
 
-#define COMMENT_BEGIN   "##!"
-#define COMMENT_END     "!##"
-#define COMMENT_LEN     strlen( COMMENT_BEGIN )
+const char* commentBegin  = "##!";
+const char* commentEnd = "!##";
+size_t commentLen = sizeof( commentBegin ) - 1;
 
 char* getNameOfFile( const char* sentenceForPrint ){
     assert( sentenceForPrint );
@@ -98,16 +99,16 @@ bool translateComment( FILE* translateLanguage, char** ptrOnSymbolInPosition ){
     assert( ptrOnSymbolInPosition );
     assert( *ptrOnSymbolInPosition );
 
-    if( strncmp( *ptrOnSymbolInPosition, COMMENT_BEGIN, COMMENT_LEN ) == 0 ){
-        fprintf( translateLanguage, "%s", COMMENT_BEGIN );
-        *ptrOnSymbolInPosition += COMMENT_LEN;
+    if( strncmp( *ptrOnSymbolInPosition, commentBegin, commentLen ) == 0 ){
+        fprintf( translateLanguage, "%s", commentBegin );
+        *ptrOnSymbolInPosition += commentLen;
 
         return true;
     }
 
-    if( strncmp( *ptrOnSymbolInPosition, COMMENT_END, COMMENT_LEN ) == 0 ){
-        fprintf( translateLanguage, "%s", COMMENT_END );
-        *ptrOnSymbolInPosition += COMMENT_LEN;
+    if( strncmp( *ptrOnSymbolInPosition, commentEnd, commentLen ) == 0 ){
+        fprintf( translateLanguage, "%s", commentEnd );
+        *ptrOnSymbolInPosition += commentLen;
 
         return true;
     }

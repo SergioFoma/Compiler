@@ -23,26 +23,11 @@ struct informationWithMathOperators {
     typeOfMathOperation mathOperation;
     const char* nameOfMathOperation;
     const char* viewOfMathOperationInFile;
-    double(*doMathOperation)( double firstNumber, double doubleSecondNumber );
     functionClasses functionClass;
 };
 
 extern informationWithMathOperators arrayWithMathInfo[];
 extern const size_t sizeOfMathArray;
-
-struct informationWithVariables {
-    char* nameOfVariable;
-    size_t variableIndexInArray;
-};
-
-struct informationWithVariablesArray {
-    size_t capacity;
-    size_t freeIndexNow;
-};
-
-extern informationWithVariables* arrayWithVariables;
-extern informationWithVariablesArray infoForVarArray;
-extern double* arrayWithVariableValue;
 
 struct informationWithStatements {
     typeOfStatement statement;
@@ -60,6 +45,20 @@ struct informationWithExpressions {
     const char* viewOfExpressionOperatorInFile;
     const char* viewOfExpressionInAST;
 };
+
+struct informationWithVariables {
+    char* nameOfVariable;
+    size_t variableIndexInArray;
+};
+
+struct informationWithVariablesArray {
+    size_t capacity;
+    size_t freeIndexNow;
+};
+
+extern informationWithVariables* arrayWithVariables;
+extern informationWithVariablesArray infoForVarArray;
+extern double* arrayWithVariableValue;
 
 extern informationWithExpressions arrayWithExpressions[];
 extern const size_t sizeOfExpressionArray;

@@ -15,7 +15,7 @@ FLAGS = -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop
 
 EXE_NAME = $(BUILD_DIR)/translator.out
 
-SOURCES = main.cpp tree.cpp paint.cpp myStringFunction.cpp mathOperatorsInfo.cpp parseFileDataBase.cpp translator.cpp
+SOURCES = main.cpp tree.cpp paint.cpp myStringFunction.cpp mathOperatorsInfo.cpp parseFileDataBase.cpp translator.cpp fileBufferInfo.cpp
 OBJECTS = $(SOURCES:.cpp=.obj)
 
 OBJECTS_IN_SOURCE = $(addprefix src/, $(OBJECTS))

@@ -5,8 +5,8 @@
 #include "tree.h"
 #include "treeDump.h"
 #include "parseFileDataBase.h"
-#include "mathematicalCalculator.h"
 #include "dataForBackend.h"
+#include "mathData.h"
 
 int main(){
 

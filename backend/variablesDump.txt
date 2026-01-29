@@ -7,7 +7,7 @@ array №0 = {
 count of variables = 4
 capacity = 8
 maximumIndexOfVariable = 2
-	
+
 
 array №1 = {
 	{ factorial, 0, 0x504000000e90 },

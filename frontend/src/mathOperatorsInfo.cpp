@@ -3,29 +3,28 @@
 #include <stdlib.h>
 
 #include "mathOperatorsInfo.h"
-#include "mathematicalCalculator.h"
 
 informationWithMathOperators arrayWithMathInfo[] = {
-        { ADD   , "ADD"     , "+"       ,   doAdd       ,   TWO_ARG    },
-        { SUB   , "SUB"     , "-"       ,   doSub       ,   TWO_ARG    },
-        { MUL   , "MUL"     , "*"       ,   doMul       ,   TWO_ARG    },
-        { DIV   , "DIV"     , "/"       ,   doDiv       ,   TWO_ARG    },
-        { LN    , "LN"      , "ln"      ,   doLn        ,   ONE_ARG    },
-        { POW   , "POW"     , "^"       ,   doPow       ,   TWO_ARG    },
-        { SIN   , "SIN"     , "sin"     ,   doSin       ,   ONE_ARG    },
-        { COS   , "COS"     , "cos"     ,   doCos       ,   ONE_ARG    },
-        { TG    , "TG"      , "tg"      ,   doTg        ,   ONE_ARG    },
-        { CTG   , "CTG"     , "ctg"     ,   doCtg       ,   ONE_ARG    },
-        { ARCSIN, "ARCSIN"  , "arcsin"  ,   doArcsin    ,   ONE_ARG    },
-        { ARCCOS, "ARCCOS"  , "arccos"  ,   doArccos    ,   ONE_ARG    },
-        { ARCTG , "ARCTG"   , "arctg"   ,   doArctg     ,   ONE_ARG    },
-        { ARCCTG, "ARCCTG"  , "arcctg"  ,   doArcctg    ,   ONE_ARG    },
-        { SH    , "SH"      , "sh"      ,   doSh        ,   ONE_ARG    },
-        { CH    , "CH"      , "ch"      ,   doCh        ,   ONE_ARG    },
-        { TH    , "TH"      , "th"      ,   doTh        ,   ONE_ARG    },
-        { CTH   , "CTH"     , "cth"     ,   doCth       ,   ONE_ARG    },
-        { EXP   , "EXP"     , "exp"     ,   doExp       ,   ONE_ARG    },
-        { SQRT  , "SQRT"    , "sqrt"    ,   doSqrt      ,   ONE_ARG    }
+        { ADD   , "ADD"     , "+"       ,   TWO_ARG    },
+        { SUB   , "SUB"     , "-"       ,   TWO_ARG    },
+        { MUL   , "MUL"     , "*"       ,   TWO_ARG    },
+        { DIV   , "DIV"     , "/"       ,   TWO_ARG    },
+        { LN    , "LN"      , "ln"      ,   ONE_ARG    },
+        { POW   , "POW"     , "^"       ,   TWO_ARG    },
+        { SIN   , "SIN"     , "sin"     ,   ONE_ARG    },
+        { COS   , "COS"     , "cos"     ,   ONE_ARG    },
+        { TG    , "TG"      , "tg"      ,   ONE_ARG    },
+        { CTG   , "CTG"     , "ctg"     ,   ONE_ARG    },
+        { ARCSIN, "ARCSIN"  , "arcsin"  ,   ONE_ARG    },
+        { ARCCOS, "ARCCOS"  , "arccos"  ,   ONE_ARG    },
+        { ARCTG , "ARCTG"   , "arctg"   ,   ONE_ARG    },
+        { ARCCTG, "ARCCTG"  , "arcctg"  ,   ONE_ARG    },
+        { SH    , "SH"      , "sh"      ,   ONE_ARG    },
+        { CH    , "CH"      , "ch"      ,   ONE_ARG    },
+        { TH    , "TH"      , "th"      ,   ONE_ARG    },
+        { CTH   , "CTH"     , "cth"     ,   ONE_ARG    },
+        { EXP   , "EXP"     , "exp"     ,   ONE_ARG    },
+        { SQRT  , "SQRT"    , "sqrt"    ,   ONE_ARG    }
 };
 const size_t sizeOfMathArray = sizeof( arrayWithMathInfo ) / sizeof( arrayWithMathInfo[ 0 ] );
 

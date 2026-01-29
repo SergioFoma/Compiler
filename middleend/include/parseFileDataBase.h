@@ -7,12 +7,6 @@
 
 #include "tree.h"
 
-enum errorCode {
-    correct        = 0,
-    fileOpenErr    = 1,
-    memoryErr      = 2
-};
-
 enum expertSystemErrors {
     CORRECT_WORK            = 0,
     CAN_NOT_DO_ALLOCATION   = 1,
@@ -25,20 +19,6 @@ enum expertSystemErrors {
     ERROR_WITH_FILE         = 8,
     ROOT_NULL_PTR           = 9
 };
-
-struct bufferInformation{
-    char* buffer;
-    size_t fileSize;
-    size_t bufferSize;
-};
-
-void getFileSize( bufferInformation* bufferFromFile, const char* nameOfFile );
-
-errorCode initBufferInformation( bufferInformation *bufferFromFile, FILE* myFile, const char* nameOfFile );
-
-void destroyBufferInformation( bufferInformation *bufferFromFile );
-
-bufferInformation getBufferFromFile( FILE** fileWithBuffer );
 
 expertSystemErrors createTreeFromFile( tree_t* tree );
 

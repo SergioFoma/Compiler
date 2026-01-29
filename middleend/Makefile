@@ -15,7 +15,7 @@ FLAGS = -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop
 
 EXE_NAME = $(BUILD_DIR)/middleend.out
 
-SOURCES = main.cpp dataForBackend.cpp mathematicalCalculator.cpp mathOperatorsInfo.cpp myStringFunction.cpp paint.cpp parseFileDataBase.cpp tree.cpp treeDump.cpp
+SOURCES = main.cpp dataForBackend.cpp mathematicalCalculator.cpp mathOperatorsInfo.cpp myStringFunction.cpp paint.cpp parseFileDataBase.cpp tree.cpp treeDump.cpp fileBufferInfo.cpp
 OBJECTS = $(SOURCES:.cpp=.obj)
 
 OBJECTS_IN_SOURCE = $(addprefix src/, $(OBJECTS))
