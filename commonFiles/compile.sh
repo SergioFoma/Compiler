@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILD_DIRS=( "frontend" "middleend" "backend" "machine/ASM" "machine/Processor" "translator")
+BUILD_DIRS=( "frontend" "middleend" "backend" "ASM" "translator")
 
 OUT_PATTERN="*.out"
 
@@ -38,7 +38,7 @@ echo "___________BACKED STARTED________________"
 "backend/Build/backend.out" "commonFiles/AST.txt" "commonFiles/assemble.asm" "backend/variablesDump.txt"
 
 echo "_____________ASSEMBLER STARTED_____________"
-"machine/ASM/Build/ASM.out" "commonFiles/assemble.asm" "BYTE-CODE.txt"
+"ASM/Build/ASM.out" "commonFiles/assemble.asm" "BYTE-CODE.txt"
 
 echo "_____________TRANSLATOR STARTED______________"
 "translator/Build/translator.out" "frontend/code.txt" "translator/russianLanguage.txt"

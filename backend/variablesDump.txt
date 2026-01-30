@@ -1,32 +1,41 @@
 array №0 = {
-	{ number_for_factorial, 0, 0x504000000110 },
-	{ factorial, 1, 0x5040000003d0 },
-	{ number_for_factorial, 0, 0x504000000450 },
-	{ number_for_factorial, 0, 0x5040000004d0 },
+	{ a, 0, 0x504000000110 },
+	{ b, 1, 0x504000000210 },
+	{ c, 2, 0x504000000310 },
+	{ D, 3, 0x504000000410 },
+	{ b, 1, 0x5040000004d0 },
+	{ b, 1, 0x504000000510 },
+	{ a, 0, 0x504000000610 },
+	{ c, 2, 0x504000000650 },
+	{ TWO_ROOT, 4, 0x504000000710 },
+	{ ONE_ROOT, 5, 0x504000000810 },
+	{ ZERO_ROOT, 6, 0x504000000910 },
+	{ D, 3, 0x504000000a50 },
+	{ TWO_ROOT, 4, 0x504000000bd0 },
+	{ x_1, 7, 0x504000000c90 },
+	{ b, 1, 0x504000000dd0 },
+	{ D, 3, 0x504000000e50 },
+	{ a, 0, 0x504000000f10 },
+	{ x_2, 8, 0x504000000fd0 },
+	{ b, 1, 0x504000001110 },
+	{ D, 3, 0x504000001190 },
+	{ a, 0, 0x504000001250 },
+	{ x_1, 7, 0x504000001350 },
+	{ x_2, 8, 0x5040000013d0 },
+	{ D, 3, 0x5040000014d0 },
+	{ ONE_ROOT, 5, 0x504000001650 },
+	{ x, 9, 0x504000001710 },
+	{ b, 1, 0x504000001810 },
+	{ a, 0, 0x5040000018d0 },
+	{ x, 9, 0x5040000019d0 },
+	{ ZERO_ROOT, 6, 0x504000001ad0 },
 };
-count of variables = 4
-capacity = 8
-maximumIndexOfVariable = 2
+count of variables = 30
+capacity = 32
+maximumIndexOfVariable = 10
 
 
-array №1 = {
-	{ factorial, 0, 0x504000000f90 },
-	{ result, 1, 0x504000001010 },
-	{ result, 1, 0x504000001110 },
-	{ var, 2, 0x504000001310 },
-	{ result, 1, 0x504000001390 },
-	{ factorial, 0, 0x5040000015d0 },
-	{ result, 1, 0x504000001690 },
-	{ var, 2, 0x5040000017d0 },
-	{ var, 2, 0x504000001890 },
-};
-count of variables = 9
-capacity = 16
-maximumIndexOfVariable = 3
-
-
-count of functions = 2
-capacity of array = 4
+count of functions = 1
+capacity of array = 2
 
 All functions and they labels:
-{ factorial, 0 },

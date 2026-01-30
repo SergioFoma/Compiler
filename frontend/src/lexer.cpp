@@ -144,12 +144,11 @@ bool tryInitializationMathOperator( char** symbol, infoForCreateTree* infoForTre
     assert( *symbol );
     assert( infoForTree );
 
-    for( size_t mathIndex = 0; mathIndex < sizeOfStatementArray; mathIndex++ ){
+    for( size_t mathIndex = 0; mathIndex < sizeOfMathArray; mathIndex++ ){
         const char* nameOfMath = arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile;
         size_t lenOfMath = strlen( arrayWithMathInfo[ mathIndex ].viewOfMathOperationInFile );
 
         if( strncmp( *symbol, nameOfMath, lenOfMath ) == 0 ){
-
             (infoForTree->tokens)[ infoForTree->freeIndexNow ]->nodeValueType = OPERATOR;
             (infoForTree->tokens)[ infoForTree->freeIndexNow ]->data.mathOperation = arrayWithMathInfo[ mathIndex ].mathOperation;
             (*symbol) += lenOfMath;

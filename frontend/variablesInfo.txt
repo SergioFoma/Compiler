@@ -1,12 +1,24 @@
-array with variables[ 4 ] = {
-	{ number_for_factorial  , 0  },
-	{ factorial  , 1  },
-	{ result  , 2  },
-	{ var  , 3  },
+array with variables[ 10 ] = {
+	{ a  , 0  },
+	{ b  , 1  },
+	{ c  , 2  },
+	{ D  , 3  },
+	{ TWO_ROOT  , 4  },
+	{ ONE_ROOT  , 5  },
+	{ ZERO_ROOT  , 6  },
+	{ x_1  , 7  },
+	{ x_2  , 8  },
+	{ x  , 9  },
 };
-capacity = 8
+capacity = 16
 
 var[0] = 0
 var[1] = 0
 var[2] = 0
 var[3] = 0
+var[4] = 0
+var[5] = 0
+var[6] = 0
+var[7] = 0
+var[8] = 0
+var[9] = 0

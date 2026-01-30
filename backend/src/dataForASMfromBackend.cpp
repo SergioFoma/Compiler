@@ -27,7 +27,7 @@ expertSystemErrors writeASMcommand( tree_t* tree, const char* fileNameForASM ){
 
     writeASMcommandFromNode( tree->rootTree, fileForASM );
 
-    fprintf( fileForASM, "DRAW\n" );
+    //fprintf( fileForASM, "DRAW\n" );
     fprintf( fileForASM, "HLT\n" );
 
     fclose( fileForASM );
@@ -88,8 +88,12 @@ size_t printMathInASM( const node_t* node, FILE* fileForASM ){
     assert( node );
     assert( fileForASM );
 
-    writeASMcommandFromNode( node->left, fileForASM );
-    writeASMcommandFromNode( node->right, fileForASM );
+    if( node->left ){
+        writeASMcommandFromNode( node->left, fileForASM );
+    }
+    if( node->right ){
+        writeASMcommandFromNode( node->right, fileForASM );
+    }
 
     fprintf( fileForASM, "%s\n", getStringOfMathOperator( node ) );
 

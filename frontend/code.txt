@@ -1,17 +1,29 @@
-number_for_factorial pabgo_govnito get_info() gusi
+a pabgo_govnito get_info() gusi
+b pabgo_govnito get_info() gusi
+c pabgo_govnito get_info() gusi
 
-give_info( factorial( number_for_factorial ), number_for_factorial ) gusi
+D pabgo_govnito b * b - 4 * a * c gusi
 
-IN_PUBG factorial( result ){
+TWO_ROOT pabgo_govnito 2 gusi
+ONE_ROOT pabgo_govnito 1 gusi
+ZERO_ROOT pabgo_govnito 0 gusi
 
-    wool( result == 1 ){
+wool( D > 0 ){
+    give_info( TWO_ROOT ) gusi
 
-        rolling_back 1 gusi
-    }
-    dandruff{
-        var pabgo_govnito result * factorial( result - 1 ) gusi
-        give_info( var ) gusi
-        
-        rolling_back var gusi
-    }
+    x_1 pabgo_govnito ( 0 - b - sqrt( D ) ) / ( 2 * a ) gusi
+    x_2 pabgo_govnito ( 0 - b  + sqrt( D ) ) / ( 2 * a ) gusi
+
+    give_info( x_1, x_2 ) gusi
 }
+dandruff wool( D == 0 ){
+    give_info( ONE_ROOT ) gusi
+
+    x pabgo_govnito ( 0 - b ) / ( 2 * a ) gusi
+
+    give_info( x ) gusi
+}
+dandruff{
+    give_info( ZERO_ROOT ) gusi
+}
+
